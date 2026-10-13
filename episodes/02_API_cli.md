@@ -1,5 +1,5 @@
 ---
-title: "terminal and Making Connections"
+title: "Terminal and Making Connections"
 teaching: 20 # teaching time in minutes
 exercises: 20 # exercise time in minutes
 ---
