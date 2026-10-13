@@ -165,7 +165,7 @@ You can type this info directly into your terminal. For larger requests, however
 
 ::::::::::::::::::::::::::::::::::::: callout
 
-You can load the API key from the `secrets.env` file instead of pasting the secret into the command. From the `research_computer/` directory, run:
+You can load the API key from the `secrets.env` file instead of pasting the secret into the command. From the **workshop directory** directory, run:
 
 ```bash
 set -a
