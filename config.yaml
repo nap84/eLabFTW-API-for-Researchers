@@ -18,18 +18,18 @@ carpentry: 'incubator'
 # carpentry_description: "Custom Carpentry"
 
 # Overall title for pages.
-title: 'Lesson Title' # FIXME
+title: 'eLabFTW API for Researchers' # FIXME
 
 # Date the lesson was created (YYYY-MM-DD, this is empty by default)
-created: ~ # FIXME
+created: 2026-10-13
 
 # Comma-separated list of keywords for the lesson
-keywords: 'software, data, lesson, The Carpentries' # FIXME
+keywords: 'software, data, lesson, The Carpentries, ELN, API, python, jupyter'
 
 # Life cycle stage of the lesson
 # refer to <https://docs.carpentries.org/resources/curriculum/lesson-life-cycle.html> for details
 # possible values: pre-alpha, alpha, beta, stable, retired
-life_cycle: 'pre-alpha' # FIXME
+life_cycle: 'pre-alpha'
 
 # License of the lesson
 license: 'CC-BY 4.0'
@@ -41,7 +41,7 @@ source: 'https://github.com/carpentries/workbench-template-md' # FIXME
 branch: 'main'
 
 # Who to contact if there are any issues
-contact: 'team@carpentries.org' # FIXME
+contact: 'parks@itc.rwth-aachen.de' 
 
 # Navigation ------------------------------------------------
 #
@@ -67,7 +67,12 @@ contact: 'team@carpentries.org' # FIXME
 
 # Order of episodes in your lesson
 episodes: 
-- introduction.md
+- 00_IntroSetup.md
+- 01_API.md
+- 02_API_cli.md
+- 03_python_jupyter.md
+- 04_data_analysis.md
+
 
 # Information for Learners
 learners: 
@@ -76,7 +81,7 @@ learners:
 instructors: 
 
 # Learner Profiles
-profiles: 
+profiles: learner-profiles.md
 
 # Customisation ---------------------------------------------
 #
