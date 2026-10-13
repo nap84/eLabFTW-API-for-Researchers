@@ -1,5 +1,5 @@
 ---
-title: "terminal and Making Connections"
+title: "Terminal and Making Connections"
 teaching: 20 # teaching time in minutes
 exercises: 20 # exercise time in minutes
 ---
@@ -69,7 +69,7 @@ Scroll to the [Experiments](https://doc.elabftw.net/api/elabapi-html/#api-Experi
       4. Select the `API KEYS` header
       5. Under `Create new key`, enter a name for your key and select `Read/Write` from the permissions drop-down menu.
       6. click `Generate an API Key`
-      7. Copy and paste this to the `.env` file in your `workshop_data/research_computer` folder. It will only be shown once!
+      7. Copy and paste this to the `secrets.env` file in your `research_computer/` folder. It will only be shown once in the ELN!
    2. Copy and paste your token to the terminal, replacing `[[apiKey]]`
    3. Replace `https://elab.local:3148` with your eLabFTW URL
    4. Add experiment info using the template below. Once done, add `\` at the end of the last line, <kbd>enter</kbd> for a new line and add `-d '{"title":"my api exp"}` (replace info in curly brackets with full info)
@@ -165,15 +165,15 @@ You can type this info directly into your terminal. For larger requests, however
 
 ::::::::::::::::::::::::::::::::::::: callout
 
-You can load the API key from the `.env` file instead of pasting the secret into the command. From the `research_computer/` directory, run:
+You can load the API key from the `secrets.env` file instead of pasting the secret into the command. From the **workshop directory** directory, run:
 
 ```bash
 set -a
-source .env
+source research_computer/secrets.env
 set +a
 ```
 
-The `.env` file should contain `ELAB_API_KEY` and `ELAB_API_HOST`. The key is
+The `secrets.env` file should contain `ELAB_API_KEY` and `ELAB_API_HOST`. The key is
 then available as the `$ELAB_API_KEY` environment variable. Use it in the
 request like this:
 
@@ -186,8 +186,10 @@ curl -s -i -X POST \
    "$ELAB_API_HOST/experiments"
 ```
 
-This keeps the token out of the command itself. Do not print the variable or share the `.env` file. If you believe you unsafely used an API key, always revoke it and create a new one.
+This keeps the token out of the command itself. Do not print the variable or share the `secrets.env` file. If you believe you unsafely used an API key, always revoke it and create a new one.
 
+
+Note: `.env` is more common, however, Jupyter lab immediately hides these.
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: challenge
