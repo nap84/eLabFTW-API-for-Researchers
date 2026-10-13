@@ -17,7 +17,7 @@ We will use a demo instance of eLabFTW. As such, we have created a team for this
 To access the demo instance and team:
 
 1. Head to https://elab.parks.web.gateway.ionos.coscine.dev/register.php
-2. Select the team `TODO`
+2. Select the team `YYYY-MM-DD_FDMIII_API` (where YYYY-MM-DD is the date of the workshop)
 3. Fill in your information
 4. Click `Create`
 
@@ -25,13 +25,15 @@ You will have access to this team for 4 weeks after the workshop. Your account w
 
 ### Jupyter Lab
 
-This course is designed so you do not have to download and install anything locally (you can, if you like). We will use an online version of Jupyter Lab for everything we do. If you are an RWTH Aachen member, feel free to use the RWTH's Jupyter Hub. Otherwise, you may use Jupyter4NFDI.
+This course borrows from the concepts of [The Carpentries](https://carpentries.org/). Thus, it contains a lot of live coding and exercises–it's hands on! That means, you will need some kind of working environment.
+
+Everything is designed so you do not have to download and install anything locally (you can, if you like). We will use an online version of Jupyter Lab for everything we do. If you are an RWTH Aachen member, feel free to use the RWTH's Jupyter Hub. Otherwise, you may use Jupyter4NFDI.
 
 Jupyter Lab is an environment that allows you to code in Python (or Julia, R, ...), interact with a terminal, and so on. It is an easy way to get started – and notably, to teach courses like this.
 
 :::::::::::::::::::::: spoiler
 
-**RWTH Jupyter Hub**
+### [RWTH JupyterHub](https://jupyter.rwth-aachen.de/hub/) (requires RWTH Account)
 
 1. Head to https://jupyter.rwth-aachen.de/hub/login and sign in with your credentials
 2. Select the `Python 3.13` profile
@@ -43,7 +45,7 @@ Most things appear to remain saved in Jupyter Hub - but I would still recommend 
 
 :::::::::::::::::::::: spoiler
 
-**Jupyter4NFDI**
+### [Jupyter4NFDI](https://hub.nfdi-jupyter.de/hub/home)
 
 1. Head to https://hub.nfdi-jupyter.de/hub/login and click `Sign in`
 2. Follow the instructions to sign in
@@ -55,14 +57,18 @@ Remember to download everything if you want to keep it after the course!
 
 ::::::::::::::::::::::
 
-All course material (included a filled out version of the notebook) will be available after the course via Moodle.
+All course material (included a filled-out version of the notebook) will be available after the course via Moodle.
 
 ## Datasets
 
-Once Jupyter Lab is running, open a new terminal and run:
+Once Jupyter Lab is running, open a new terminal and run the following command (copy-paste and hit enter):
 
 ```bash
-TODO
+#TODO: fix the below by replacing BRANCH, OWNER, REPO, and path/to/folder with the correct values
+git clone --depth 1 --filter=blob:none --sparse --branch BRANCH \
+  https://github.com/OWNER/REPO.git
+cd REPO
+git sparse-checkout set path/to/folder
 ```
 
 This will retrieve the `workshop_data` folder directly.
