@@ -125,4 +125,4 @@ We can also see a nested structure when we look at the `teams` key, with more ke
 
 ## Attribution
 
-The API-Restaurant analogy of this lesson were adapted from [Torsten Giess](https://github.com/torogi94) (![](https://info.orcid.org/wp-content/uploads/2021/12/orcid_16x16.gif) [0000-0002-8512-8606](https://orcid.org/0000-0002-8512-8606)), from the University of Bielefeld (formerly University of Stuttgart).
+The API-Restaurant analogy of this lesson was adapted from [Torsten Giess](https://github.com/torogi94) (![](https://info.orcid.org/wp-content/uploads/2021/12/orcid_16x16.gif) [0000-0002-8512-8606](https://orcid.org/0000-0002-8512-8606)), from the University of Bielefeld (formerly University of Stuttgart).
