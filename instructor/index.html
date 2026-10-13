@@ -394,8 +394,8 @@ team for this workshop.</p>
 <p>To access the demo instance and team:</p>
 <ol style="list-style-type: decimal"><li>Head to <a href="https://elab.parks.web.gateway.ionos.coscine.dev/register.php" class="external-link uri">https://elab.parks.web.gateway.ionos.coscine.dev/register.php</a>
 </li>
-<li>Select the team <code>TODO</code>
-</li>
+<li>Select the team <code>YYYY-MM-DD_FDMIII_API</code> (where YYYY-MM-DD
+is the date of the workshop)</li>
 <li>Fill in your information</li>
 <li>Click <code>Create</code>
 </li>
@@ -404,7 +404,10 @@ Your account will then be deleted.</p>
 </div>
 <div class="section level3">
 <h3 id="jupyter-lab">Jupyter Lab<a class="anchor" aria-label="anchor" href="#jupyter-lab"></a></h3>
-<p>This course is designed so you do not have to download and install
+<p>This course borrows from the concepts of <a href="https://carpentries.org/" class="external-link">The Carpentries</a>. Thus, it contains a
+lot of live coding and exercises–it’s hands on! That means, you will
+need some kind of working environment.</p>
+<p>Everything is designed so you do not have to download and install
 anything locally (you can, if you like). We will use an online version
 of Jupyter Lab for everything we do. If you are an RWTH Aachen member,
 feel free to use the RWTH’s Jupyter Hub. Otherwise, you may use
@@ -415,11 +418,13 @@ get started – and notably, to teach courses like this.</p>
 <div id="accordionSpoiler1" class="accordion spoiler-accordion accordion-flush">
 <div class="accordion-item">
 <button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler1" aria-expanded="false" aria-controls="collapseSpoiler1">
-  <h3 class="accordion-header" id="headingSpoiler1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Show details </h3>
+  <h3 class="accordion-header" id="headingSpoiler1">
+  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div>
+  RWTH JupyterHub (requires RWTH Account)
+  </h3>
 </button>
 <div id="collapseSpoiler1" class="accordion-collapse collapse" aria-labelledby="headingSpoiler1" data-bs-parent="#accordionSpoiler1">
 <div class="accordion-body">
-<p><strong>RWTH Jupyter Hub</strong></p>
 <ol style="list-style-type: decimal"><li>Head to <a href="https://jupyter.rwth-aachen.de/hub/login" class="external-link uri">https://jupyter.rwth-aachen.de/hub/login</a> and sign in
 with your credentials</li>
 <li>Select the <code>Python 3.13</code> profile</li>
@@ -435,11 +440,13 @@ full access to what you did.</p>
 <div id="accordionSpoiler2" class="accordion spoiler-accordion accordion-flush">
 <div class="accordion-item">
 <button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler2" aria-expanded="false" aria-controls="collapseSpoiler2">
-  <h3 class="accordion-header" id="headingSpoiler2">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Show details </h3>
+  <h3 class="accordion-header" id="headingSpoiler2">
+  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div>
+  Jupyter4NFDI
+  </h3>
 </button>
 <div id="collapseSpoiler2" class="accordion-collapse collapse" aria-labelledby="headingSpoiler2" data-bs-parent="#accordionSpoiler2">
 <div class="accordion-body">
-<p><strong>Jupyter4NFDI</strong></p>
 <ol style="list-style-type: decimal"><li>Head to <a href="https://hub.nfdi-jupyter.de/hub/login" class="external-link uri">https://hub.nfdi-jupyter.de/hub/login</a> and click
 <code>Sign in</code>
 </li>
@@ -454,15 +461,20 @@ course!</p>
 </div>
 </div>
 </div>
-<p>All course material (included a filled out version of the notebook)
+<p>All course material (included a filled-out version of the notebook)
 will be available after the course via Moodle.</p>
 </div>
 </section><section><h2 class="section-heading" id="datasets">Datasets<a class="anchor" aria-label="anchor" href="#datasets"></a></h2>
-<hr class="half-width"><p>Once Jupyter Lab is running, open a new terminal and run:</p>
+<hr class="half-width"><p>Once Jupyter Lab is running, open a new terminal and run the
+following command (copy-paste and hit enter):</p>
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1" aria-label="code-block-1-1"></a><span class="ex">TODO</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1" aria-label="code-block-1-1"></a><span class="co">#TODO: fix the below by replacing BRANCH, OWNER, REPO, and path/to/folder with the correct values</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1" aria-label="code-block-1-2"></a><span class="fu">git</span> clone <span class="at">--depth</span> 1 <span class="at">--filter</span><span class="op">=</span>blob:none <span class="at">--sparse</span> <span class="at">--branch</span> BRANCH <span class="dt">\</span></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1" aria-label="code-block-1-3"></a>  https://github.com/OWNER/REPO.git</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1" aria-label="code-block-1-4"></a><span class="bu">cd</span> REPO</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1" aria-label="code-block-1-5"></a><span class="fu">git</span> sparse-checkout set path/to/folder</span></code></pre>
 </div>
 <p>This will retrieve the <code>workshop_data</code> folder
 directly.</p>

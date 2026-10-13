@@ -10,5 +10,5 @@
 "episodes/04_data_analysis.md" "fde94d73adbce8ad54f04f21658aa336" "site/built/04_data_analysis.md" "2026-10-13"
 "instructors/instructor-notes.md" "cae72b6712578d74a49fea7513099f8c" "site/built/instructor-notes.md" "2023-03-16"
 "learners/reference.md" "428eb28506b866d2ca5d13450c4df140" "site/built/reference.md" "2026-10-13"
-"learners/setup.md" "011a72b44374b49f25c701270d81be51" "site/built/setup.md" "2026-10-13"
+"learners/setup.md" "a41002dc1c64ad375914604103e7d24f" "site/built/setup.md" "2026-10-13"
 "profiles/learner-profiles.md" "583954743c6158eced701f69f74e3e59" "site/built/learner-profiles.md" "2026-10-13"
