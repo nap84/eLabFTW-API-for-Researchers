@@ -69,7 +69,7 @@ contact: 'parks@itc.rwth-aachen.de'
 episodes: 
 - 00_IntroSetup.md
 - 01_API.md
-- 02_API-cli.md
+- 02_API_cli.md
 - 03_python_jupyter.md
 - 04_data_analysis.md
 
