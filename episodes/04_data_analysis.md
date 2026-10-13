@@ -266,8 +266,6 @@ Using a second experiment ID, adapt the code above to:
 - upload the combined plot to a new analysis experiment, and
 - link the two source experiments to that analysis experiment.
 
-::::::::::::::::::::::::::::::::::::::::::::::::
-
 ::::::::::::::::::::::::::::::::::::::: solution
 
 Use `read_experiments` or the experiment IDs from the previous episodes to
@@ -306,6 +304,8 @@ The remaining steps are the same: create an analysis experiment, upload the
 combined plot, and call `post_entity_experiments_links` for each source
 experiment.
 
+
+:::::::::::::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: keypoints

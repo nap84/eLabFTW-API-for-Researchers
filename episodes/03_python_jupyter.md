@@ -204,6 +204,8 @@ C. TypeError
 
 :::::::::::::::::::::::::::::::::
 
+::::::::::::::::::::::::::::::::::::::::::::::::
+
 ## The eLabFTW Python API Library
 
 One of the advantages of Python is that there are many ready-made libraries that allow us to easily reuse code others have created for a specific purpose.
@@ -312,9 +314,8 @@ What is the code for the client that interacts with resources in eLabFTW? Create
 
 Hint: Look through the [examples](https://github.com/elabftw/elabapi-python/tree/master/examples) and keep your eyes out for a different word than _resources_.
 
-::::::::::::::::::::::::::::::::::::::::::::::::
 
-::::::::::::::::::::::::::::::::::::::: solution
+:::::::::::::::::::::::: solution
 
 An example can be found in [05-create-modify-item](https://github.com/elabftw/elabapi-python/blob/master/examples/05-create-modify-item.py) in line 6:
 
@@ -329,6 +330,7 @@ resources = itemsApi.read_items()
 resources
 ```
 
+:::::::::::::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: keypoints

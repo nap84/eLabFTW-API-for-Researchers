@@ -196,8 +196,6 @@ What would the command line `cURL` API call look like that retrieves the experim
 
 Hint: use the experiment ID in the response from your last API call when building the URL for the request.
 
-::::::::::::::::::::::::::::::::::::::::::::::::
-
 :::::::::::::::::::::::: solution
 
 The `POST` response includes the URL of the new experiment in its `Location`
@@ -247,6 +245,9 @@ curl.exe ... | jq .
 
 :::::::::::::::::::::::::::::::::
 
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+
 ::::::::::::::::::::::::::::::::::::: challenge
 
 Fill in the blanks for the the script in `research_computer/attach_measurement.sh` to attach the measurement file (`research_computer/measurement.csv`) to the created experiment.
@@ -261,7 +262,6 @@ Run the script with the experiment ID and the measurement file as arguments. For
 ./attach_measurement.sh 94 ./measurement.csv
 ```
 
-::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 :::::::::::::::::::::::: solution
 
@@ -298,7 +298,10 @@ UPLOAD_URL="$ELAB_API_HOST/experiments/$EXPERIMENT_ID/uploads"
 curl -sS -f -i "${curl_options[@]}" "$UPLOAD_URL"
 ```
 
-::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
 
 ::::::::::::::::::::::::::::::::::::: keypoints
 
