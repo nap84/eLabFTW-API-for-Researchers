@@ -196,7 +196,6 @@ print(x)
 A. 5  
 B. five  
 C. TypeError  
-::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::::: solution
 
@@ -218,7 +217,7 @@ Here, we can find some examples and information such as installation. We will do
 %pip install elabapi-python
 ```
 
-::::::::::::::::::::::::::: callout
+::::::::::::::::::::::::::::::::::::: callout
 
 This installs it directly in the environment we are working in so it is accessible to our notebook.
 
@@ -242,7 +241,7 @@ uv sync
 The package `elabapi-python` is imported as `elabapi_python`, and
 `python-dotenv` is imported as `dotenv` in `client.py`. Ensure you have added your credentials and the URL to a `.env` file.
 
-:::::::::::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::::::::::
 
 Once downloaded, we need to import the library into our notebook or scripts:
 
