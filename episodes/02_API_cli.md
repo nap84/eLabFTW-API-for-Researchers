@@ -72,7 +72,7 @@ Scroll to the [Experiments](https://doc.elabftw.net/api/elabapi-html/#api-Experi
       7. Copy and paste this to the `.env` file in your `workshop_data/research_computer` folder. It will only be shown once!
    2. Copy and paste your token to the terminal, replacing `[[apiKey]]`
    3. Replace `https://elab.local:3148` with your eLabFTW URL
-   4. Add experiment info using the template below. Once done, add `-d '{"title":"my api exp"}` (replace info in curly brackets with full info)
+   4. Add experiment info using the template below. Once done, add `\` at the end of the last line, <kbd>enter</kbd> for a new line and add `-d '{"title":"my api exp"}` (replace info in curly brackets with full info)
    5. Copy and paste into your terminal
    6. Hit <kbd>enter</kbd> to run
 
