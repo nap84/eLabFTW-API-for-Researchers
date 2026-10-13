@@ -244,7 +244,7 @@
 <div class="accordion accordion-flush" id="accordionFlush2">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading2">
-        <a href="00_IntroSetup.html">1. Introduction and Setup</a>
+        <a href="01_API.html">1. The eLabFTW API</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -256,7 +256,7 @@
 <div class="accordion accordion-flush" id="accordionFlush3">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading3">
-        <a href="01_API.html">2. The eLabFTW API</a>
+        <a href="02_API_cli.html">2. terminal and Making Connections</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -268,7 +268,7 @@
 <div class="accordion accordion-flush" id="accordionFlush4">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading4">
-        <a href="02_API_cli.html">3. terminal and Making Connections</a>
+        <a href="03_python_jupyter.html">3. Using the API with Python in Jupyter Notebooks</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -280,19 +280,7 @@
 <div class="accordion accordion-flush" id="accordionFlush5">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading5">
-        <a href="03_python_jupyter.html">4. Using the API with Python in Jupyter Notebooks</a>
-    </div>
-<!--/div.accordion-header-->
-
-  </div>
-<!--/div.accordion-item-->
-</div>
-<!--/div.accordion-flush-->
-
-<div class="accordion accordion-flush" id="accordionFlush6">
-  <div class="accordion-item">
-    <div class="accordion-header" id="flush-heading6">
-        <a href="04_data_analysis.html">5. Retrieving and Analyzing Data</a>
+        <a href="04_data_analysis.html">4. Retrieving and Analyzing Data</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -374,156 +362,7 @@
     <main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>All in One View</h1>
         
-<section id="aio-00_IntroSetup"><p>Content from <a href="00_IntroSetup.html">Introduction and Setup</a></p>
-<hr>
-<p>Last updated on 2026-10-13 |
-
-        <a href="https://github.com/carpentries/workbench-template-md/edit/main/episodes/00_IntroSetup.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
-<div class="text-end">
-          <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
-        </div>
-<div class="overview card">
-<h2 class="card-header">Overview</h2>
-<div class="row g-0">
-<div class="col-md-4">
-<div class="card-body">
-<div class="inner">
-<h3 class="card-title">Questions</h3>
-<ul>
-<li>What can I expect from this course?</li>
-<li>What are the prerequisites?</li>
-<li>What is the technical setup?</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="col-md-8">
-<div class="card-body">
-<div class="inner bordered">
-<h3 class="card-title">Objectives</h3>
-<ul>
-<li>Manage expectations for this course</li>
-<li>Identify prerequisites for this course</li>
-<li>Everyone has a working environment for this course</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-</div>
-<section><h2 class="section-heading" id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
-</h2>
-<hr class="half-width">
-<p>This course introduces the eLabFTW API and how to use it. It is
-designed for researchers who want to interact with their eLabFTW
-instance programmatically. As such, you should be familiar with using
-eLabFTW through it’s user interface (UI).</p>
-<p>Since this course is supposed to reach as many researchers as
-possible, it does contain some very basic concepts on APIs, Python, and
-Jupyter Notebooks. Bear with us here if you are already familiar with
-these concepts. We will also code some short example scripts that act
-upon the data so we can work through a mildly realistic sceanario.</p>
-<!--Note on where content can be found (link)/Intro slides-->
-</section><section><h2 class="section-heading" id="notes-and-resources">Notes and Resources<a class="anchor" aria-label="anchor" href="#notes-and-resources"></a>
-</h2>
-<hr class="half-width">
-<p>We have joint notepad for this course. Feel free to job things down:
-<!-- link to notepad --></p>
-</section><section><h2 class="section-heading" id="setup">Setup<a class="anchor" aria-label="anchor" href="#setup"></a>
-</h2>
-<hr class="half-width">
-<p>This course borrows from the concepts of <a href="https://carpentries.org/" class="external-link">The Carpentries</a>. Thus, it contains a
-lot of live coding and exercises–it’s hands on! That means, you will
-need some kind of working environment.</p>
-<p>If you use Jupyter Notebooks on your computer and already feel
-comfortable using things like a terminal there, feel free to stay local.
-If you cannot or do not wish to install anything, you can use a
-JupyterHub instance. We have outlined two options below.</p>
-<div class="section level3">
-<h3 id="rwth-jupyterhub-requires-rwth-account">
-<a href="https://jupyter.rwth-aachen.de/hub/" class="external-link">RWTH JupyterHub</a>
-(requires RWTH Account)<a class="anchor" aria-label="anchor" href="#rwth-jupyterhub-requires-rwth-account"></a>
-</h3>
-<ol style="list-style-type: decimal">
-<li>Head to <a href="https://jupyter.rwth-aachen.de/hub/" class="external-link uri">https://jupyter.rwth-aachen.de/hub/</a> and log in with your
-RWTH account.</li>
-<li>Then Select the <strong>Python 3.13</strong> profile.</li>
-</ol>
-<figure><img src="img/screenshot_RWTHjupyter_profiles.png" alt="Screenshot of the RWTH Jupyter Hub profile selection" class="figure mx-auto d-block"><div class="figcaption">Screenshot of the RWTH Jupyter Hub profile
-selection</div>
-</figure><ol start="3" style="list-style-type: decimal">
-<li>Then Scroll down and click <strong>START</strong>.</li>
-</ol>
-<figure><img src="img/screenshot_RWTHjupyter_start.png" alt="Screenshot of the RWTH Jupyter Hub start button" class="figure mx-auto d-block"><div class="figcaption">Screenshot of the RWTH Jupyter Hub start
-button</div>
-</figure>
-</div>
-<div class="section level3">
-<h3 id="jupyter4nfdi">
-<a href="https://hub.nfdi-jupyter.de/hub/home" class="external-link">Jupyter4NFDI</a><a class="anchor" aria-label="anchor" href="#jupyter4nfdi"></a>
-</h3>
-<ol style="list-style-type: decimal">
-<li>Head to <a href="https://hub.nfdi-jupyter.de/hub/home" class="external-link uri">https://hub.nfdi-jupyter.de/hub/home</a> and click
-<strong>Sign In</strong>.</li>
-<li>Select an <strong>NFDI consortium</strong> or <strong>Guest
-Access</strong>. Log in accordingly.</li>
-<li>Give your lab a name and click <strong>start</strong>. The basic
-settings are sufficient for our course.</li>
-</ol>
-<p>Whichever path you chose, you should now see something like this (or
-whatever your local setup is):</p>
-<figure><img src="img/screenshot_jupyterLab.png" alt="Screen shot Jupyter Lab" class="figure mx-auto d-block"><div class="figcaption">Screen shot Jupyter Lab</div>
-</figure>
-</div>
-<div class="section level3">
-<h3 id="course-material">Course Material<a class="anchor" aria-label="anchor" href="#course-material"></a>
-</h3>
-<p>::::::::::::::::::::::::::::::: instructor note live code in jupyter
-lab from here on out.
-::::::::::::::::::::::::::::::::::::::::::::::::</p>
-<p>Next, no matter where you are working, you will need to download the
-course materials. Open a terminal and run the following command (feel
-free to copy and paste from notepad):</p>
-<div class="codewrapper sourceCode" id="cb1">
-<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1" aria-label="code-block-1-1"></a><span class="fu">git</span> clone https://TODO_UPDATEME/rdmIII_elabAPI_researcher.git</span></code></pre>
-</div>
-<p>This gives you the entire course content. Switch to the course
-learner directory in the file explorer to the left of the screen.</p>
-<p>Note: your are more than welcome to download the entire course
-content. Especially if you are working on Jupyter4NFDI, we encourage you
-to <strong>download and save your work</strong> before closing the
-server. You can do this by clicking on the <strong>File</strong> menu
-and selecting <strong>Download</strong>. This will download a zip file
-containing all your work. do this by exporting your workspace (in the
-<strong>File</strong> menu).</p>
-</div>
-<div class="section level3">
-<h3 id="elabftw-access">eLabFTW Access<a class="anchor" aria-label="anchor" href="#elabftw-access"></a>
-</h3>
-<p>You should have created an account on the eLabFTW demo instance <a href="https://elab.parks.web.gateway.ionos.coscine.dev" class="external-link uri">https://elab.parks.web.gateway.ionos.coscine.dev</a> and
-have access to the course team. This will allow you to play around
-however you please without spamming an official instance.</p>
-<p>If not, register to the demo instance and select the team
-<strong>20261115_FDMIII_API</strong>. Let us know so an admin can grant
-you access.</p>
-</div>
-</section><section><h2 class="section-heading" id="note-on-the-carpentries">Note on the Carpentries<a class="anchor" aria-label="anchor" href="#note-on-the-carpentries"></a>
-</h2>
-<hr class="half-width">
-<p>The Carpentries are a non-profit organization that teaches
-foundational coding and data literacy skills to researchers. They have a
-very specific way of teaching and structuring their lessons. We will
-borrow some of their concepts, but we will not follow their structure to
-the letter. If you are interested in learning more about the
-Carpentries, please visit their website: <a href="https://carpentries.org/" class="external-link uri">https://carpentries.org/</a>.
-<!-- check if I used any of their content and and give attribution here where necessary--></p>
-<!--
-Place links that you need to refer to multiple times across pages here. Delete
-any links that you are not going to use.
- -->
-</section></section><section id="aio-01_API"><p>Content from <a href="01_API.html">The eLabFTW API</a></p>
+<section id="aio-01_API"><p>Content from <a href="01_API.html">The eLabFTW API</a></p>
 <hr>
 <p>Last updated on 2026-10-13 |
 
@@ -689,7 +528,7 @@ eLabFTW, then refresh the page.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>The top line has the <code>userid</code> attribute, which is your
 user ID. You can also use the browser’s search function to find it:
@@ -1005,7 +844,7 @@ when building the URL for the request.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>The <code>POST</code> response includes the URL of the new experiment
 in its <code>Location</code> header. Copy the experiment ID from that
@@ -1092,7 +931,7 @@ arguments. For example:</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>The upload endpoint expects <code>multipart/form-data</code>, so the
 file must be sent with <code>-F</code>. Make it executable with
