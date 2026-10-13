@@ -109,6 +109,8 @@ What is _your_ user ID? Find it and note for later.
 The top line has the `userid` attribute, which is your user ID. You can also use the browser's search function to find it: <kbd>ctrl</kbd>+<kbd>f</kbd> &rarr; type 'userid'.
 
 :::::::::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::::::::::
+
 
 Requests typically return JSON. Depending on which browser you are using, it may be rendered nicely for better readability. Understanding the structure can greatly help when you are trying to find a specific piece of information. What helpful is knowing which key the value you are looking for belongs to. `userid` was the key in our example.
 
