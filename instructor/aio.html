@@ -257,7 +257,7 @@
 <div class="accordion accordion-flush" id="accordionFlush3">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading3">
-        <a href="02_API_cli.html">2. terminal and Making Connections</a>
+        <a href="02_API_cli.html">2. Terminal and Making Connections</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -534,7 +534,7 @@ course.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>The top line has the <code>userid</code> attribute, which is your
 user ID. You can also use the browser’s search function to find it:
@@ -576,7 +576,7 @@ from the University of Bielefeld (formerly University of Stuttgart).</p>
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
-</section></section><section id="aio-02_API_cli"><p>Content from <a href="02_API_cli.html">terminal and Making Connections</a></p>
+</section></section><section id="aio-02_API_cli"><p>Content from <a href="02_API_cli.html">Terminal and Making Connections</a></p>
 <hr>
 <p>Last updated on 2026-10-13 |
 
@@ -680,9 +680,9 @@ Lab.</li>
 select <code>Read/Write</code> from the permissions drop-down menu.</li>
 <li>click <code>Generate an API Key</code>
 </li>
-<li>Copy and paste this to the <code>.env</code> file in your
-<code>workshop_data/research_computer</code> folder. It will only be
-shown once!</li>
+<li>Copy and paste this to the <code>secrets.env</code> file in your
+<code>research_computer/</code> folder. It will only be shown once in
+the ELN!</li>
 </ol>
 </li>
 <li>Copy and paste your token to the terminal, replacing
@@ -800,20 +800,20 @@ easier and it is easier to catch problems.</p>
 <span class="callout-header">Callout</span>
 <div class="callout-inner">
 <div class="callout-content">
-<p>You can load the API key from the <code>.env</code> file instead of
-pasting the secret into the command. From the
-<code>research_computer/</code> directory, run:</p>
+<p>You can load the API key from the <code>secrets.env</code> file
+instead of pasting the secret into the command. From the
+<strong>workshop directory</strong> directory, run:</p>
 <div class="codewrapper sourceCode" id="cb3">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" tabindex="-1" aria-label="code-block-3-1"></a><span class="bu">set</span> <span class="at">-a</span></span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1" aria-label="code-block-3-2"></a><span class="bu">source</span> .env</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1" aria-label="code-block-3-2"></a><span class="bu">source</span> research_computer/secrets.env</span>
 <span id="cb3-3"><a href="#cb3-3" tabindex="-1" aria-label="code-block-3-3"></a><span class="bu">set</span> +a</span></code></pre>
 </div>
-<p>The <code>.env</code> file should contain <code>ELAB_API_KEY</code>
-and <code>ELAB_API_HOST</code>. The key is then available as the
-<code>$ELAB_API_KEY</code> environment variable. Use it in the request
-like this:</p>
+<p>The <code>secrets.env</code> file should contain
+<code>ELAB_API_KEY</code> and <code>ELAB_API_HOST</code>. The key is
+then available as the <code>$ELAB_API_KEY</code> environment variable.
+Use it in the request like this:</p>
 <div class="codewrapper sourceCode" id="cb4">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -825,8 +825,10 @@ like this:</p>
 <span id="cb4-6"><a href="#cb4-6" tabindex="-1" aria-label="code-block-4-6"></a>   <span class="st">"</span><span class="va">$ELAB_API_HOST</span><span class="st">/experiments"</span></span></code></pre>
 </div>
 <p>This keeps the token out of the command itself. Do not print the
-variable or share the <code>.env</code> file. If you believe you
+variable or share the <code>secrets.env</code> file. If you believe you
 unsafely used an API key, always revoke it and create a new one.</p>
+<p>Note: <code>.env</code> is more common, however, Jupyter lab
+immediately hides these.</p>
 </div>
 </div>
 </div>
@@ -1531,7 +1533,7 @@ experiment.</li>
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
   <h3 class="accordion-header" id="headingInstructor1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Instructor Note </h3>
 </button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
+<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
 <div class="accordion-body">
 <p>Ask learners to use the experiment ID they created in the previous
 episode. If they do not have one, provide an accessible experiment ID
@@ -1811,7 +1813,7 @@ experiment.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>Use <code>read_experiments</code> or the experiment IDs from the
 previous episodes to select the source experiments. Retrieve each file
