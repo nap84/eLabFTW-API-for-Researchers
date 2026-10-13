@@ -67,7 +67,6 @@ contact: 'parks@itc.rwth-aachen.de'
 
 # Order of episodes in your lesson
 episodes: 
-- 00_IntroSetup.md
 - 01_API.md
 - 02_API_cli.md
 - 03_python_jupyter.md
