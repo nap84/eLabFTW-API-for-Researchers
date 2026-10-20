@@ -26,7 +26,7 @@ exercises: 45 # exercise time in minutes
 
 ## From an eLabFTW Experiment to a Plot
 
-In the previous episodes, we created an experiment and attached `measurement.csv`.
+In the previous episodes, we created an experiment and attached `calibration.csv`.
 Now we will reproduce the analysis workflow in an empty Jupyter Notebook:
 
 1. Retrieve the experiment and its attached file.
@@ -37,9 +37,7 @@ Now we will reproduce the analysis workflow in an empty Jupyter Notebook:
 
 :::::::::::::::::::::::::::::::::::::::: instructor
 
-Ask learners to use the experiment ID they created in the previous episode. If
-they do not have one, provide an accessible experiment ID from the workshop
-instance.
+Ask learners to use the experiment ID they created in the previous episode. If they do not have one, provide an accessible experiment ID from the workshop instance.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
