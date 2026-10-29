@@ -56,6 +56,9 @@ These will be live coded in a Jupyter notebook.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
+Let's open a new Jupyter Notebook called `crash_course.ipynb`. In Jupyter Lab, you can do this by clicking the blue `+` button, and then clicking the Python tile under notebook. Right-click the newly created notebook to and select rename to rename it.
+
+
 ```python
 # Print a greeting
 print("Hello, eLabFTW researcher!")
@@ -237,7 +240,7 @@ uv sync
 ```
 
 The package `elabapi-python` is imported as `elabapi_python`, and
-`python-dotenv` is imported as `dotenv` in `client.py`. Ensure you have added your credentials and the URL to a `.env` file.
+`python-dotenv` is imported as `dotenv` in `client.py`. Ensure you have added your credentials and the URL to a `.env` (or `secrets.env`) file.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -261,15 +264,24 @@ Honestly, for this specific case, the help output is not extremely helpful. Howe
 dir(elabapi_python)
 ```
 
-To get started, we have the [examples folder](https://github.com/elabftw/elabapi-python/tree/master/examples) on Github. Deltablot has created a nifty [client configuration file](https://github.com/elabftw/elabapi-python/blob/master/examples/client.py). This has already been downloaded and included in your `workshop_data` dir. We have made some small adjustments to ensure the secrets load correctly.
+To get started, we have the [examples folder](https://github.com/elabftw/elabapi-python/tree/master/examples) on Github. Deltablot has created a nifty [client configuration file](https://github.com/elabftw/elabapi-python/blob/master/examples/client.py). This has already been downloaded and included in your `workshop_data` directory. We have made some small adjustments to ensure the secrets load correctly.
 
 In the Python library, there are various clients that can be used to interact with the eLabFTW API. First, you set up the main one, which has already been done in `client.py`, then, you can create the others.
 
 Import the main one into your notebook using:
 
 ```python
-from workshop_data.research_computer.client import api_client
+from scripts.client import api_client
 ```
+
+Note: ensure your are in the correct directory.
+
+You may get an error here for missing packages, especially dotenv:
+
+```python
+%pip install python-dotenv
+```
+
 
 Let's look at a couple examples in the GitHub repo.
 
@@ -317,7 +329,10 @@ We can derive the code from the documentation, as well, which is a great way to 
 
 ::::::::::::::::::::::::::::::::::::: challenge
 
-What is the code for the client that interacts with resources in eLabFTW? Create this client in your notebook and use it to retrieve the resources from your eLabFTW instance.
+What is the code for the client that interacts with resources in eLabFTW? Create this client in your notebook and use it to:
+
+1. Retrieve the resources from your eLabFTW instance.
+2. Retrieve the bluetooth thermometer resource (from the last episode).
 
 Hint: Look through the [examples](https://github.com/elabftw/elabapi-python/tree/master/examples) and keep your eyes out for a different word than _resources_.
 
@@ -329,12 +344,20 @@ An example can be found in [05-create-modify-item](https://github.com/elabftw/el
 itemsApi = elabapi_python.ItemsApi(api_client)
 ```
 
-To retrieve and view all resources you have access to:
+To retrieve and view all resources you have access to (1):
 
 ```python
 resources = itemsApi.read_items()
 resources
 ```
+
+To retrieve a specific resource (2):
+
+```python
+resource = itemsApi.get_item(144)
+resource
+```
+
 
 :::::::::::::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::::::::::
