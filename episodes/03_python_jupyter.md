@@ -54,8 +54,6 @@ Core concepts
 
 These will be live coded in a Jupyter notebook.
 
-TODO: ensure these all fit the narrative once it is all written.
-
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ```python
@@ -263,7 +261,7 @@ Honestly, for this specific case, the help output is not extremely helpful. Howe
 dir(elabapi_python)
 ```
 
-To get started, we have the [examples folder](https://github.com/elabftw/elabapi-python/tree/master/examples). Deltablot has created a nifty [client configuration file](https://github.com/elabftw/elabapi-python/blob/master/examples/client.py). This has already been downloaded and included in your `workshop_data` dir. We have made some small adjustments to ensure the secrets load correctly.
+To get started, we have the [examples folder](https://github.com/elabftw/elabapi-python/tree/master/examples) on Github. Deltablot has created a nifty [client configuration file](https://github.com/elabftw/elabapi-python/blob/master/examples/client.py). This has already been downloaded and included in your `workshop_data` dir. We have made some small adjustments to ensure the secrets load correctly.
 
 In the Python library, there are various clients that can be used to interact with the eLabFTW API. First, you set up the main one, which has already been done in `client.py`, then, you can create the others.
 
@@ -280,16 +278,26 @@ Check out [00_getting-started.py](https://github.com/elabftw/elabapi-python/blob
 ```python
 info_client = elabapi_python.InfoApi(api_client)
 api_response = info_client.get_info()
-print(api_response)
-```
-
-In Jupyter Notebooks, we often get a pretty printed output, which is nice without using print(). This only works for the last line of a cell, so if you want to see the output of multiple lines or when using in a script, you will need to use `print()`.
-
-```python
 api_response
 ```
 
-Similarly, we can see an experiment client:
+In Jupyter Notebooks, we often get a pretty printed output without using a `print()` statement. This only works for the last line of a cell, so if you want to see the output of multiple lines or when using in a script, you will need to use `print()`.
+
+For example:
+
+```python
+api_response
+4
+```
+
+As opposed to:
+
+```python
+print(api_response)
+4
+```
+
+Back to the clients. Similarly, we can see an experiment client:
 
 ```python
 exp_client = elabapi_python.ExperimentsApi(api_client)
