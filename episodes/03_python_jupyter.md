@@ -240,7 +240,7 @@ uv sync
 ```
 
 The package `elabapi-python` is imported as `elabapi_python`, and
-`python-dotenv` is imported as `dotenv` in `client.py`. Ensure you have added your credentials and the URL to a `.env` file.
+`python-dotenv` is imported as `dotenv` in `client.py`. Ensure you have added your credentials and the URL to a `.env` (or `secrets.env`) file.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
