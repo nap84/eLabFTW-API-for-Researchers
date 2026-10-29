@@ -274,6 +274,15 @@ Import the main one into your notebook using:
 from scripts.client import api_client
 ```
 
+Note: ensure your are in the correct directory.
+
+You may get an error here for missing packages, especially dotenv:
+
+```python
+%pip install python-dotenv
+```
+
+
 Let's look at a couple examples in the GitHub repo.
 
 Check out [00_getting-started.py](https://github.com/elabftw/elabapi-python/blob/master/examples/00-getting-started.py). We can see an info client:
