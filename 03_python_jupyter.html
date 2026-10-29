@@ -327,7 +327,7 @@
       </div>
     </nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Using the API with Python in Jupyter Notebooks</h1>
-        <p>Last updated on 2026-10-13 |
+        <p>Last updated on 2026-10-29 |
 
         <a href="https://github.com/carpentries/workbench-template-md/edit/main/episodes/03_python_jupyter.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -415,7 +415,6 @@ drop‑downs).</p></li>
 <h3 id="printing-basic-data-types">1. Printing &amp; basic data types<a class="anchor" aria-label="anchor" href="#printing-basic-data-types"></a></h3>
 <p>::::::::::::::::::::::::::::::: instructor note</p>
 <p>These will be live coded in a Jupyter notebook.</p>
-<p>TODO: ensure these all fit the narrative once it is all written.</p>
 <p>::::::::::::::::::::::::::::::::::::::::::::::::</p>
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -555,7 +554,7 @@ C. TypeError</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p><strong>B</strong> – Python variables are dynamically typed; the
 second assignment overwrites the first.</p>
@@ -645,14 +644,15 @@ functions in the library:</p>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" tabindex="-1" aria-label="code-block-21-1"></a><span class="bu">dir</span>(elabapi_python)</span></code></pre>
 </div>
 <p>To get started, we have the <a href="https://github.com/elabftw/elabapi-python/tree/master/examples" class="external-link">examples
-folder</a>. Deltablot has created a nifty <a href="https://github.com/elabftw/elabapi-python/blob/master/examples/client.py" class="external-link">client
+folder</a> on Github. Deltablot has created a nifty <a href="https://github.com/elabftw/elabapi-python/blob/master/examples/client.py" class="external-link">client
 configuration file</a>. This has already been downloaded and included in
-your <code>workshop_data</code> dir.</p>
+your <code>workshop_data</code> dir. We have made some small adjustments
+to ensure the secrets load correctly.</p>
 <p>In the Python library, there are various clients that can be used to
 interact with the eLabFTW API. First, you set up the main one, which has
 already been done in <code>client.py</code>, then, you can create the
 others.</p>
-<p>Import this into your notebook using:</p>
+<p>Import the main one into your notebook using:</p>
 <div class="codewrapper sourceCode" id="cb22">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -666,37 +666,47 @@ We can see an info client:</p>
 </h3>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" tabindex="-1" aria-label="code-block-23-1"></a>info_client <span class="op">=</span> elabapi_python.InfoApi(api_client)</span>
 <span id="cb23-2"><a href="#cb23-2" tabindex="-1" aria-label="code-block-23-2"></a>api_response <span class="op">=</span> info_client.get_info()</span>
-<span id="cb23-3"><a href="#cb23-3" tabindex="-1" aria-label="code-block-23-3"></a><span class="bu">print</span>(api_response)</span></code></pre>
+<span id="cb23-3"><a href="#cb23-3" tabindex="-1" aria-label="code-block-23-3"></a>api_response</span></code></pre>
 </div>
-<p>In Jupyter Notebooks, we often get a pretty printed output, which is
-nice without using print(). This only works for the last line of a cell,
-so if you want to see the output of multiple lines or when using in a
-script, you will need to use print().</p>
+<p>In Jupyter Notebooks, we often get a pretty printed output without
+using a <code>print()</code> statement. This only works for the last
+line of a cell, so if you want to see the output of multiple lines or
+when using in a script, you will need to use <code>print()</code>.</p>
+<p>For example:</p>
 <div class="codewrapper sourceCode" id="cb24">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" tabindex="-1" aria-label="code-block-24-1"></a>api_response</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" tabindex="-1" aria-label="code-block-24-1"></a>api_response</span>
+<span id="cb24-2"><a href="#cb24-2" tabindex="-1" aria-label="code-block-24-2"></a><span class="dv">4</span></span></code></pre>
 </div>
-<p>Similarly, we can see an experiment client:</p>
+<p>As opposed to:</p>
 <div class="codewrapper sourceCode" id="cb25">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" tabindex="-1" aria-label="code-block-25-1"></a>exp_client <span class="op">=</span> elabapi_python.ExperimentsApi(api_client)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" tabindex="-1" aria-label="code-block-25-1"></a><span class="bu">print</span>(api_response)</span>
+<span id="cb25-2"><a href="#cb25-2" tabindex="-1" aria-label="code-block-25-2"></a><span class="dv">4</span></span></code></pre>
 </div>
-<p>Check out line 88, which shows us a get request. Remember how we
-created and retrieved an experiment in the CLI? Let’s try the same thing
-here using the experiment ID from the last lesson.</p>
+<p>Back to the clients. Similarly, we can see an experiment client:</p>
 <div class="codewrapper sourceCode" id="cb26">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" tabindex="-1" aria-label="code-block-26-1"></a>exp_id <span class="op">=</span> <span class="dv">94</span> <span class="co"># example: replace with your experiment ID</span></span>
-<span id="cb26-2"><a href="#cb26-2" tabindex="-1" aria-label="code-block-26-2"></a>exp <span class="op">=</span> exp_client.get_experiment(exp_id)</span>
-<span id="cb26-3"><a href="#cb26-3" tabindex="-1" aria-label="code-block-26-3"></a><span class="bu">print</span>(exp)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" tabindex="-1" aria-label="code-block-26-1"></a>exp_client <span class="op">=</span> elabapi_python.ExperimentsApi(api_client)</span></code></pre>
+</div>
+<p>Check out line 88, which shows us a <code>GET</code> request.
+Remember how we created and retrieved an experiment in the terminal?
+Let’s try the same thing here using the experiment ID from the last
+lesson.</p>
+<div class="codewrapper sourceCode" id="cb27">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" tabindex="-1" aria-label="code-block-27-1"></a>exp_id <span class="op">=</span> <span class="dv">94</span> <span class="co"># example: replace with your experiment ID</span></span>
+<span id="cb27-2"><a href="#cb27-2" tabindex="-1" aria-label="code-block-27-2"></a>exp <span class="op">=</span> exp_client.get_experiment(exp_id)</span>
+<span id="cb27-3"><a href="#cb27-3" tabindex="-1" aria-label="code-block-27-3"></a><span class="bu">print</span>(exp)</span></code></pre>
 </div>
 <p>You can see, this does the same things as we were doing before, but
-many of us find Python easier to read and understand than the CLI. This
-is especially true when we start to combine multiple steps into a single
-script.</p>
+many of us find Python easier to read and understand than the bash
+commands. This is especially true when we start to combine multiple
+steps into a single script.</p>
 <p>We can derive the code from the documentation, as well, which is a
 great way to learn how to use the API. Check out the <a href="https://doc.elabftw.net/api/" class="external-link">API docs</a> and click on
 <code>Python Library (v2)</code>.</p>
@@ -721,21 +731,21 @@ and keep your eyes out for a different word than <em>resources</em>.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>An example can be found in <a href="https://github.com/elabftw/elabapi-python/blob/master/examples/05-create-modify-item.py" class="external-link">05-create-modify-item</a>
 in line 6:</p>
-<div class="codewrapper sourceCode" id="cb27">
-<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" tabindex="-1" aria-label="code-block-27-1"></a>itemsApi <span class="op">=</span> elabapi_python.ItemsApi(api_client)</span></code></pre>
-</div>
-<p>To retrieve and view all resources you have access to:</p>
 <div class="codewrapper sourceCode" id="cb28">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" tabindex="-1" aria-label="code-block-28-1"></a>resources <span class="op">=</span> itemsApi.read_items()</span>
-<span id="cb28-2"><a href="#cb28-2" tabindex="-1" aria-label="code-block-28-2"></a>resources</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" tabindex="-1" aria-label="code-block-28-1"></a>itemsApi <span class="op">=</span> elabapi_python.ItemsApi(api_client)</span></code></pre>
+</div>
+<p>To retrieve and view all resources you have access to:</p>
+<div class="codewrapper sourceCode" id="cb29">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" tabindex="-1" aria-label="code-block-29-1"></a>resources <span class="op">=</span> itemsApi.read_items()</span>
+<span id="cb29-2"><a href="#cb29-2" tabindex="-1" aria-label="code-block-29-2"></a>resources</span></code></pre>
 </div>
 </div>
 </div>
@@ -825,8 +835,8 @@ any links that you are not going to use.
   "url": "https://carpentries.github.io/workbench-template-md/03_python_jupyter.html",
   "identifier": "https://carpentries.github.io/workbench-template-md/03_python_jupyter.html",
   "dateCreated": "2026-10-13",
-  "dateModified": "2026-10-13",
-  "datePublished": "2026-10-27"
+  "dateModified": "2026-10-29",
+  "datePublished": "2026-10-29"
 }
 
   </script><script>
