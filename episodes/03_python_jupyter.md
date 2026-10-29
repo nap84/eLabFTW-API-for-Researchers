@@ -271,7 +271,7 @@ In the Python library, there are various clients that can be used to interact wi
 Import the main one into your notebook using:
 
 ```python
-from workshop_data.research_computer.client import api_client
+from scripts.client import api_client
 ```
 
 Let's look at a couple examples in the GitHub repo.
