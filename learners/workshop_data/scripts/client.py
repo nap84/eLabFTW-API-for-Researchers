@@ -4,7 +4,7 @@
 import os
 from pathlib import Path
 
-# Load values from the .env file beside this script.
+# Load values from either supported env file beside this script.
 from dotenv import load_dotenv
 
 # You must have elabapi-python installed so it can be imported
@@ -14,9 +14,14 @@ import elabapi_python
 
 # START CONFIG
 # Basic configuration: Api Key and Host URL
-# Existing environment variables take precedence over values in .env.
-ENV_FILE = Path(__file__).with_name(".env")
-load_dotenv(dotenv_path=ENV_FILE, override=False)
+# Existing environment variables take precedence over values in either file.
+# If both files define a variable, .env takes precedence over secrets.env.
+ENV_FILES = (
+    Path(__file__).with_name(".env"),
+    Path(__file__).with_name("secrets.env"),
+)
+for env_file in ENV_FILES:
+    load_dotenv(dotenv_path=env_file, override=False)
 
 # Read the variable names used by the workshop .env file.
 API_KEY = os.getenv("ELAB_API_KEY")
