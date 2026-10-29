@@ -264,7 +264,7 @@ Honestly, for this specific case, the help output is not extremely helpful. Howe
 dir(elabapi_python)
 ```
 
-To get started, we have the [examples folder](https://github.com/elabftw/elabapi-python/tree/master/examples) on Github. Deltablot has created a nifty [client configuration file](https://github.com/elabftw/elabapi-python/blob/master/examples/client.py). This has already been downloaded and included in your `workshop_data` dir. We have made some small adjustments to ensure the secrets load correctly.
+To get started, we have the [examples folder](https://github.com/elabftw/elabapi-python/tree/master/examples) on Github. Deltablot has created a nifty [client configuration file](https://github.com/elabftw/elabapi-python/blob/master/examples/client.py). This has already been downloaded and included in your `workshop_data` directory. We have made some small adjustments to ensure the secrets load correctly.
 
 In the Python library, there are various clients that can be used to interact with the eLabFTW API. First, you set up the main one, which has already been done in `client.py`, then, you can create the others.
 
