@@ -64,7 +64,7 @@ All course material (included a filled-out version of the notebook) will be avai
 Once Jupyter Lab is running, open a new terminal and run the following command (copy-paste and hit enter):
 
 ```bash
-#TODO: fix the below by replacing BRANCH, OWNER, REPO, and path/to/folder with the correct values
+#TODO: fix the below by replacing BRANCH, OWNER, REPO, and path/to/folder with the correct values, ensure we switch to folder!
 git clone --depth 1 --filter=blob:none --sparse --branch BRANCH \
   https://github.com/OWNER/REPO.git
 cd REPO

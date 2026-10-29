@@ -54,8 +54,6 @@ Core concepts
 
 These will be live coded in a Jupyter notebook.
 
-TODO: ensure these all fit the narrative once it is all written.
-
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ```python
@@ -263,11 +261,11 @@ Honestly, for this specific case, the help output is not extremely helpful. Howe
 dir(elabapi_python)
 ```
 
-To get started, we have the [examples folder](https://github.com/elabftw/elabapi-python/tree/master/examples). Deltablot has created a nifty [client configuration file](https://github.com/elabftw/elabapi-python/blob/master/examples/client.py). This has already been downloaded and included in your `workshop_data` dir.
+To get started, we have the [examples folder](https://github.com/elabftw/elabapi-python/tree/master/examples) on Github. Deltablot has created a nifty [client configuration file](https://github.com/elabftw/elabapi-python/blob/master/examples/client.py). This has already been downloaded and included in your `workshop_data` dir. We have made some small adjustments to ensure the secrets load correctly.
 
 In the Python library, there are various clients that can be used to interact with the eLabFTW API. First, you set up the main one, which has already been done in `client.py`, then, you can create the others.
 
-Import this into your notebook using:
+Import the main one into your notebook using:
 
 ```python
 from workshop_data.research_computer.client import api_client
@@ -280,22 +278,32 @@ Check out [00_getting-started.py](https://github.com/elabftw/elabapi-python/blob
 ```python
 info_client = elabapi_python.InfoApi(api_client)
 api_response = info_client.get_info()
-print(api_response)
-```
-
-In Jupyter Notebooks, we often get a pretty printed output, which is nice without using print(). This only works for the last line of a cell, so if you want to see the output of multiple lines or when using in a script, you will need to use print().
-
-```python
 api_response
 ```
 
-Similarly, we can see an experiment client:
+In Jupyter Notebooks, we often get a pretty printed output without using a `print()` statement. This only works for the last line of a cell, so if you want to see the output of multiple lines or when using in a script, you will need to use `print()`.
+
+For example:
+
+```python
+api_response
+4
+```
+
+As opposed to:
+
+```python
+print(api_response)
+4
+```
+
+Back to the clients. Similarly, we can see an experiment client:
 
 ```python
 exp_client = elabapi_python.ExperimentsApi(api_client)
 ```
 
-Check out line 88, which shows us a get request. Remember how we created and retrieved an experiment in the CLI? Let's try the same thing here using the experiment ID from the last lesson.
+Check out line 88, which shows us a `GET` request. Remember how we created and retrieved an experiment in the terminal? Let's try the same thing here using the experiment ID from the last lesson.
 
 ```python
 exp_id = 94 # example: replace with your experiment ID
@@ -303,7 +311,7 @@ exp = exp_client.get_experiment(exp_id)
 print(exp)
 ```
 
-You can see, this does the same things as we were doing before, but many of us find Python easier to read and understand than the CLI. This is especially true when we start to combine multiple steps into a single script.
+You can see, this does the same things as we were doing before, but many of us find Python easier to read and understand than the bash commands. This is especially true when we start to combine multiple steps into a single script.
 
 We can derive the code from the documentation, as well, which is a great way to learn how to use the API. Check out the [API docs](https://doc.elabftw.net/api/) and click on `Python Library (v2)`.
 
@@ -312,7 +320,6 @@ We can derive the code from the documentation, as well, which is a great way to 
 What is the code for the client that interacts with resources in eLabFTW? Create this client in your notebook and use it to retrieve the resources from your eLabFTW instance.
 
 Hint: Look through the [examples](https://github.com/elabftw/elabapi-python/tree/master/examples) and keep your eyes out for a different word than _resources_.
-
 
 :::::::::::::::::::::::: solution
 
