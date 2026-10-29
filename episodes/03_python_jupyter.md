@@ -56,6 +56,9 @@ These will be live coded in a Jupyter notebook.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
+Let's open a new Jupyter Notebook called `crash_course.ipynb`. In Jupyter Lab, you can do this by clicking the blue `+` button, and then clicking the Python tile under notebook. Right-click the newly created notebook to and select rename to rename it.
+
+
 ```python
 # Print a greeting
 print("Hello, eLabFTW researcher!")
