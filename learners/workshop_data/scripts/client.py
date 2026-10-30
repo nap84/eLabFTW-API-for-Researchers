@@ -17,7 +17,7 @@ import elabapi_python
 # Existing environment variables take precedence over values in either file.
 # If both files define a variable, .env takes precedence over secrets.env.
 ENV_FILES = (
-    Path(__file__).with_name(".env"),
+    Path(__file__).with_name(".env"), #__file__ --> directly of this script
     Path(__file__).with_name("secrets.env"),
 )
 for env_file in ENV_FILES:
