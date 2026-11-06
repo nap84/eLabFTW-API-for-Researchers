@@ -336,7 +336,7 @@
       </div>
     </nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Using the API with Python in Jupyter Notebooks</h1>
-        <p>Last updated on 2026-10-29 |
+        <p>Last updated on 2026-11-06 |
 
         <a href="https://github.com/carpentries/workbench-template-md/edit/main/episodes/03_python_jupyter.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -570,7 +570,7 @@ C. TypeError</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p><strong>B</strong> – Python variables are dynamically typed; the
 second assignment overwrites the first.</p>
@@ -693,6 +693,13 @@ We can see an info client:</p>
 <span id="cb24-2"><a href="#cb24-2" tabindex="-1" aria-label="code-block-24-2"></a>api_response <span class="op">=</span> info_client.get_info()</span>
 <span id="cb24-3"><a href="#cb24-3" tabindex="-1" aria-label="code-block-24-3"></a>api_response</span></code></pre>
 </div>
+<div id="callout2" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<span class="callout-header">Callout</span>
+<div class="callout-inner">
+<div class="callout-content">
 <p>In Jupyter Notebooks, we often get a pretty printed output without
 using a <code>print()</code> statement. This only works for the last
 line of a cell, so if you want to see the output of multiple lines or
@@ -710,6 +717,9 @@ when using in a script, you will need to use <code>print()</code>.</p>
 </h3>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" tabindex="-1" aria-label="code-block-26-1"></a><span class="bu">print</span>(api_response)</span>
 <span id="cb26-2"><a href="#cb26-2" tabindex="-1" aria-label="code-block-26-2"></a><span class="dv">4</span></span></code></pre>
+</div>
+</div>
+</div>
 </div>
 <p>Back to the clients. Similarly, we can see an experiment client:</p>
 <div class="codewrapper sourceCode" id="cb27">
@@ -729,7 +739,7 @@ lesson.</p>
 <span id="cb28-3"><a href="#cb28-3" tabindex="-1" aria-label="code-block-28-3"></a><span class="bu">print</span>(exp)</span></code></pre>
 </div>
 <p>You can see, this does the same things as we were doing before, but
-many of us find Python easier to read and understand than the bash
+many of us find Python easier to read and understand than the terminal
 commands. This is especially true when we start to combine multiple
 steps into a single script.</p>
 <p>We can derive the code from the documentation, as well, which is a
@@ -745,7 +755,8 @@ great way to learn how to use the API. Check out the <a href="https://doc.elabft
 <div class="callout-content">
 <p>What is the code for the client that interacts with resources in
 eLabFTW? Create this client in your notebook and use it to:</p>
-<ol style="list-style-type: decimal"><li>Retrieve the resources from your eLabFTW instance.</li>
+<ol style="list-style-type: decimal"><li>Retrieve all resources (you have access to) from your eLabFTW
+instance.</li>
 <li>Retrieve the bluetooth thermometer resource (from the last
 episode).</li>
 </ol><p>Hint: Look through the <a href="https://github.com/elabftw/elabapi-python/tree/master/examples" class="external-link">examples</a>
@@ -758,7 +769,7 @@ and keep your eyes out for a different word than <em>resources</em>.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>An example can be found in <a href="https://github.com/elabftw/elabapi-python/blob/master/examples/05-create-modify-item.py" class="external-link">05-create-modify-item</a>
 in line 6:</p>
@@ -869,7 +880,7 @@ any links that you are not going to use.
   "url": "https://carpentries.github.io/workbench-template-md/instructor/03_python_jupyter.html",
   "identifier": "https://carpentries.github.io/workbench-template-md/instructor/03_python_jupyter.html",
   "dateCreated": "2026-10-13",
-  "dateModified": "2026-10-29",
+  "dateModified": "2026-11-06",
   "datePublished": "2026-11-06"
 }
 
