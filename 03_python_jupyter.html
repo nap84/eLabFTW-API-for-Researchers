@@ -422,7 +422,7 @@ drop‑downs).</p></li>
 </ul></section><section><h2 class="section-heading" id="crash-course-python-basics">Crash course: Python Basics<a class="anchor" aria-label="anchor" href="#crash-course-python-basics"></a></h2>
 <hr class="half-width"><div class="section level3">
 <h3 id="printing-basic-data-types">1. Printing &amp; basic data types<a class="anchor" aria-label="anchor" href="#printing-basic-data-types"></a></h3>
-<p>::::::::::::::::::::::::::::::: instructor note</p>
+<p>:::::::::::::::::::::::::::::::::::::: instructor note</p>
 <p>These will be live coded in a Jupyter notebook.</p>
 <p>::::::::::::::::::::::::::::::::::::::::::::::::</p>
 <p>Let’s open a new Jupyter Notebook called
@@ -508,39 +508,70 @@ select rename to rename it.</p>
 </div>
 <div class="section level3">
 <h3 id="defining-and-calling-a-function">6. Defining and calling a function<a class="anchor" aria-label="anchor" href="#defining-and-calling-a-function"></a></h3>
+<p>Functions serve as reusable pieces of code. We define them using
+<code>def</code>:</p>
 <div class="codewrapper sourceCode" id="cb11">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" tabindex="-1" aria-label="code-block-11-1"></a><span class="kw">def</span> greet(name: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">str</span>:</span>
 <span id="cb11-2"><a href="#cb11-2" tabindex="-1" aria-label="code-block-11-2"></a>    <span class="co">"""Return a friendly greeting."""</span></span>
-<span id="cb11-3"><a href="#cb11-3" tabindex="-1" aria-label="code-block-11-3"></a>    <span class="cf">return</span> <span class="ss">f"Hello, </span><span class="sc">{</span>name<span class="sc">}</span><span class="ss">!"</span></span>
-<span id="cb11-4"><a href="#cb11-4" tabindex="-1" aria-label="code-block-11-4"></a></span>
-<span id="cb11-5"><a href="#cb11-5" tabindex="-1" aria-label="code-block-11-5"></a><span class="bu">print</span>(greet(<span class="st">"Alice"</span>))</span></code></pre>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1" aria-label="code-block-11-3"></a>    <span class="cf">return</span> <span class="ss">f"Hello, </span><span class="sc">{</span>name<span class="sc">}</span><span class="ss">!"</span></span></code></pre>
 </div>
+<p>Then we can call them using their name and passing any required
+parameters in parentheses:</p>
+<pre><code><span><span class="fu">print</span><span class="op">(</span><span class="fu">greet</span><span class="op">(</span><span class="st">"Alice"</span><span class="op">)</span><span class="op">)</span></span></code></pre>
 <p><strong>Output</strong></p>
 <pre><code>Hello, Alice!</code></pre>
-</div>
-<div class="section level3">
-<h3 id="reading-and-writing-json-files">7. Reading and writing JSON files<a class="anchor" aria-label="anchor" href="#reading-and-writing-json-files"></a></h3>
-<div class="codewrapper sourceCode" id="cb13">
+<div class="section level4">
+<h4 id="built-in-functions">Built-in Functions<a class="anchor" aria-label="anchor" href="#built-in-functions"></a></h4>
+<p>There are a number of built-in functions in Python, which means we
+don’t have to define everything ourselves. We’ve already seen some of
+these, for example, the <code>print()</code> function. Again, we call
+the function by it’s name and pass what it needs in the parentheses (as
+above <code>print("Hello, eLabFTW researcher!")</code>).</p>
+<p>The built-in function <code>help()</code> allows us to retrieve the
+documentation on functions, including built-in ones. For example, we can
+call <code>help()</code> on the built-in function
+<code>type()</code>:</p>
+<div class="codewrapper sourceCode" id="cb14">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" tabindex="-1" aria-label="code-block-13-1"></a><span class="im">import</span> json</span>
-<span id="cb13-2"><a href="#cb13-2" tabindex="-1" aria-label="code-block-13-2"></a></span>
-<span id="cb13-3"><a href="#cb13-3" tabindex="-1" aria-label="code-block-13-3"></a>payload <span class="op">=</span> {<span class="st">"experiment"</span>: <span class="st">"test"</span>, <span class="st">"value"</span>: <span class="dv">123</span>}</span>
-<span id="cb13-4"><a href="#cb13-4" tabindex="-1" aria-label="code-block-13-4"></a></span>
-<span id="cb13-5"><a href="#cb13-5" tabindex="-1" aria-label="code-block-13-5"></a><span class="co"># Write to disk</span></span>
-<span id="cb13-6"><a href="#cb13-6" tabindex="-1" aria-label="code-block-13-6"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"payload.json"</span>, <span class="st">"w"</span>) <span class="im">as</span> fp:</span>
-<span id="cb13-7"><a href="#cb13-7" tabindex="-1" aria-label="code-block-13-7"></a>    json.dump(payload, fp, indent<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb13-8"><a href="#cb13-8" tabindex="-1" aria-label="code-block-13-8"></a></span>
-<span id="cb13-9"><a href="#cb13-9" tabindex="-1" aria-label="code-block-13-9"></a><span class="co"># Read it back</span></span>
-<span id="cb13-10"><a href="#cb13-10" tabindex="-1" aria-label="code-block-13-10"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"payload.json"</span>) <span class="im">as</span> fp:</span>
-<span id="cb13-11"><a href="#cb13-11" tabindex="-1" aria-label="code-block-13-11"></a>    data <span class="op">=</span> json.load(fp)</span>
-<span id="cb13-12"><a href="#cb13-12" tabindex="-1" aria-label="code-block-13-12"></a></span>
-<span id="cb13-13"><a href="#cb13-13" tabindex="-1" aria-label="code-block-13-13"></a><span class="bu">print</span>(data)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" tabindex="-1" aria-label="code-block-14-1"></a><span class="bu">help</span>(<span class="bu">print</span>)</span></code></pre>
 </div>
 <p><strong>Output</strong></p>
-<pre><code>{'experiment': 'test', 'value': 123}</code></pre>
+<pre><code>Help on built-in function print in module builtins:
+
+print(*args, sep=' ', end='\n', file=None, flush=False)
+    Prints the values to a stream, or to sys.stdout by default.
+
+    sep
+      string inserted between values, default a space.
+    end
+      string appended after the last value, default a newline.
+    file
+      a file-like object (stream); defaults to the current sys.stdout.
+    flush
+      whether to forcibly flush the stream.</code></pre>
+<p>Another useful built-in function is <code>len()</code> which gives is
+the length of things, such as, strings, lists, or dictionaries:</p>
+<div class="codewrapper sourceCode" id="cb16">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" tabindex="-1" aria-label="code-block-16-1"></a><span class="bu">len</span>(<span class="st">'Hello'</span>)</span></code></pre>
+</div>
+<p><strong>Output</strong></p>
+<pre><code><span><span class="fl">5</span></span></code></pre>
+<div class="codewrapper sourceCode" id="cb18">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" tabindex="-1" aria-label="code-block-18-1"></a>samples <span class="op">=</span> [<span class="st">"S1"</span>, <span class="st">"S2"</span>, <span class="st">"S3"</span>]   <span class="co"># create a list</span></span>
+<span id="cb18-2"><a href="#cb18-2" tabindex="-1" aria-label="code-block-18-2"></a><span class="bu">len</span>(sample)</span></code></pre>
+</div>
+<p><strong>Output</strong></p>
+<pre><code><span><span class="fl">3</span></span></code></pre>
+<p>See the <a href="https://docs.python.org/3/builtins/functions.html" class="external-link">Python Docs on
+built-in functions</a>.</p>
+<!--TODO better challenge-->
 <div id="challenge1" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
@@ -550,12 +581,12 @@ select rename to rename it.</p>
 <h3 class="callout-title">Challenge</h3>
 <div class="callout-content">
 <p>What will be printed?</p>
-<div class="codewrapper sourceCode" id="cb15">
+<div class="codewrapper sourceCode" id="cb20">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" tabindex="-1" aria-label="code-block-15-1"></a>x <span class="op">=</span> <span class="dv">5</span></span>
-<span id="cb15-2"><a href="#cb15-2" tabindex="-1" aria-label="code-block-15-2"></a>x <span class="op">=</span> <span class="st">"five"</span></span>
-<span id="cb15-3"><a href="#cb15-3" tabindex="-1" aria-label="code-block-15-3"></a><span class="bu">print</span>(x)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" tabindex="-1" aria-label="code-block-20-1"></a>x <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb20-2"><a href="#cb20-2" tabindex="-1" aria-label="code-block-20-2"></a>x <span class="op">=</span> <span class="st">"five"</span></span>
+<span id="cb20-3"><a href="#cb20-3" tabindex="-1" aria-label="code-block-20-3"></a><span class="bu">print</span>(x)</span></code></pre>
 </div>
 <p>A. 5<br>
 B. five<br>
@@ -577,6 +608,7 @@ second assignment overwrites the first.</p>
 </div>
 </div>
 </div>
+</div>
 </section><section><h2 class="section-heading" id="the-elabftw-python-api-library">The eLabFTW Python API Library<a class="anchor" aria-label="anchor" href="#the-elabftw-python-api-library"></a></h2>
 <hr class="half-width"><p>One of the advantages of Python is that there are many ready-made
 libraries that allow us to easily reuse code others have created for a
@@ -588,10 +620,10 @@ docs selection page</a> by clicking
 <p>Here, we can find some examples and information such as installation.
 We will do something similar to what the page says and install it
 directly via our Jupyter Notebook:</p>
-<div class="codewrapper sourceCode" id="cb16">
+<div class="codewrapper sourceCode" id="cb21">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" tabindex="-1" aria-label="code-block-16-1"></a><span class="ex">%pip</span> install elabapi-python</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" tabindex="-1" aria-label="code-block-21-1"></a><span class="ex">%pip</span> install elabapi-python</span></code></pre>
 </div>
 <div id="callout1" class="callout">
 <div class="callout-square">
@@ -605,10 +637,10 @@ is accessible to our notebook.</p>
 <p>To install it locally (e.g., if you are working outside of the
 Jupyter environment), open a terminal window and install via pip. This
 usually looks like:</p>
-<div class="codewrapper sourceCode" id="cb17">
+<div class="codewrapper sourceCode" id="cb22">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" tabindex="-1" aria-label="code-block-17-1"></a><span class="ex">pip</span> install elabapi-python</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" tabindex="-1" aria-label="code-block-22-1"></a><span class="ex">pip</span> install elabapi-python</span></code></pre>
 </div>
 <p>However, your Python and pip installation may use <code>pip3</code>
 instead of <code>pip</code>.</p>
@@ -616,13 +648,13 @@ instead of <code>pip</code>.</p>
 installation instructions</a>, it is highly recommended to work in a
 virtual environment. We recommend <a href="https://docs.astral.sh/uv/" class="external-link"><code>uv</code></a> for creating and
 managing these:</p>
-<div class="codewrapper sourceCode" id="cb18">
+<div class="codewrapper sourceCode" id="cb23">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" tabindex="-1" aria-label="code-block-18-1"></a><span class="bu">cd</span> researcher_user</span>
-<span id="cb18-2"><a href="#cb18-2" tabindex="-1" aria-label="code-block-18-2"></a><span class="ex">uv</span> init <span class="at">--bare</span> <span class="co"># initialize the project in the desired directory</span></span>
-<span id="cb18-3"><a href="#cb18-3" tabindex="-1" aria-label="code-block-18-3"></a><span class="ex">uv</span> add elabapi-python python-dotenv <span class="co"># add the API client and .env support</span></span>
-<span id="cb18-4"><a href="#cb18-4" tabindex="-1" aria-label="code-block-18-4"></a><span class="ex">uv</span> sync</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" tabindex="-1" aria-label="code-block-23-1"></a><span class="bu">cd</span> researcher_user</span>
+<span id="cb23-2"><a href="#cb23-2" tabindex="-1" aria-label="code-block-23-2"></a><span class="ex">uv</span> init <span class="at">--bare</span> <span class="co"># initialize the project in the desired directory</span></span>
+<span id="cb23-3"><a href="#cb23-3" tabindex="-1" aria-label="code-block-23-3"></a><span class="ex">uv</span> add elabapi-python python-dotenv <span class="co"># add the API client and .env support</span></span>
+<span id="cb23-4"><a href="#cb23-4" tabindex="-1" aria-label="code-block-23-4"></a><span class="ex">uv</span> sync</span></code></pre>
 </div>
 <p>The package <code>elabapi-python</code> is imported as
 <code>elabapi_python</code>, and <code>python-dotenv</code> is imported
@@ -634,32 +666,35 @@ your credentials and the URL to a <code>.env</code> (or
 </div>
 <p>Once downloaded, we need to import the library into our notebook or
 scripts:</p>
-<div class="codewrapper sourceCode" id="cb19">
+<div class="codewrapper sourceCode" id="cb24">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" tabindex="-1" aria-label="code-block-19-1"></a><span class="im">import</span> elabapi_python</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" tabindex="-1" aria-label="code-block-24-1"></a><span class="im">import</span> elabapi_python</span></code></pre>
 </div>
 <p>Python does not allow dashes, therefore, this is replaced with an
 underscore when calling the library.</p>
 <p>To get basic help on any Python library in Jupyter, we can use the
 <code>help()</code> function. For example, to get help on the
 <code>elabapi_python</code> library, we can run:</p>
-<div class="codewrapper sourceCode" id="cb20">
+<div class="codewrapper sourceCode" id="cb25">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" tabindex="-1" aria-label="code-block-20-1"></a><span class="bu">help</span>(elabapi_python)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" tabindex="-1" aria-label="code-block-25-1"></a><span class="bu">help</span>(elabapi_python)</span></code></pre>
 </div>
 <p>Honestly, for this specific case, the help output is not extremely
 helpful. However, it does give us some information on the library. We
 can also use the <code>dir()</code> function to get a list of all the
 functions in the library:</p>
-<div class="codewrapper sourceCode" id="cb21">
+<div class="codewrapper sourceCode" id="cb26">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" tabindex="-1" aria-label="code-block-21-1"></a><span class="bu">dir</span>(elabapi_python)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" tabindex="-1" aria-label="code-block-26-1"></a><span class="bu">dir</span>(elabapi_python)</span></code></pre>
 </div>
-<p>To get started, we have the <a href="https://github.com/elabftw/elabapi-python/tree/master/examples" class="external-link">examples
-folder</a> on Github. Deltablot has created a nifty <a href="https://github.com/elabftw/elabapi-python/blob/master/examples/client.py" class="external-link">client
+<p>If we start the <a href="https://doc.elabftw.net/api/" class="external-link">API docs</a>
+again and click on <code>Python Library (v2)</code>, we get are taking
+to a GitHub repository.</p>
+<p>Here, we have the <a href="https://github.com/elabftw/elabapi-python/tree/master/examples" class="external-link">examples
+folder</a> on Github. This contains a nifty <a href="https://github.com/elabftw/elabapi-python/blob/master/examples/client.py" class="external-link">client
 configuration file</a>. This has already been downloaded and included in
 your <code>workshop_data</code> directory. We have made some small
 adjustments to ensure the secrets load correctly.</p>
@@ -667,29 +702,29 @@ adjustments to ensure the secrets load correctly.</p>
 interact with the eLabFTW API. First, you set up the main one, which has
 already been done in <code>client.py</code>, then, you can create the
 others.</p>
-<p>Import the main one into your notebook using:</p>
-<div class="codewrapper sourceCode" id="cb22">
+<p>We import the main api client into our notebook using:</p>
+<div class="codewrapper sourceCode" id="cb27">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" tabindex="-1" aria-label="code-block-22-1"></a><span class="im">from</span> scripts.client <span class="im">import</span> api_client</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" tabindex="-1" aria-label="code-block-27-1"></a><span class="im">from</span> scripts.client <span class="im">import</span> api_client</span></code></pre>
 </div>
 <p>Note: ensure your are in the correct directory.</p>
 <p>You may get an error here for missing packages, especially
 dotenv:</p>
-<div class="codewrapper sourceCode" id="cb23">
+<div class="codewrapper sourceCode" id="cb28">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" tabindex="-1" aria-label="code-block-23-1"></a><span class="op">%</span>pip install python<span class="op">-</span>dotenv</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" tabindex="-1" aria-label="code-block-28-1"></a><span class="op">%</span>pip install python<span class="op">-</span>dotenv</span></code></pre>
 </div>
 <p>Let’s look at a couple examples in the GitHub repo.</p>
 <p>Check out <a href="https://github.com/elabftw/elabapi-python/blob/master/examples/00-getting-started.py" class="external-link">00_getting-started.py</a>.
 We can see an info client:</p>
-<div class="codewrapper sourceCode" id="cb24">
+<div class="codewrapper sourceCode" id="cb29">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" tabindex="-1" aria-label="code-block-24-1"></a>info_client <span class="op">=</span> elabapi_python.InfoApi(api_client)</span>
-<span id="cb24-2"><a href="#cb24-2" tabindex="-1" aria-label="code-block-24-2"></a>api_response <span class="op">=</span> info_client.get_info()</span>
-<span id="cb24-3"><a href="#cb24-3" tabindex="-1" aria-label="code-block-24-3"></a>api_response</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" tabindex="-1" aria-label="code-block-29-1"></a>info_client <span class="op">=</span> elabapi_python.InfoApi(api_client)</span>
+<span id="cb29-2"><a href="#cb29-2" tabindex="-1" aria-label="code-block-29-2"></a>api_response <span class="op">=</span> info_client.get_info()</span>
+<span id="cb29-3"><a href="#cb29-3" tabindex="-1" aria-label="code-block-29-3"></a>api_response</span></code></pre>
 </div>
 <div id="callout2" class="callout">
 <div class="callout-square">
@@ -703,46 +738,47 @@ using a <code>print()</code> statement. This only works for the last
 line of a cell, so if you want to see the output of multiple lines or
 when using in a script, you will need to use <code>print()</code>.</p>
 <p>For example:</p>
-<div class="codewrapper sourceCode" id="cb25">
+<div class="codewrapper sourceCode" id="cb30">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" tabindex="-1" aria-label="code-block-25-1"></a>api_response</span>
-<span id="cb25-2"><a href="#cb25-2" tabindex="-1" aria-label="code-block-25-2"></a><span class="dv">4</span></span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" tabindex="-1" aria-label="code-block-30-1"></a>api_response</span>
+<span id="cb30-2"><a href="#cb30-2" tabindex="-1" aria-label="code-block-30-2"></a><span class="dv">4</span></span></code></pre>
 </div>
+<p>will output the number 4.</p>
 <p>As opposed to:</p>
-<div class="codewrapper sourceCode" id="cb26">
+<div class="codewrapper sourceCode" id="cb31">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" tabindex="-1" aria-label="code-block-26-1"></a><span class="bu">print</span>(api_response)</span>
-<span id="cb26-2"><a href="#cb26-2" tabindex="-1" aria-label="code-block-26-2"></a><span class="dv">4</span></span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" tabindex="-1" aria-label="code-block-31-1"></a><span class="bu">print</span>(api_response)</span>
+<span id="cb31-2"><a href="#cb31-2" tabindex="-1" aria-label="code-block-31-2"></a><span class="dv">4</span></span></code></pre>
 </div>
+<p>which will output both <code>api_response</code> and the number
+4.</p>
 </div>
 </div>
 </div>
 <p>Back to the clients. Similarly, we can see an experiment client:</p>
-<div class="codewrapper sourceCode" id="cb27">
+<div class="codewrapper sourceCode" id="cb32">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" tabindex="-1" aria-label="code-block-27-1"></a>exp_client <span class="op">=</span> elabapi_python.ExperimentsApi(api_client)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" tabindex="-1" aria-label="code-block-32-1"></a>exp_client <span class="op">=</span> elabapi_python.ExperimentsApi(api_client)</span></code></pre>
 </div>
-<p>Check out line 88, which shows us a <code>GET</code> request.
-Remember how we created and retrieved an experiment in the terminal?
-Let’s try the same thing here using the experiment ID from the last
+<p>Check out <a href="https://github.com/elabftw/elabapi-python/blob/master/examples/00-getting-started.py#L87" class="external-link">line
+87</a>, which shows us how we retrieve an experiment. Remember how we
+created and retrieved an experiment in the terminal using cURL? Let’s
+try the same thing here using the experiment ID from the last
 lesson.</p>
-<div class="codewrapper sourceCode" id="cb28">
+<div class="codewrapper sourceCode" id="cb33">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" tabindex="-1" aria-label="code-block-28-1"></a>exp_id <span class="op">=</span> <span class="dv">94</span> <span class="co"># example: replace with your experiment ID</span></span>
-<span id="cb28-2"><a href="#cb28-2" tabindex="-1" aria-label="code-block-28-2"></a>exp <span class="op">=</span> exp_client.get_experiment(exp_id)</span>
-<span id="cb28-3"><a href="#cb28-3" tabindex="-1" aria-label="code-block-28-3"></a><span class="bu">print</span>(exp)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" tabindex="-1" aria-label="code-block-33-1"></a>exp_id <span class="op">=</span> <span class="dv">94</span> <span class="co"># example; replace with your experiment ID</span></span>
+<span id="cb33-2"><a href="#cb33-2" tabindex="-1" aria-label="code-block-33-2"></a>exp <span class="op">=</span> exp_client.get_experiment(exp_id)</span>
+<span id="cb33-3"><a href="#cb33-3" tabindex="-1" aria-label="code-block-33-3"></a><span class="bu">print</span>(exp)</span></code></pre>
 </div>
 <p>You can see, this does the same things as we were doing before, but
 many of us find Python easier to read and understand than the terminal
 commands. This is especially true when we start to combine multiple
 steps into a single script.</p>
-<p>We can derive the code from the documentation, as well, which is a
-great way to learn how to use the API. Check out the <a href="https://doc.elabftw.net/api/" class="external-link">API docs</a> and click on
-<code>Python Library (v2)</code>.</p>
 <div id="challenge2" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
@@ -758,7 +794,8 @@ instance.</li>
 <li>Retrieve the bluetooth thermometer resource (from the last
 episode).</li>
 </ol><p>Hint: Look through the <a href="https://github.com/elabftw/elabapi-python/tree/master/examples" class="external-link">examples</a>
-and keep your eyes out for a different word than <em>resources</em>.</p>
+and keep your eyes out for a different word than <em>resources</em>. We
+saw this in <a href="01_API">episode 01</a>, as well.</p>
 </div>
 </div>
 </div>
@@ -771,24 +808,24 @@ and keep your eyes out for a different word than <em>resources</em>.</p>
 <div class="accordion-body">
 <p>An example can be found in <a href="https://github.com/elabftw/elabapi-python/blob/master/examples/05-create-modify-item.py" class="external-link">05-create-modify-item</a>
 in line 6:</p>
-<div class="codewrapper sourceCode" id="cb29">
+<div class="codewrapper sourceCode" id="cb34">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" tabindex="-1" aria-label="code-block-29-1"></a>itemsApi <span class="op">=</span> elabapi_python.ItemsApi(api_client)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" tabindex="-1" aria-label="code-block-34-1"></a>itemsApi <span class="op">=</span> elabapi_python.ItemsApi(api_client)</span></code></pre>
 </div>
 <p>To retrieve and view all resources you have access to (1):</p>
-<div class="codewrapper sourceCode" id="cb30">
+<div class="codewrapper sourceCode" id="cb35">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" tabindex="-1" aria-label="code-block-30-1"></a>resources <span class="op">=</span> itemsApi.read_items()</span>
-<span id="cb30-2"><a href="#cb30-2" tabindex="-1" aria-label="code-block-30-2"></a>resources</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" tabindex="-1" aria-label="code-block-35-1"></a>resources <span class="op">=</span> itemsApi.read_items()</span>
+<span id="cb35-2"><a href="#cb35-2" tabindex="-1" aria-label="code-block-35-2"></a>resources <span class="co"># outputs the resource to the jupyter notebook</span></span></code></pre>
 </div>
 <p>To retrieve a specific resource (2):</p>
-<div class="codewrapper sourceCode" id="cb31">
+<div class="codewrapper sourceCode" id="cb36">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" tabindex="-1" aria-label="code-block-31-1"></a>resource <span class="op">=</span> itemsApi.get_item(<span class="dv">144</span>)</span>
-<span id="cb31-2"><a href="#cb31-2" tabindex="-1" aria-label="code-block-31-2"></a>resource</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" tabindex="-1" aria-label="code-block-36-1"></a>resource <span class="op">=</span> itemsApi.get_item(<span class="dv">144</span>)</span>
+<span id="cb36-2"><a href="#cb36-2" tabindex="-1" aria-label="code-block-36-2"></a>resource <span class="co"># outputs the resource to the jupyter notebook</span></span></code></pre>
 </div>
 </div>
 </div>
