@@ -1,7 +1,7 @@
 ---
 title: "Data Analysis Workflows"
-teaching: 45 # teaching time in minutes
-exercises: 45 # exercise time in minutes
+teaching: 20 # teaching time in minutes
+exercises: 30 # exercise time in minutes
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions
@@ -137,11 +137,13 @@ uploads_api.post_upload('experiments', experiment.id, file="50w_temp_time_plot.p
 Use the above snippets and function to write a code that
 
 1. Retrieves all desired experiments
-2. Plot and saves figures for each
+2. Plots and saves figures for each
 3. Attaches the plot back to the experiment
 4. Sets the experiment status to success
 
 Hint: make a small modification to the `download_matching_uploads_locally` so you can retrieve the file name.
+
+Bonus: if anyone can figure out how to add an image directly to the main text field, please share!
 
 ::::::::::::::::::::::::::::::::::::: solution
 TODO
