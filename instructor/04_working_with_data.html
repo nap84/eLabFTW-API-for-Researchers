@@ -401,10 +401,10 @@ need:</p>
 <p>The first thing we will do is run an experiment, creating data files
 to attach to the associated experiments in eLabFTW.</p>
 <p>To this end, experiments have already been created in eLabFTW through
-the UI - say, the planning took place there and the experimental
+the GUI - say, the planning took place there and the experimental
 parameters have been setup. We are going to use a super simples example
 where we grab a single experiment parameter from a set of experiments
-and run each measurement accordingly. If you check the eLabFTW UI, you
+and run each measurement accordingly. If you check the eLabFTW GUI, you
 will see three experiments with the category ‘MEASUREMENT’ titled
 ‘Heating Test Run X’, where X is a roman numeral. These each have an
 extra field called ‘Laser Power’, for where each experiment has a
@@ -435,7 +435,7 @@ docs under <strong>read experiments</strong></a> gives us information
 here. You can query terms, look experiments linked to specific other
 entries, and so on. We have a few options here, but let’s keep ot simple
 and look for experiments with status ‘Planning’ and ‘Heat Test Run’ in
-title. We can get the status ID through the browser UI by filtering by
+title. We can get the status ID through the browser GUI by filtering by
 the status and checking the address bar. We are also going to set the
 scope to only find our own experiences. From the docs we can see: <em>1:
 self, 2: team, 3: everything. It defaults to the user value stored in
@@ -1480,8 +1480,8 @@ GitHub Python examples to see how we upload files to entries.</p>
 <span id="cb24-11"><a href="#cb24-11" tabindex="-1" aria-label="code-block-24-11"></a>    )</span>
 <span id="cb24-12"><a href="#cb24-12" tabindex="-1" aria-label="code-block-24-12"></a>    </span></code></pre>
 </div>
-<p>If you check your experiments in the UI, you should see your attached
-files.</p>
+<p>If you check your experiments in the GUI, you should see your
+attached files.</p>
 <div id="challenge2" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
@@ -1493,7 +1493,7 @@ files.</p>
 <p>Write a for loops that sets each experiment status to running. Hint:
 get an idea of what the commands could look like in the example <a href="https://github.com/elabftw/elabapi-python/blob/master/examples/05-create-modify-item.py" class="external-link">examples/05-create-modify-item.py</a>
 on GitHub.</p>
-<p>Execute the code and check the UI to see if it worked.</p>
+<p>Execute the code and check the GUI to see if it worked.</p>
 </div>
 </div>
 </div>
@@ -1548,9 +1548,9 @@ innefficient, e.g. it loops over the experiments list and gets the power
 variable twice. This would all be consolidated into a script. Here, we
 would create single functions for each step and so on. Then this could
 be run automatically, e.g., on a device computer, maybe one schedule
-that checks for new experimets entered throug the UI and then runs them
+that checks for new experimets entered throug the GUI and then runs them
 for you and attached the output files for you to then check through the
-UI.</p>
+GUI.</p>
 </div>
 </div>
 </div>

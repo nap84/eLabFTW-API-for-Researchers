@@ -494,7 +494,8 @@ documentation link, which leads to the APIs <a href="https://doc.elabftw.net/api
 link</a>, the latter two of which we will get to later.</p>
 <p>We will mainly focus on the to the <a href="https://doc.elabftw.net/api/elabapi-html/" class="external-link">HTML doc (v2)</a>. To
 the left, we have the various API methods allowed for each type of API,
-e.g. items (resources in the UI), experiments, items, and so on.</p>
+e.g. items (resources in the graphical user interface (GUI)),
+experiments, items, and so on.</p>
 <p>Scrolling through the categories and knowing how eLabFTW is
 structured, we can get a pretty good idea of the types of interaction we
 can carry out. For instance, under <a href="https://doc.elabftw.net/api/elabapi-html/#api-Experiments" class="external-link">API
@@ -696,7 +697,7 @@ select <code>Read/Write</code> from the permissions drop-down menu.</li>
 </li>
 <li>Copy and paste this to the <code>secrets.env</code> file in your
 <code>research_computer/</code> folder for later use. It will only be
-shown once in the ELN’s UI!</li>
+shown once in the ELN’s GUI!</li>
 </ol>
 <p>Now we can start editing the request:</p>
 <ol style="list-style-type: decimal">
@@ -920,7 +921,7 @@ the docs for LinksToExperiments</a></p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 
 </div>
@@ -949,7 +950,7 @@ last call to get the ID.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>The <code>POST</code> response includes the URL of the new experiment
 in its <code>Location</code> header. Copy the experiment ID from that
@@ -1702,10 +1703,10 @@ need:</p>
 <p>The first thing we will do is run an experiment, creating data files
 to attach to the associated experiments in eLabFTW.</p>
 <p>To this end, experiments have already been created in eLabFTW through
-the UI - say, the planning took place there and the experimental
+the GUI - say, the planning took place there and the experimental
 parameters have been setup. We are going to use a super simples example
 where we grab a single experiment parameter from a set of experiments
-and run each measurement accordingly. If you check the eLabFTW UI, you
+and run each measurement accordingly. If you check the eLabFTW GUI, you
 will see three experiments with the category ‘MEASUREMENT’ titled
 ‘Heating Test Run X’, where X is a roman numeral. These each have an
 extra field called ‘Laser Power’, for where each experiment has a
@@ -1738,7 +1739,7 @@ docs under <strong>read experiments</strong></a> gives us information
 here. You can query terms, look experiments linked to specific other
 entries, and so on. We have a few options here, but let’s keep ot simple
 and look for experiments with status ‘Planning’ and ‘Heat Test Run’ in
-title. We can get the status ID through the browser UI by filtering by
+title. We can get the status ID through the browser GUI by filtering by
 the status and checking the address bar. We are also going to set the
 scope to only find our own experiences. From the docs we can see: <em>1:
 self, 2: team, 3: everything. It defaults to the user value stored in
@@ -2783,8 +2784,8 @@ GitHub Python examples to see how we upload files to entries.</p>
 <span id="cb24-11"><a href="#cb24-11" tabindex="-1" aria-label="code-block-24-11"></a>    )</span>
 <span id="cb24-12"><a href="#cb24-12" tabindex="-1" aria-label="code-block-24-12"></a>    </span></code></pre>
 </div>
-<p>If you check your experiments in the UI, you should see your attached
-files.</p>
+<p>If you check your experiments in the GUI, you should see your
+attached files.</p>
 <div id="challenge2" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
@@ -2796,7 +2797,7 @@ files.</p>
 <p>Write a for loops that sets each experiment status to running. Hint:
 get an idea of what the commands could look like in the example <a href="https://github.com/elabftw/elabapi-python/blob/master/examples/05-create-modify-item.py" class="external-link">examples/05-create-modify-item.py</a>
 on GitHub.</p>
-<p>Execute the code and check the UI to see if it worked.</p>
+<p>Execute the code and check the GUI to see if it worked.</p>
 </div>
 </div>
 </div>
@@ -2851,9 +2852,9 @@ innefficient, e.g. it loops over the experiments list and gets the power
 variable twice. This would all be consolidated into a script. Here, we
 would create single functions for each step and so on. Then this could
 be run automatically, e.g., on a device computer, maybe one schedule
-that checks for new experimets entered throug the UI and then runs them
+that checks for new experimets entered throug the GUI and then runs them
 for you and attached the output files for you to then check through the
-UI.</p>
+GUI.</p>
 </div>
 </div>
 </div>
@@ -2938,7 +2939,7 @@ file.</p>
 <p>We keep using the <code>uploads_api</code> to interact with attached
 files. To ensure we have our experiment information, let’s retrieve
 these again. We will filter by status again, but remember, we changed
-this to <em>Running</em>. The UI reminds us that this status has ID
+this to <em>Running</em>. The GUI reminds us that this status has ID
 47.</p>
 <div class="codewrapper sourceCode" id="cb3">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -3060,7 +3061,7 @@ main text field, please share!</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>TODO</p>
 </div>
