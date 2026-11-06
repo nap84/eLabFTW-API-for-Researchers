@@ -441,18 +441,22 @@ documentation link, which leads to the APIs <a href="https://doc.elabftw.net/api
 (2) the <a href="https://doc.elabftw.net/api/elabapi-html/" class="external-link">HTML doc
 (v2)</a> and (3) the <a href="https://github.com/elabftw/elabapi-python" class="external-link">Python Library (v2)
 link</a>, the latter two of which we will get to later.</p>
-<p>Let’s head to the <a href="(https://doc.elabftw.net/api/v2)" class="external-link">Swagger
-page</a>. Here, we have a list of <strong>endpoints</strong>,
-sub-divided into categories. Each link is color-coded to indicate the
-type of request, further marked by <code>PUT</code>, <code>POST</code>,
-<code>GET</code>, <code>PATCH</code>, and <code>DELETE</code>
-labels.</p>
+<p>We will mainly focus on the to the <a href="https://doc.elabftw.net/api/elabapi-html/" class="external-link">HTML doc (v2)</a>. To
+the left, we have the various API methods allowed for each type of API,
+e.g. items (resources in the UI), experiments, items, and so on.</p>
 <p>Scrolling through the categories and knowing how eLabFTW is
 structured, we can get a pretty good idea of the types of interaction we
-can carry out. For instance, under <code>Experiment Categories</code> we
-have a <code>GET</code> request that let’s us read all experiment
-categories in a given team (indicated by it’s ID).</p>
-</section><section><h2 class="section-heading" id="constructing-requests">Constructing Requests<a class="anchor" aria-label="anchor" href="#constructing-requests"></a></h2>
+can carry out. For instance, under <a href="https://doc.elabftw.net/api/elabapi-html/#api-Experiments" class="external-link">API
+METHODS - EXPERIMENTS</a> we see there are options to delete, get, post,
+patch, and read.</p>
+<figure><img src="fig/screenshot_experimentsAPI_HTMLdocs.png" alt="screenshot of the api methods for experiments from the HTML docs page" class="figure mx-auto d-block"><div class="figcaption">screenshot of the api methods for experiments
+from the HTML docs page</div>
+</figure><p>Selecting a methods gives us more information, e.g., we can see that
+<code>postExperiments</code> creates an experiment, as well as usage
+examples in different programming languages and the parameters we can
+give our API request.</p>
+<figure><img src="fig/screenshot_postExperiments_HTMLdocs.png" alt="alt text" class="figure mx-auto d-block"><div class="figcaption">alt text</div>
+</figure></section><section><h2 class="section-heading" id="constructing-requests">Constructing Requests<a class="anchor" aria-label="anchor" href="#constructing-requests"></a></h2>
 <hr class="half-width"><p>The first time you see these types of docs pages, it may seem a bit
 daunting. So let’s construct our first API call using a tool we’re all
 familiar with: our browser.</p>

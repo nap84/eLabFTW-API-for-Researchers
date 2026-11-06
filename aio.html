@@ -492,18 +492,22 @@ documentation link, which leads to the APIs <a href="https://doc.elabftw.net/api
 (2) the <a href="https://doc.elabftw.net/api/elabapi-html/" class="external-link">HTML doc
 (v2)</a> and (3) the <a href="https://github.com/elabftw/elabapi-python" class="external-link">Python Library (v2)
 link</a>, the latter two of which we will get to later.</p>
-<p>Let’s head to the <a href="(https://doc.elabftw.net/api/v2)" class="external-link">Swagger
-page</a>. Here, we have a list of <strong>endpoints</strong>,
-sub-divided into categories. Each link is color-coded to indicate the
-type of request, further marked by <code>PUT</code>, <code>POST</code>,
-<code>GET</code>, <code>PATCH</code>, and <code>DELETE</code>
-labels.</p>
+<p>We will mainly focus on the to the <a href="https://doc.elabftw.net/api/elabapi-html/" class="external-link">HTML doc (v2)</a>. To
+the left, we have the various API methods allowed for each type of API,
+e.g. items (resources in the UI), experiments, items, and so on.</p>
 <p>Scrolling through the categories and knowing how eLabFTW is
 structured, we can get a pretty good idea of the types of interaction we
-can carry out. For instance, under <code>Experiment Categories</code> we
-have a <code>GET</code> request that let’s us read all experiment
-categories in a given team (indicated by it’s ID).</p>
-</section><section><h2 class="section-heading" id="constructing-requests">Constructing Requests<a class="anchor" aria-label="anchor" href="#constructing-requests"></a>
+can carry out. For instance, under <a href="https://doc.elabftw.net/api/elabapi-html/#api-Experiments" class="external-link">API
+METHODS - EXPERIMENTS</a> we see there are options to delete, get, post,
+patch, and read.</p>
+<figure><img src="fig/screenshot_experimentsAPI_HTMLdocs.png" alt="screenshot of the api methods for experiments from the HTML docs page" class="figure mx-auto d-block"><div class="figcaption">screenshot of the api methods for experiments
+from the HTML docs page</div>
+</figure><p>Selecting a methods gives us more information, e.g., we can see that
+<code>postExperiments</code> creates an experiment, as well as usage
+examples in different programming languages and the parameters we can
+give our API request.</p>
+<figure><img src="fig/screenshot_postExperiments_HTMLdocs.png" alt="alt text" class="figure mx-auto d-block"><div class="figcaption">alt text</div>
+</figure></section><section><h2 class="section-heading" id="constructing-requests">Constructing Requests<a class="anchor" aria-label="anchor" href="#constructing-requests"></a>
 </h2>
 <hr class="half-width">
 <p>The first time you see these types of docs pages, it may seem a bit
@@ -1307,7 +1311,7 @@ C. TypeError</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p><strong>B</strong> – Python variables are dynamically typed; the
 second assignment overwrites the first.</p>
@@ -1510,7 +1514,7 @@ and keep your eyes out for a different word than <em>resources</em>.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>An example can be found in <a href="https://github.com/elabftw/elabapi-python/blob/master/examples/05-create-modify-item.py" class="external-link">05-create-modify-item</a>
 in line 6:</p>
@@ -1890,7 +1894,7 @@ individual index each time you want to retrieve the ID?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>You can use the same syntax as above to retrieve a an ID from a
 single experiment.</p>
@@ -2733,7 +2737,7 @@ on GitHub.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>The request we are making is a <code>patch</code> to an existing
 experiment. We need to tell the</p>
