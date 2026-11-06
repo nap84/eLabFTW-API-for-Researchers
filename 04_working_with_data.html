@@ -123,7 +123,7 @@
     <a id="search-button-nav" class="btn btn-primary" href="aio.html" role="button" aria-label="Search the All In One page">Search the All In One page</a>
   </div><!--/div.container-fluid -->
 </nav><aside class="col-md-12 lesson-progress"><div class="progress incubator">
-    <div class="progress-bar incubator" role="progressbar" style="width: 68%" aria-valuenow="68" aria-valuemin="0" aria-valuemax="100" aria-label="Lesson Progress">68%</div>
+    <div class="progress-bar incubator" role="progressbar" style="width: 53%" aria-valuenow="53" aria-valuemin="0" aria-valuemax="100" aria-label="Lesson Progress">53%</div>
   </div>
 </aside><div class="container">
       <div class="row">
@@ -379,87 +379,108 @@ experiments at once.</li>
 <hr class="half-width"><p>In the previous episodes, we created an experiment, linked a
 resource, and retrieved the experiments and resources. Now, we will look
 at how to get and work with information from entries in eLabFTW.</p>
+<p>Here’s an overview of the intended workflow:</p>
+<pre class="mermaid"><code>---
+config:
+  theme: redux
+  layout: fixed
+---
+flowchart LR
+ subgraph s4["ELN (GUI)"]
+        n3["Experiment"]
+        n11["parameters (custom field metadata)"]
+  end
+ subgraph s3["Script"]
+        n10["get parameters from ELN"]
+        n6["output data files"]
+        n5["run measurements"]
+  end
+ subgraph s2["Device Computer"]
+        s3
+  end
+    n5 --&gt; n6
+    n6 -- attach --&gt; n3
+    n3 --&gt; n11
+    n10 --&gt; n5
+    n11 --&gt; n10
+    n12(["Researcher"]) -- plans --&gt; n3
+</code></pre>
 <p>To this end, head to our eLabFTW test instance via your in your
 browser. Create at least three experiments using the Heating Test
-template. Enter a different Laser Power value for each.</p>
+template. Enter a different Laser Power value for each in the extra
+fields metadata. <em>Note: You may change the title, just ensure the
+word ‘Heating’ remains.</em></p>
 <p>The configured client, which we worked with in the previous episode,
-loads the API host and token from the <code>.env</code> file beside
-<code>client.py</code>. Don’t forget to keep the token in the
-environment and do not place it in notebook cells or output - this is
-not as important if you are working on your personal computer, but is
-good to practice.</p>
+loads the API host and token from the <code>secrets.env</code> or
+<code>.env</code> file beside <code>client.py</code>. Don’t forget to
+keep the token in the environment and do not place it in notebook cells
+or output - this is not as important if you are working on your personal
+computer, but is good to practice.</p>
+<p>With the experiments planned via the GUI, we now need to retrieve the
+parameters. To do so, we first retrieve the experiments, then we extract
+the information we need.</p>
 <p>Again, since we are using a new notebook we import everything we
 need:</p>
-<div class="codewrapper sourceCode" id="cb1">
-<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1" aria-label="code-block-1-1"></a><span class="im">import</span> elabapi_python</span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1" aria-label="code-block-1-2"></a><span class="im">from</span> scripts.client <span class="im">import</span> api_client</span></code></pre>
-</div>
-<p>The first thing we will do is run an experiment, creating data files
-to attach to the associated experiments in eLabFTW.</p>
-<p>To this end, experiments have already been created in eLabFTW through
-the GUI - say, the planning took place there and the experimental
-parameters have been setup. We are going to use a super simples example
-where we grab a single experiment parameter from a set of experiments
-and run each measurement accordingly. If you check the eLabFTW GUI, you
-will see three experiments with the category ‘MEASUREMENT’ titled
-‘Heating Test Run X’, where X is a roman numeral. These each have an
-extra field called ‘Laser Power’, for where each experiment has a
-different value and set the status to planning.</p>
-<p>What we want to do:</p>
-<ol style="list-style-type: decimal"><li>Get the parameters we set from the experiments.</li>
-<li>Run the measurements, generating a file for each.</li>
-<li>Attach these experiments back to the experiments.</li>
-<li>Change the status to running.</li>
-</ol><p>First, let’s get the experiments. To do so, we need the experiments
-api again. We can kind of guess from our previous coding experience that
-we will need an upload API. We can what that looks like by checking out
-the <a href="https://github.com/elabftw/elabapi-python/blob/master/examples/03-experiment-file-handling.py" class="external-link">examples/03-experiment-file-handling.py</a>
-in the github repository.</p>
 <div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1" aria-label="code-block-2-1"></a>experiments_api <span class="op">=</span> elabapi_python.ExperimentsApi(api_client)</span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1" aria-label="code-block-2-2"></a>uploads_api <span class="op">=</span> elabapi_python.UploadsApi(api_client)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1" aria-label="code-block-2-1"></a><span class="im">import</span> elabapi_python</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1" aria-label="code-block-2-2"></a><span class="im">from</span> scripts.client <span class="im">import</span> api_client</span></code></pre>
 </div>
-<p>Note: run <code>%pip install elabapi_python</code> (or for any other
-packages) if needed.</p>
-<p>We could get all experiments and then, as we just saw, which would
-work fine for our little team, but is not really efficient in reality.
-Luckily, the API allows us to query and this filter what it returns.</p>
-<p>A quick check of the <a href="https://doc.elabftw.net/api/v2/#/Experiments/read-experiments" class="external-link">swagger
-docs under <strong>read experiments</strong></a> gives us information
-here. You can query terms, look experiments linked to specific other
-entries, and so on. We have a few options here, but let’s keep ot simple
-and look for experiments with status ‘Planning’ and ‘Heat Test Run’ in
-title. We can get the status ID through the browser GUI by filtering by
-the status and checking the address bar. We are also going to set the
-scope to only find our own experiences. From the docs we can see: <em>1:
-self, 2: team, 3: everything. It defaults to the user value stored in
-preferences.</em> This is just to ensure you’re working with what you
-just created yourself.</p>
+<p>If we check the eLabFTW GUI for our own experiments, we will see our
+experiments with the category ‘MEASUREMENT’ with ‘Heating’ in the
+title:</p>
+<figure><img src="fig/screenshot_elabftwUI_experiments.png" alt="screenshot of ones own experiments in eLabFTW" class="figure mx-auto d-block"><div class="figcaption">screenshot of ones own experiments in
+eLabFTW</div>
+</figure><p>First, let’s get the experiments. To do so, we need the experiments
+api again. We also need a method to attach files. We can what that looks
+like by checking out the <a href="https://github.com/elabftw/elabapi-python/blob/master/examples/03-experiment-file-handling.py" class="external-link">examples/03-experiment-file-handling.py</a>
+in the github repository.</p>
+<p>We know we need the experiments API, let’s create it:</p>
 <div class="codewrapper sourceCode" id="cb3">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1" aria-label="code-block-3-1"></a>heating_experiments<span class="op">=</span>experiments_api.read_experiments(q<span class="op">=</span><span class="st">'Heating Test Run'</span>, status<span class="op">=</span><span class="dv">80</span>, scope<span class="op">=</span><span class="dv">1</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1" aria-label="code-block-3-1"></a>experiments_api <span class="op">=</span> elabapi_python.ExperimentsApi(api_client)</span></code></pre>
 </div>
-<p>The return is a list of experiment objects. We can check how many it
-returned for a quick sanity check:</p>
+<p>Note: run <code>%pip install elabapi_python</code> (or for any other
+packages) if needed.</p>
+<p>We could get all experiments, as we just saw in the previous episode,
+which would work fine for our little team, but is not really efficient
+in reality. Luckily, the API allows us to query and this filter what it
+returns.</p>
+<p>A quick check of the <a href="https://doc.elabftw.net/api/elabapi-html/#api-Experiments-readExperiments" class="external-link">HTML
+eLabFTW API Docs for <strong>readExperiments</strong></a> gives us
+information here. You can query terms, look for experiments linked to
+specific other entries, and so on. We have a few options here, but let’s
+keep ot simple and look for experiments with status ‘Planning’ and
+‘Heat’ in the title. We can get the status ID through the browser UI by
+filtering by the status and checking the address bar. We are also going
+to set the scope to only find our own experiments. From the docs we can
+see: <em>1: self, 2: team, 3: everything. It defaults to the user value
+stored in preferences.</em> This ensures everyone is working with their
+own experiments.</p>
 <div class="codewrapper sourceCode" id="cb4">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" tabindex="-1" aria-label="code-block-4-1"></a><span class="bu">len</span>(heating_experiments)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" tabindex="-1" aria-label="code-block-4-1"></a>heating_experiments<span class="op">=</span>experiments_api.read_experiments(q<span class="op">=</span><span class="st">'Heating'</span>, status<span class="op">=</span><span class="dv">80</span>, scope<span class="op">=</span><span class="dv">1</span>)</span></code></pre>
 </div>
-<p>Output:</p>
-<pre><code><span><span class="fl">3</span></span></code></pre>
-<p>We can also looks at the returned data:</p>
-<div class="codewrapper sourceCode" id="cb6">
+<p>The return is a <code>list</code> of experiment objects. We can check
+how many it returned for a quick sanity check:</p>
+<div class="codewrapper sourceCode" id="cb5">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" tabindex="-1" aria-label="code-block-6-1"></a>heating_experiments</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" tabindex="-1" aria-label="code-block-5-1"></a><span class="bu">len</span>(heating_experiments)</span></code></pre>
 </div>
-<p>Output:</p>
+<p><strong>Output:</strong></p>
+<pre><code><span><span class="fl">3</span></span></code></pre>
+<p>Note: if you created more, you list will be longer.</p>
+<p>We can also looks at the returned data:</p>
+<div class="codewrapper sourceCode" id="cb7">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" tabindex="-1" aria-label="code-block-7-1"></a>heating_experiments</span></code></pre>
+</div>
+<p><strong>Output:</strong></p>
 <pre><code>[{'_date': '2026-10-30',
   'access_key': None,
   'body': None,
@@ -624,20 +645,26 @@ returned for a quick sanity check:</p>
   'userid': 1}]</code></pre>
 <p>We can access individual pieces of information from each of the
 returned experiments, which are elabapi-python objects. Let’s look at a
-single one and extract some information:</p>
-<div class="codewrapper sourceCode" id="cb8">
+single one and extract some information (remember how we can use
+indexing for lists, as shown in <a href="03_python_jupyter.html#3-lists-ordered-collections">our crash
+course in episode 03</a>):</p>
+<div class="codewrapper sourceCode" id="cb9">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" tabindex="-1" aria-label="code-block-8-1"></a>my_experiment <span class="op">=</span> heating_experiments[<span class="dv">0</span>]</span>
-<span id="cb8-2"><a href="#cb8-2" tabindex="-1" aria-label="code-block-8-2"></a><span class="bu">print</span>(my_experiment.title)</span>
-<span id="cb8-3"><a href="#cb8-3" tabindex="-1" aria-label="code-block-8-3"></a><span class="bu">print</span>(my_experiment.created_at)</span>
-<span id="cb8-4"><a href="#cb8-4" tabindex="-1" aria-label="code-block-8-4"></a><span class="bu">print</span>(<span class="ss">f"Experiment owned by: </span><span class="sc">{</span>my_experiment<span class="sc">.</span>fullname<span class="sc">}</span><span class="ss">"</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" tabindex="-1" aria-label="code-block-9-1"></a>my_experiment <span class="op">=</span> heating_experiments[<span class="dv">0</span>]</span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1" aria-label="code-block-9-2"></a><span class="bu">print</span>(my_experiment.title)</span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1" aria-label="code-block-9-3"></a><span class="bu">print</span>(my_experiment.created_at)</span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1" aria-label="code-block-9-4"></a><span class="bu">print</span>(<span class="ss">f"Experiment owned by: </span><span class="sc">{</span>my_experiment<span class="sc">.</span>fullname<span class="sc">}</span><span class="ss">"</span>)</span></code></pre>
 </div>
-<p>Output:</p>
+<p><strong>Output:</strong></p>
 <pre><code>Heating Test Run I
 2026-10-30 09:55:43
 Experiment owned by: Nicole Parks</code></pre>
-<div id="challenge1" class="callout challenge">
+<p>This is what we expect if we look at the same experiment in the
+GUI:</p>
+<figure><img src="fig/screenshot_experimentI_info.png" alt="screenshot of the experiment info in the GUI" class="figure mx-auto d-block"><div class="figcaption">screenshot of the experiment info in the
+GUI</div>
+</figure><div id="challenge1" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
@@ -645,10 +672,12 @@ Experiment owned by: Nicole Parks</code></pre>
 <div class="callout-inner">
 <h3 class="callout-title">Challenge</h3>
 <div class="callout-content">
-<p>How would you access the ID for each of the experiments you
-retrieved?</p>
+<p>How would you access the ID for each of the experiments you retrieved
+using the GUI?</p>
 <p>Bonus: How can you avoid having to access the experiment by its
-individual index each time you want to retrieve the ID?</p>
+individual index each time you want to retrieve the ID? Hint: check out
+the <a href="03_python_jupyter.html#4-loop-over-a-list-forloop-to-create-a-dictionary">previous
+episode on iteration</a></p>
 </div>
 </div>
 </div>
@@ -661,65 +690,72 @@ individual index each time you want to retrieve the ID?</p>
 <div class="accordion-body">
 <p>You can use the same syntax as above to retrieve a an ID from a
 single experiment.</p>
-<div class="codewrapper sourceCode" id="cb10">
-<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" tabindex="-1" aria-label="code-block-10-1"></a>heating_experiments[<span class="dv">0</span>].<span class="bu">id</span></span></code></pre>
-</div>
-<p>We could then write</p>
 <div class="codewrapper sourceCode" id="cb11">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" tabindex="-1" aria-label="code-block-11-1"></a><span class="bu">print</span>(heating_experiments[<span class="dv">0</span>].<span class="bu">id</span>)</span>
-<span id="cb11-2"><a href="#cb11-2" tabindex="-1" aria-label="code-block-11-2"></a><span class="bu">print</span>(heating_experiments[<span class="dv">1</span>].<span class="bu">id</span>)</span>
-<span id="cb11-3"><a href="#cb11-3" tabindex="-1" aria-label="code-block-11-3"></a><span class="bu">print</span>(heating_experiments[<span class="dv">2</span>].<span class="bu">id</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" tabindex="-1" aria-label="code-block-11-1"></a>heating_experiments[<span class="dv">0</span>].<span class="bu">id</span></span></code></pre>
+</div>
+<p>We could then write</p>
+<div class="codewrapper sourceCode" id="cb12">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" tabindex="-1" aria-label="code-block-12-1"></a><span class="bu">print</span>(heating_experiments[<span class="dv">0</span>].<span class="bu">id</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1" aria-label="code-block-12-2"></a><span class="bu">print</span>(heating_experiments[<span class="dv">1</span>].<span class="bu">id</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" tabindex="-1" aria-label="code-block-12-3"></a><span class="bu">print</span>(heating_experiments[<span class="dv">2</span>].<span class="bu">id</span>)</span></code></pre>
 </div>
 <p>to print each id.</p>
 <p>To avoid having to access each individual one, we can use a for
 loop:</p>
-<div class="codewrapper sourceCode" id="cb12">
+<div class="codewrapper sourceCode" id="cb13">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" tabindex="-1" aria-label="code-block-12-1"></a><span class="cf">for</span> experiment <span class="kw">in</span> heating_experiments:</span>
-<span id="cb12-2"><a href="#cb12-2" tabindex="-1" aria-label="code-block-12-2"></a>  <span class="bu">print</span>(experiment.<span class="bu">id</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" tabindex="-1" aria-label="code-block-13-1"></a><span class="cf">for</span> experiment <span class="kw">in</span> heating_experiments:</span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1" aria-label="code-block-13-2"></a>  <span class="bu">print</span>(experiment.<span class="bu">id</span>)</span></code></pre>
 </div>
 </div>
 </div>
 </div>
 </div>
 <p>What we need to run our experiments is the laser power entry. There’s
-a slight bug in the Python package as you may notice: metadata is
-returned as None - <a href="https://github.com/elabftw/elabapi-python/issues/35" class="external-link">this issue
-has been reported</a>, but it has not been fixed, yet.</p>
-<p>Normally, you would be able to use
-<code>heating_experiment.metadata</code> to pull out this piece of
-information. The code for iterating over the experiments and pulling it
-out would be:</p>
-<div class="codewrapper sourceCode" id="cb13">
-<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" tabindex="-1" aria-label="code-block-13-1"></a>power_settings <span class="op">=</span> []</span>
-<span id="cb13-2"><a href="#cb13-2" tabindex="-1" aria-label="code-block-13-2"></a><span class="cf">for</span> exp <span class="kw">in</span> heating_experiments:</span>
-<span id="cb13-3"><a href="#cb13-3" tabindex="-1" aria-label="code-block-13-3"></a>    power_setting <span class="op">=</span> exp.metadata.extra_fields[<span class="st">"Laser Power"</span>]</span>
-<span id="cb13-4"><a href="#cb13-4" tabindex="-1" aria-label="code-block-13-4"></a>    power_settings.append(power_setting)</span></code></pre>
-</div>
-<p>We’ve built a workaround. The returned data structure is a bit
-different, but that’s fine. It works with the requests Python package
-and makes API requests directly without the eLabFTW API package:</p>
+a slight bug in the Python package as you may notice: the parameters,
+which would be in <code>metadata</code> are missing:</p>
 <div class="codewrapper sourceCode" id="cb14">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" tabindex="-1" aria-label="code-block-14-1"></a><span class="im">from</span> scripts.client <span class="im">import</span> API_HOST, API_KEY</span>
-<span id="cb14-2"><a href="#cb14-2" tabindex="-1" aria-label="code-block-14-2"></a><span class="im">import</span> requests</span>
-<span id="cb14-3"><a href="#cb14-3" tabindex="-1" aria-label="code-block-14-3"></a></span>
-<span id="cb14-4"><a href="#cb14-4" tabindex="-1" aria-label="code-block-14-4"></a>heating_experiments_full <span class="op">=</span> []</span>
-<span id="cb14-5"><a href="#cb14-5" tabindex="-1" aria-label="code-block-14-5"></a></span>
-<span id="cb14-6"><a href="#cb14-6" tabindex="-1" aria-label="code-block-14-6"></a><span class="cf">for</span> exp <span class="kw">in</span> heating_experiments:</span>
-<span id="cb14-7"><a href="#cb14-7" tabindex="-1" aria-label="code-block-14-7"></a>    exp_id <span class="op">=</span> exp.<span class="bu">id</span></span>
-<span id="cb14-8"><a href="#cb14-8" tabindex="-1" aria-label="code-block-14-8"></a>    endpoint <span class="op">=</span> API_HOST <span class="op">+</span> <span class="ss">f'/experiments/</span><span class="sc">{</span>exp_id<span class="sc">}</span><span class="ss">'</span></span>
-<span id="cb14-9"><a href="#cb14-9" tabindex="-1" aria-label="code-block-14-9"></a>    headers <span class="op">=</span> {<span class="st">'Authorization'</span>: <span class="ss">f'</span><span class="sc">{</span>API_KEY<span class="sc">}</span><span class="ss">'</span>}</span>
-<span id="cb14-10"><a href="#cb14-10" tabindex="-1" aria-label="code-block-14-10"></a>    response <span class="op">=</span> requests.get(endpoint, headers<span class="op">=</span>headers)</span>
-<span id="cb14-11"><a href="#cb14-11" tabindex="-1" aria-label="code-block-14-11"></a>    heating_experiments_full.append(response.json())</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" tabindex="-1" aria-label="code-block-14-1"></a><span class="bu">print</span>(my_experiment.metadata)</span></code></pre>
+</div>
+<p><strong>Output:</strong></p>
+<pre><code><span><span class="va">None</span></span></code></pre>
+<p><a href="https://github.com/elabftw/elabapi-python/issues/35" class="external-link">This
+issue has been reported</a>, but it has not been fixed, yet.</p>
+<p>The code for iterating over the experiments and pulling it out would
+be:</p>
+<div class="codewrapper sourceCode" id="cb16">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" tabindex="-1" aria-label="code-block-16-1"></a>power_settings <span class="op">=</span> []</span>
+<span id="cb16-2"><a href="#cb16-2" tabindex="-1" aria-label="code-block-16-2"></a><span class="cf">for</span> exp <span class="kw">in</span> heating_experiments:</span>
+<span id="cb16-3"><a href="#cb16-3" tabindex="-1" aria-label="code-block-16-3"></a>    power_setting <span class="op">=</span> exp.metadata.extra_fields[<span class="st">"Laser Power"</span>]</span>
+<span id="cb16-4"><a href="#cb16-4" tabindex="-1" aria-label="code-block-16-4"></a>    power_settings.append(power_setting)</span></code></pre>
+</div>
+<p>There’s many ways to get what we need: here, we will use the
+<code>requests</code> package to make the API request directly and get
+the full experiment information. The returned data structure is a bit
+different, but that’s fine.</p>
+<div class="codewrapper sourceCode" id="cb17">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" tabindex="-1" aria-label="code-block-17-1"></a><span class="im">from</span> scripts.client <span class="im">import</span> API_HOST, API_KEY</span>
+<span id="cb17-2"><a href="#cb17-2" tabindex="-1" aria-label="code-block-17-2"></a><span class="im">import</span> requests</span>
+<span id="cb17-3"><a href="#cb17-3" tabindex="-1" aria-label="code-block-17-3"></a></span>
+<span id="cb17-4"><a href="#cb17-4" tabindex="-1" aria-label="code-block-17-4"></a>heating_experiments_full <span class="op">=</span> []</span>
+<span id="cb17-5"><a href="#cb17-5" tabindex="-1" aria-label="code-block-17-5"></a></span>
+<span id="cb17-6"><a href="#cb17-6" tabindex="-1" aria-label="code-block-17-6"></a><span class="cf">for</span> exp <span class="kw">in</span> heating_experiments:</span>
+<span id="cb17-7"><a href="#cb17-7" tabindex="-1" aria-label="code-block-17-7"></a>    exp_id <span class="op">=</span> exp.<span class="bu">id</span></span>
+<span id="cb17-8"><a href="#cb17-8" tabindex="-1" aria-label="code-block-17-8"></a>    endpoint <span class="op">=</span> API_HOST <span class="op">+</span> <span class="ss">f'/experiments/</span><span class="sc">{</span>exp_id<span class="sc">}</span><span class="ss">'</span></span>
+<span id="cb17-9"><a href="#cb17-9" tabindex="-1" aria-label="code-block-17-9"></a>    headers <span class="op">=</span> {<span class="st">'Authorization'</span>: <span class="ss">f'</span><span class="sc">{</span>API_KEY<span class="sc">}</span><span class="ss">'</span>}</span>
+<span id="cb17-10"><a href="#cb17-10" tabindex="-1" aria-label="code-block-17-10"></a>    response <span class="op">=</span> requests.get(endpoint, headers<span class="op">=</span>headers)</span>
+<span id="cb17-11"><a href="#cb17-11" tabindex="-1" aria-label="code-block-17-11"></a>    heating_experiments_full.append(response.json())</span></code></pre>
 </div>
 <p>Generally, it’s good to know you have a lot of options to get where
 you need to be. Another possible workaround may have been, for example,
@@ -731,10 +767,10 @@ are now a list of Python <em>dictionaries</em> instead of
 <em>elabapi-python objects</em>. We access the information a little
 differently. Let’s look at a single experiment, accessing it by its
 index:</p>
-<div class="codewrapper sourceCode" id="cb15">
+<div class="codewrapper sourceCode" id="cb18">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" tabindex="-1" aria-label="code-block-15-1"></a>heating_experiments_full[<span class="dv">0</span>]</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" tabindex="-1" aria-label="code-block-18-1"></a>heating_experiments_full[<span class="dv">0</span>]</span></code></pre>
 </div>
 <pre><code>[{'access_key': None,
   'body': '&lt;p style="line-height:1;"&gt;&lt;strong&gt;Goal&lt;/strong&gt;: Gain an understanding of salt water temperature behavior when heated with a "super laser". This will inidicate how to scale this experiment and threaten the world powers to bend to my every demand!&lt;/p&gt;\n&lt;p&gt;The switch-off temperature is set to 100 by default (see fields below).\xa0&lt;/p&gt;',
@@ -1397,33 +1433,49 @@ index:</p>
   'type': 'experiments',
   'uploads': [],
   'userid': 1}]</code></pre>
-<p>There is a <code>metadata</code> and a <code>metadata_decoded</code>
-key. We can quickly check what te differences are by using Python’s
-built-in <code>type</code> function. Note, values are accessed slightly
+<p>Again we see all the information we would expect–and then some.
+Keeping our eyes out for the work <em>metadata</em> we see:</p>
+<pre><code>'metadata': '{"extra_fields": {"Laser Power": {"type": "number", "unit": "W", "units": ["W"], "value": "50"}, "Switch-off Temperature": {"type": "number", "unit": "°C", "units": ["°C", "K"], "value": "100"}}}',
+'metadata_decoded': {'extra_fields': {'Laser Power': {'type': 'number',
+    'unit': 'W',
+    'units': ['W'],
+    'value': '50'},
+  'Switch-off Temperature': {'type': 'number',
+    'unit': '°C',
+    'units': ['°C', 'K'],
+    'value': '100'}}},</code></pre>
+<p>Corresponding to the custom fields in our experiment:</p>
+<figure><img src="fig/sreenshot_experiment_custom_fields.png" alt="screenshot of experiment with custom fields metadata" class="figure mx-auto d-block"><div class="figcaption">screenshot of experiment with custom fields
+metadata</div>
+</figure><p>There is a <code>metadata</code> and a <code>metadata_decoded</code>.
+We can quickly check what te differences are by using Python’s built-in
+<code>type()</code> function. Note, values are accessed slightly
 differently in dictionaries than in elabapi-python objects:</p>
-<div class="codewrapper sourceCode" id="cb17">
-<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" tabindex="-1" aria-label="code-block-17-1"></a><span class="bu">type</span>(heating_experiments_full[<span class="dv">0</span>][<span class="st">'metadata'</span>])</span></code></pre>
-</div>
-<p>Output:</p>
-<pre><code><span><span class="va">str</span></span></code></pre>
-<div class="codewrapper sourceCode" id="cb19">
-<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" tabindex="-1" aria-label="code-block-19-1"></a><span class="bu">type</span>(heating_experiments_full[<span class="dv">0</span>][<span class="st">'metadata_decoded'</span>])</span></code></pre>
-</div>
-<p>Output:</p>
-<pre><code><span><span class="va">dict</span></span></code></pre>
-<p>Basically, <code>metadata_decoded</code> means the json-formatted
-string has already been decoded into a dictionary. This is what we need.
-Let’s output that part so we know how to access the values needed:</p>
 <div class="codewrapper sourceCode" id="cb21">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" tabindex="-1" aria-label="code-block-21-1"></a>heating_experiments_full[<span class="dv">0</span>][<span class="st">'metadata_decoded'</span>]</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" tabindex="-1" aria-label="code-block-21-1"></a><span class="bu">type</span>(heating_experiments_full[<span class="dv">0</span>][<span class="st">'metadata'</span>])</span></code></pre>
 </div>
-<p>Output</p>
+<p><strong>Output:</strong></p>
+<pre><code><span><span class="va">str</span></span></code></pre>
+<div class="codewrapper sourceCode" id="cb23">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" tabindex="-1" aria-label="code-block-23-1"></a><span class="bu">type</span>(heating_experiments_full[<span class="dv">0</span>][<span class="st">'metadata_decoded'</span>])</span></code></pre>
+</div>
+<p><strong>Output:</strong></p>
+<pre><code><span><span class="va">dict</span></span></code></pre>
+<p>Basically, <code>metadata_decoded</code> means the json-formatted
+string has already been decoded into a dictionary, which is easy to use
+in Python. This is what we need.</p>
+<p>Let’s output that part so we know how to access the values
+needed:</p>
+<div class="codewrapper sourceCode" id="cb25">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" tabindex="-1" aria-label="code-block-25-1"></a>heating_experiments_full[<span class="dv">0</span>][<span class="st">'metadata_decoded'</span>]</span></code></pre>
+</div>
+<p><strong>Output:</strong></p>
 <pre><code>{'extra_fields': {'Laser Power': {'type': 'number',
    'unit': 'W',
    'units': ['W'],
@@ -1432,29 +1484,38 @@ Let’s output that part so we know how to access the values needed:</p>
    'unit': '°C',
    'units': ['°C', 'K'],
    'value': '100'}}}</code></pre>
-<p>We want the power value from the extra fields. Let’s collect these in
-a list:</p>
-<p>Now that we have the values, we can go ahead and use them. We’ve
-prepared a script that contains a function that generates some synthetic
-data and saves it as a CSV (see
+<p>That means we can access each value accordingly:</p>
+<div class="codewrapper sourceCode" id="cb27">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" tabindex="-1" aria-label="code-block-27-1"></a>heating_experiments_full[<span class="dv">0</span>][<span class="st">'metadata_decoded'</span>][<span class="st">'extra_fields'</span>][<span class="st">'Laser Power'</span>][<span class="st">'value'</span>]</span></code></pre>
+</div>
+<p><strong>Output:</strong></p>
+<pre><code><span><span class="st">'125'</span></span></code></pre>
+<p>We want to use hese in a pre-prepared script that contains a function
+that generates some synthetic data and saves it as a CSV (see
 <code>scripts/generate_measurement.py</code>). Let’s import this and run
 it for each experiment, e.g., every set of values. The function returns
 the path to the generated file, which we will save in a list so we can
 easily access each one in later steps.</p>
-<div class="codewrapper sourceCode" id="cb23">
+<div class="codewrapper sourceCode" id="cb29">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" tabindex="-1" aria-label="code-block-23-1"></a><span class="im">from</span> scripts.generate_measurement <span class="im">import</span> generate_measurement</span>
-<span id="cb23-2"><a href="#cb23-2" tabindex="-1" aria-label="code-block-23-2"></a></span>
-<span id="cb23-3"><a href="#cb23-3" tabindex="-1" aria-label="code-block-23-3"></a>measurement_files <span class="op">=</span> []</span>
-<span id="cb23-4"><a href="#cb23-4" tabindex="-1" aria-label="code-block-23-4"></a></span>
-<span id="cb23-5"><a href="#cb23-5" tabindex="-1" aria-label="code-block-23-5"></a><span class="cf">for</span> exp <span class="kw">in</span> heating_experiments_full:</span>
-<span id="cb23-6"><a href="#cb23-6" tabindex="-1" aria-label="code-block-23-6"></a>    off_temp <span class="op">=</span> exp[<span class="st">'metadata_decoded'</span>][<span class="st">'extra_fields'</span>][<span class="st">'Switch-off Temperature'</span>][<span class="st">'value'</span>]</span>
-<span id="cb23-7"><a href="#cb23-7" tabindex="-1" aria-label="code-block-23-7"></a>    laser_power <span class="op">=</span> exp[<span class="st">'metadata_decoded'</span>][<span class="st">'extra_fields'</span>][<span class="st">'Laser Power'</span>][<span class="st">'value'</span>]</span>
-<span id="cb23-8"><a href="#cb23-8" tabindex="-1" aria-label="code-block-23-8"></a>    <span class="bu">print</span>(<span class="ss">f"Running measurement with laser poser </span><span class="sc">{</span>laser_power<span class="sc">}</span><span class="ss"> and shut-off temperature </span><span class="sc">{</span>off_temp<span class="sc">}</span><span class="ss">..."</span>)</span>
-<span id="cb23-9"><a href="#cb23-9" tabindex="-1" aria-label="code-block-23-9"></a>    output_path <span class="op">=</span> generate_measurement(power_w <span class="op">=</span> <span class="bu">float</span>(laser_power), break_temp<span class="op">=</span><span class="bu">float</span>(off_temp))</span>
-<span id="cb23-10"><a href="#cb23-10" tabindex="-1" aria-label="code-block-23-10"></a>    <span class="bu">print</span>(<span class="ss">f"Output file saved to </span><span class="sc">{</span>output_path<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb23-11"><a href="#cb23-11" tabindex="-1" aria-label="code-block-23-11"></a>    measurement_files.append(output_path)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" tabindex="-1" aria-label="code-block-29-1"></a><span class="im">from</span> scripts.generate_measurement <span class="im">import</span> generate_measurement</span>
+<span id="cb29-2"><a href="#cb29-2" tabindex="-1" aria-label="code-block-29-2"></a></span>
+<span id="cb29-3"><a href="#cb29-3" tabindex="-1" aria-label="code-block-29-3"></a>measurement_files <span class="op">=</span> []</span>
+<span id="cb29-4"><a href="#cb29-4" tabindex="-1" aria-label="code-block-29-4"></a></span>
+<span id="cb29-5"><a href="#cb29-5" tabindex="-1" aria-label="code-block-29-5"></a><span class="cf">for</span> exp <span class="kw">in</span> heating_experiments_full:</span>
+<span id="cb29-6"><a href="#cb29-6" tabindex="-1" aria-label="code-block-29-6"></a>    off_temp <span class="op">=</span> exp[<span class="st">'metadata_decoded'</span>][<span class="st">'extra_fields'</span>][<span class="st">'Switch-off Temperature'</span>][<span class="st">'value'</span>]</span>
+<span id="cb29-7"><a href="#cb29-7" tabindex="-1" aria-label="code-block-29-7"></a>    </span>
+<span id="cb29-8"><a href="#cb29-8" tabindex="-1" aria-label="code-block-29-8"></a>    laser_power <span class="op">=</span> exp[<span class="st">'metadata_decoded'</span>][<span class="st">'extra_fields'</span>][<span class="st">'Laser Power'</span>][<span class="st">'value'</span>]</span>
+<span id="cb29-9"><a href="#cb29-9" tabindex="-1" aria-label="code-block-29-9"></a>    </span>
+<span id="cb29-10"><a href="#cb29-10" tabindex="-1" aria-label="code-block-29-10"></a>    <span class="bu">print</span>(<span class="ss">f"Running measurement with laser poser </span><span class="sc">{</span>laser_power<span class="sc">}</span><span class="ss"> and shut-off temperature </span><span class="sc">{</span>off_temp<span class="sc">}</span><span class="ss">..."</span>)</span>
+<span id="cb29-11"><a href="#cb29-11" tabindex="-1" aria-label="code-block-29-11"></a>    </span>
+<span id="cb29-12"><a href="#cb29-12" tabindex="-1" aria-label="code-block-29-12"></a>    output_path <span class="op">=</span> generate_measurement(power_w <span class="op">=</span> <span class="bu">float</span>(laser_power), break_temp<span class="op">=</span><span class="bu">float</span>(off_temp))</span>
+<span id="cb29-13"><a href="#cb29-13" tabindex="-1" aria-label="code-block-29-13"></a>    </span>
+<span id="cb29-14"><a href="#cb29-14" tabindex="-1" aria-label="code-block-29-14"></a>    <span class="bu">print</span>(<span class="ss">f"Output file saved to </span><span class="sc">{</span>output_path<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb29-15"><a href="#cb29-15" tabindex="-1" aria-label="code-block-29-15"></a>    measurement_files.append(output_path)</span></code></pre>
 </div>
 <p>If you check the output folder <code>output_data/</code>, you will
 see three files have been created.</p>
@@ -1462,25 +1523,27 @@ see three files have been created.</p>
 <a href="https://github.com/elabftw/elabapi-python/blob/master/examples/23-create-resources-and-upload-pdfs.py#L42C5-L47C6" class="external-link">line
 42-47 in examples/23-create-resources-and-upload-pdfs.py</a> in the
 GitHub Python examples to see how we upload files to entries.</p>
-<div class="codewrapper sourceCode" id="cb24">
+<div class="codewrapper sourceCode" id="cb30">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" tabindex="-1" aria-label="code-block-24-1"></a><span class="cf">for</span> exp <span class="kw">in</span> heating_experiments_full:</span>
-<span id="cb24-2"><a href="#cb24-2" tabindex="-1" aria-label="code-block-24-2"></a>    exp_id <span class="op">=</span> exp[<span class="st">'id'</span>]</span>
-<span id="cb24-3"><a href="#cb24-3" tabindex="-1" aria-label="code-block-24-3"></a>    power <span class="op">=</span> exp[<span class="st">'metadata_decoded'</span>][<span class="st">'extra_fields'</span>][<span class="st">'Laser Power'</span>][<span class="st">'value'</span>]</span>
-<span id="cb24-4"><a href="#cb24-4" tabindex="-1" aria-label="code-block-24-4"></a>    <span class="cf">for</span> <span class="bu">file</span> <span class="kw">in</span> measurement_files:</span>
-<span id="cb24-5"><a href="#cb24-5" tabindex="-1" aria-label="code-block-24-5"></a>        <span class="cf">if</span> <span class="bu">file</span>.name.startswith(power):</span>
-<span id="cb24-6"><a href="#cb24-6" tabindex="-1" aria-label="code-block-24-6"></a>            uploads_api.post_upload(</span>
-<span id="cb24-7"><a href="#cb24-7" tabindex="-1" aria-label="code-block-24-7"></a>                <span class="st">"experiments"</span>,</span>
-<span id="cb24-8"><a href="#cb24-8" tabindex="-1" aria-label="code-block-24-8"></a>                exp_id,</span>
-<span id="cb24-9"><a href="#cb24-9" tabindex="-1" aria-label="code-block-24-9"></a>                <span class="bu">file</span><span class="op">=</span><span class="bu">str</span>(<span class="bu">file</span>),</span>
-<span id="cb24-10"><a href="#cb24-10" tabindex="-1" aria-label="code-block-24-10"></a>            </span>
-<span id="cb24-11"><a href="#cb24-11" tabindex="-1" aria-label="code-block-24-11"></a>    )</span>
-<span id="cb24-12"><a href="#cb24-12" tabindex="-1" aria-label="code-block-24-12"></a>    </span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" tabindex="-1" aria-label="code-block-30-1"></a><span class="cf">for</span> exp <span class="kw">in</span> heating_experiments_full:</span>
+<span id="cb30-2"><a href="#cb30-2" tabindex="-1" aria-label="code-block-30-2"></a>    exp_id <span class="op">=</span> exp[<span class="st">'id'</span>]</span>
+<span id="cb30-3"><a href="#cb30-3" tabindex="-1" aria-label="code-block-30-3"></a>    power <span class="op">=</span> exp[<span class="st">'metadata_decoded'</span>][<span class="st">'extra_fields'</span>][<span class="st">'Laser Power'</span>][<span class="st">'value'</span>]</span>
+<span id="cb30-4"><a href="#cb30-4" tabindex="-1" aria-label="code-block-30-4"></a>    <span class="cf">for</span> <span class="bu">file</span> <span class="kw">in</span> measurement_files:</span>
+<span id="cb30-5"><a href="#cb30-5" tabindex="-1" aria-label="code-block-30-5"></a>        <span class="cf">if</span> <span class="bu">file</span>.name.startswith(power):</span>
+<span id="cb30-6"><a href="#cb30-6" tabindex="-1" aria-label="code-block-30-6"></a>            uploads_api.post_upload(</span>
+<span id="cb30-7"><a href="#cb30-7" tabindex="-1" aria-label="code-block-30-7"></a>                <span class="st">"experiments"</span>,</span>
+<span id="cb30-8"><a href="#cb30-8" tabindex="-1" aria-label="code-block-30-8"></a>                exp_id,</span>
+<span id="cb30-9"><a href="#cb30-9" tabindex="-1" aria-label="code-block-30-9"></a>                <span class="bu">file</span><span class="op">=</span><span class="bu">str</span>(<span class="bu">file</span>),</span>
+<span id="cb30-10"><a href="#cb30-10" tabindex="-1" aria-label="code-block-30-10"></a>            </span>
+<span id="cb30-11"><a href="#cb30-11" tabindex="-1" aria-label="code-block-30-11"></a>    )</span>
+<span id="cb30-12"><a href="#cb30-12" tabindex="-1" aria-label="code-block-30-12"></a>    </span></code></pre>
 </div>
-<p>If you check your experiments in the GUI, you should see your
-attached files.</p>
-<div id="challenge2" class="callout challenge">
+<p>If we check our experiments in the GUI, we should see your attached
+files:</p>
+<figure><img src="fig/screenshot_experiment_file.png" alt="screenshot of an atatched file in the experiment" class="figure mx-auto d-block"><div class="figcaption">screenshot of an atatched file in the
+experiment</div>
+</figure><div id="challenge2" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
@@ -1488,8 +1551,9 @@ attached files.</p>
 <div class="callout-inner">
 <h3 class="callout-title">Challenge</h3>
 <div class="callout-content">
-<p>Write a for loops that sets each experiment status to running. Hint:
-get an idea of what the commands could look like in the example <a href="https://github.com/elabftw/elabapi-python/blob/master/examples/05-create-modify-item.py" class="external-link">examples/05-create-modify-item.py</a>
+<p>Write a for loops that sets each experiment status to running.</p>
+<p>Hint: get an idea of what the commands could look like in the example
+<a href="https://github.com/elabftw/elabapi-python/blob/master/examples/05-create-modify-item.py" class="external-link">examples/05-create-modify-item.py</a>
 on GitHub.</p>
 <p>Execute the code and check the GUI to see if it worked.</p>
 </div>
@@ -1504,30 +1568,30 @@ on GitHub.</p>
 <div class="accordion-body">
 <p>The request we are making is a <code>patch</code> to an existing
 experiment. We need to tell the</p>
-<div class="codewrapper sourceCode" id="cb25">
+<div class="codewrapper sourceCode" id="cb31">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" tabindex="-1" aria-label="code-block-25-1"></a><span class="cf">for</span> exp <span class="kw">in</span> heating_experiments_full:</span>
-<span id="cb25-2"><a href="#cb25-2" tabindex="-1" aria-label="code-block-25-2"></a>    exp_id <span class="op">=</span> exp[<span class="st">'id'</span>]</span>
-<span id="cb25-3"><a href="#cb25-3" tabindex="-1" aria-label="code-block-25-3"></a>    experiments_api.patch_experiment(exp_id, body<span class="op">=</span>{<span class="st">'status'</span>: <span class="dv">47</span>})</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" tabindex="-1" aria-label="code-block-31-1"></a><span class="cf">for</span> exp <span class="kw">in</span> heating_experiments_full:</span>
+<span id="cb31-2"><a href="#cb31-2" tabindex="-1" aria-label="code-block-31-2"></a>    exp_id <span class="op">=</span> exp[<span class="st">'id'</span>]</span>
+<span id="cb31-3"><a href="#cb31-3" tabindex="-1" aria-label="code-block-31-3"></a>    experiments_api.patch_experiment(exp_id, body<span class="op">=</span>{<span class="st">'status'</span>: <span class="dv">47</span>})</span></code></pre>
 </div>
 <p>Note, and alternative using the original experiment return (using the
 elabapi-python package) would be:</p>
-<div class="codewrapper sourceCode" id="cb26">
+<div class="codewrapper sourceCode" id="cb32">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" tabindex="-1" aria-label="code-block-26-1"></a><span class="cf">for</span> exp <span class="kw">in</span> heating_experiments:</span>
-<span id="cb26-2"><a href="#cb26-2" tabindex="-1" aria-label="code-block-26-2"></a>    exp_id <span class="op">=</span> exp.<span class="bu">id</span></span>
-<span id="cb26-3"><a href="#cb26-3" tabindex="-1" aria-label="code-block-26-3"></a>    experiments_api.patch_experiment(exp_id, body<span class="op">=</span>{<span class="st">'status'</span>: <span class="dv">47</span>})</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" tabindex="-1" aria-label="code-block-32-1"></a><span class="cf">for</span> exp <span class="kw">in</span> heating_experiments:</span>
+<span id="cb32-2"><a href="#cb32-2" tabindex="-1" aria-label="code-block-32-2"></a>    exp_id <span class="op">=</span> exp.<span class="bu">id</span></span>
+<span id="cb32-3"><a href="#cb32-3" tabindex="-1" aria-label="code-block-32-3"></a>    experiments_api.patch_experiment(exp_id, body<span class="op">=</span>{<span class="st">'status'</span>: <span class="dv">47</span>})</span></code></pre>
 </div>
 <p>Here, we are working with the eLabFTW object instead of a dictionary,
 so we access the experiment ID differently.</p>
 <p>We could shorten this a bit:</p>
-<div class="codewrapper sourceCode" id="cb27">
+<div class="codewrapper sourceCode" id="cb33">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" tabindex="-1" aria-label="code-block-27-1"></a><span class="cf">for</span> exp <span class="kw">in</span> heating_experiments:</span>
-<span id="cb27-2"><a href="#cb27-2" tabindex="-1" aria-label="code-block-27-2"></a>    experiments_api.patch_experiment(exp.<span class="bu">id</span>, body<span class="op">=</span>{<span class="st">'status'</span>: <span class="dv">47</span>})</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" tabindex="-1" aria-label="code-block-33-1"></a><span class="cf">for</span> exp <span class="kw">in</span> heating_experiments:</span>
+<span id="cb33-2"><a href="#cb33-2" tabindex="-1" aria-label="code-block-33-2"></a>    experiments_api.patch_experiment(exp.<span class="bu">id</span>, body<span class="op">=</span>{<span class="st">'status'</span>: <span class="dv">47</span>})</span></code></pre>
 </div>
 </div>
 </div>
@@ -1561,8 +1625,9 @@ GUI.</p>
 <div class="callout-content">
 <ul><li>Retrieve information using either the elabapi_python module or
 requests</li>
-<li>Use queries and filters in your Python API requests to access
-specific entries by given parameters</li>
+<li>Use queries and filters in your Python API requests</li>
+<li>Access specific entries by given parameters in retrieved
+experiments</li>
 <li>Iterate (loop) over lists of entries to perform bulk actions</li>
 </ul></div>
 </div>
