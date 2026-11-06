@@ -87,11 +87,17 @@ Scrolling through the categories and knowing how eLabFTW is structured, we can g
 
 Selecting a methods gives us more information, e.g., we can see that `postExperiments` creates an experiment, as well as usage examples in different programming languages and the parameters we can give our API request.
 
-![alt text](fig/screenshot_postExperiments_HTMLdocs.png)
+![screenshot of the postExperiment API method](fig/screenshot_postExperiments_HTMLdocs.png)
 
 ## Constructing Requests
 
 The first time you see these types of docs pages, it may seem a bit daunting. So let's construct our first API call using a tool we're all familiar with: our browser.
+
+First, just as a little reference, scroll all the way down to the [USERS section](https://doc.elabftw.net/api/elabapi-html/#api-Users) on the HTML Docs page and select [readUser](https://doc.elabftw.net/api/elabapi-html/#api-Users). We can see the endpoint will be constructed to end with `/users/{id}`. If we look down at the parameters, we can also see that `id` may be set to `me`. In the usage example we can see how the request url will be formatted:
+
+`"https://elab.local:3148/api/v2/users/{id}"`
+
+Now, head to the browser:
 
 1. Write the eLabFTW URL, e.g., `https://elab.parks.web.gateway.ionos.coscine.dev` (match to your instance) in the menu bar.
 2. Add `/api/v2`.
