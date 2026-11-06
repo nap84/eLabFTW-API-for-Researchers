@@ -52,32 +52,90 @@ Open a new terminal in Jupyter Lab. (_Hint: if you already have a window open, u
 
 We will use a tool called [`cURL`](https://curl.se/) to make API calls. This is a typical tool used for data transfer.
 
-We could head to its documentation to learn how to use it, but let's be lazy and use what we already have.
+We could head to its documentation to learn how to use it, but let's be lazy and use what we already have, e.g., the usage examples in the [HTML doc (v2)](https://doc.elabftw.net/api/elabapi-html/) we just saw.
 
-Head back [eLabFTW's API docs](https://doc.elabftw.net/api/). Choose the [HTML doc (v2)](https://doc.elabftw.net/api/elabapi-html/).
+Sticking to Users, let's replicate what we did in our browser as a cURL request. You can try to construct this in your terminal, but for many of us it is easier in a text editor. Copy and paste the cURL code.
 
-Similar to the Swagger page we saw in the previous episode, you will see the available endpoints on the left-hand pane, but now we have programmatic examples alongside them.
+Unlike our browser, through which we have been identified by logging in, we now need to tell the ELN we are allowed to have access. This is done by creating a token:
 
-Scroll to the [Experiments](https://doc.elabftw.net/api/elabapi-html/#api-Experiments) section on the left and click [`postExperiment`](https://doc.elabftw.net/api/elabapi-html/#api-Experiments-postExperiment). On the right, cURL has already been selected in the example window. Let's use this to programmatically create and experiment:
+1. Head your eLabFTW instance
+2. click your initials on the top right-hand side
+3. click `settings`
+4. Select the `API KEYS` header
+5. Under `Create new key`, enter a name for your key and select `Read/Write` from the permissions drop-down menu.
+6. click `Generate an API Key`
+7. Copy and paste this to the `secrets.env` file in your `research_computer/` folder for later use. It will only be shown once in the ELN's UI!
 
-1. Copy the text in the example window into a text editor in Jupyter Lab.
-2. Edit the required info
-   1. Create a token
-      1. Head your eLabFTW instance
-      2. click your initials on the top right-hand side
-      3. click `settings`
-      4. Select the `API KEYS` header
-      5. Under `Create new key`, enter a name for your key and select `Read/Write` from the permissions drop-down menu.
-      6. click `Generate an API Key`
-      7. Copy and paste this to the `secrets.env` file in your `research_computer/` folder. It will only be shown once in the ELN!
-   2. Copy and paste your token to the terminal, replacing `[[apiKey]]`
-   3. Replace `https://elab.local:3148` with your eLabFTW URL
-   4. Add experiment info using the template below. Once done, add `\` at the end of the last line, <kbd>enter</kbd> for a new line and add `-d '{"title":"my api exp"}` (replace info in curly brackets with full info)
-   5. Add `-i` before `-X` in the top line. This ensures the response is output.
-   6. Copy and paste into your terminal
-   7. Hit <kbd>enter</kbd> to run
+Now we can start editing the request:
 
-Note: make sure you have spaces between the `\` and the end of the line.
+1. Paste your token, replacing `[[apiKey]]`
+2. Replace `https://elab.local:3148` with your eLabFTW URL
+3. Replace {id} with `me`
+4. Put spaces before the `/`
+
+::::::::::::::::::::::::::::::::::::: caution
+
+The cURL examples in the HTML Docs page are missing a white space before the backslashes (`/`). Whenever you copy-and-paste from here, you will have to add them.
+
+:::::::::::::::::::::::::::::::::::::::::::::
+
+If you are working in the a text editor, copy this code into your terminal. Now, we will execute by hitting <kbd>enter</kbd>.
+
+::::::::::::::::::::::::::::::::::::: callout
+
+You can type this info directly into your terminal. For larger requests, however, especially when just starting out, it can be difficult to navigate. Thus, copy and pasting from a text editor may be easier and it is easier to catch problems.
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::: callout
+
+You can load the API key from a `secrets.env` file instead of pasting the secret into the command. 
+
+Create such a file **in the workshop directory** and paste your token:
+
+```python
+ELAB_API_KEY='YOU_TOKEN_HERE'
+ELAB_API_HOST='https://elab.parks.web.gateway.ionos.coscine.dev/api/v2'
+```
+
+From the **workshop directory**, run:
+
+```bash
+set -a
+source research_computer/secrets.env
+set +a
+```
+
+The `secrets.env` file should contain `ELAB_API_KEY` and `ELAB_API_HOST`. The key is
+then available as the `$ELAB_API_KEY` environment variable. Use it in the request like this:
+
+```bash
+curl -i -X POST \
+   -H "Authorization: $ELAB_API_KEY" \
+   -H "Accept: application/json" \
+   -H "Content-Type: application/json" \
+   -d '{"title":"my api exp"}' \
+   "$ELAB_API_HOST/experiments"
+```
+
+This keeps the token out of the command itself. Do not print the variable or share the `secrets.env` file. If you believe you unsafely used an API key, always revoke it and create a new one.
+
+Note: `.env` is more common, however, Jupyter lab immediately hides these.
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+Now, let's make a new request and create an experiment:
+
+Scroll to the [Experiments](https://doc.elabftw.net/api/elabapi-html/#api-Experiments) section on the left and click [`postExperiment`](https://doc.elabftw.net/api/elabapi-html/#api-Experiments-postExperiment). Again, we will look at the cURL usage example and copy and paste it into our text editor. Similar to the steps above:
+
+1. Copy and paste your token to the terminal, replacing `[[apiKey]]`
+2. Replace `https://elab.local:3148` with your eLabFTW URL
+3. Add experiment info using the template below. Once done, add `\` at the end of the last line, <kbd>enter</kbd> for a new line and add `-d '{"title":"my api exp"}` (replace info in curly brackets with the full data)
+4. Add `-i` before `-X` in the top line. This ensures the response is output.
+5. Copy and paste into your terminal
+6. Hit <kbd>enter</kbd> to run
+
+Note: Don't forget to add spaces between the `\` and the end of the line.
 
 Template for data:
 
@@ -162,66 +220,27 @@ curl -i -X POST \
    "https://{YOUR_ELAB_URL}/api/v2/experiments"
 ```
 
-::::::::::::::::::::::::::::::::::::: callout
+::::::::::::::::::::::::::::::::::::: challenge
 
-You can type this info directly into your terminal. For larger requests, however, especially when just starting out, it can be difficult to navigate. Thus, copy and pasting from a text editor may be easier and it is easier to catch problems.
+The below code intends to link the device resource [**Bluetooth Infrared Thermometer**](elab.parks.web.gateway.ionos.coscine.dev/database.php?mode=view&id=144) to the experiment experiment created above.
 
-::::::::::::::::::::::::::::::::::::::::::::::::
+In it current state, it fails. What needs to be fixed?
 
-::::::::::::::::::::::::::::::::::::: callout
-
-You can load the API key from a `secrets.env` file instead of pasting the secret into the command. 
-
-Create such a file **in the workshop directory** and paste your token:
-
-```python
-ELAB_API_KEY='YOU_TOKEN_HERE'
-ELAB_API_HOST='https://elab.parks.web.gateway.ionos.coscine.dev/api/v2'
-```
-
-From the **workshop directory**, run:
-
-```bash
-set -a
-source research_computer/secrets.env
-set +a
-```
-
-The `secrets.env` file should contain `ELAB_API_KEY` and `ELAB_API_HOST`. The key is
-then available as the `$ELAB_API_KEY` environment variable. Use it in the request like this:
-
-```bash
-curl -i -X POST \
-   -H "Authorization: $ELAB_API_KEY" \
-   -H "Accept: application/json" \
-   -H "Content-Type: application/json" \
-   -d '{"title":"my api exp"}' \
-   "$ELAB_API_HOST/experiments"
-```
-
-This keeps the token out of the command itself. Do not print the variable or share the `secrets.env` file. If you believe you unsafely used an API key, always revoke it and create a new one.
-
-Note: `.env` is more common, however, Jupyter lab immediately hides these.
-
-::::::::::::::::::::::::::::::::::::::::::::::::
-
-Now, let's link the device resource **Bluetooth Infrared Thermometer**.  Again, we look at the [HTML doc (v2)](https://doc.elabftw.net/api/elabapi-html/). We need three parameters:
-
-* entity type &rarr; resource  &rarr; `items` (as they are called in the API)
-* entity (resource) id
-* experiment id &rarr; see above previously json
-
-To keep it simple, we can check the course team UI for the ID.
-
-We can copy-and-paste the cURL code from the docs and fill out the required information (don't forget to adjust the spaces after each line before the `\`):
+Hint: [Read the docs for LinksToExperiments](https://doc.elabftw.net/api/elabapi-html/#api-LinksToExperiments)
 
 ```bash
 curl -X POST \
    -H "Authorization: $ELAB_API_KEY" \
    -H "Accept: application/json" \
    -H "Content-Type: application/json" \
-   "$ELAB_API_HOST/{entity_type}/{entity_id}/experiments_links/{exp_id}"
+   "elab.parks.web.gateway.ionos.coscine.dev/items/144/experiment/{your_exp_id}"
 ```
+
+:::::::::::::::::::::::: solution
+
+:::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: challenge
 
@@ -242,6 +261,14 @@ curl -X GET \
 ```
 
 This prints the JSON response directly in the terminal. The response should contain the experiment title and body, its creation and modification details, the permission settings, and the values in `metadata.extra_fields`.
+
+
+:::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::: callout
+
 
 **If you have admin rights**, for more readable, indented JSON, you can pipe the response through `jq` :
 
@@ -271,11 +298,9 @@ explicitly, because `curl` may be an alias for a PowerShell command (shortened e
 ```powershell
 curl.exe ... | jq .
 ```
+:::::::::::::::::::::::::::::::::::::::::::::::
 
-:::::::::::::::::::::::::::::::::
-
-::::::::::::::::::::::::::::::::::::::::::::::::
-
+<!-- 
 ::::::::::::::::::::::::::::::::::::: challenge
 
 Fill in the blanks for the the script in `research_computer/attach_measurement.sh` to attach the measurement file (`research_computer/2026_11_17_thermometer_calibration.csv`) to the created experiment.
@@ -327,7 +352,7 @@ curl -sS -f -i "${curl_options[@]}" "$UPLOAD_URL"
 
 :::::::::::::::::::::::::::::::::
 
-::::::::::::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::::::::::::::::::::::: -->
 
 ::::::::::::::::::::::::::::::::::::: keypoints
 
@@ -335,6 +360,5 @@ curl -sS -f -i "${curl_options[@]}" "$UPLOAD_URL"
 * cURL can create, retrieve, and update data through the eLabFTW API
 * API responses contain JSON data and HTTP headers that help interpret the result
 * Environment variables and `.env` (or `secrets.env`) files keep API credentials out of commands
-* File uploads use the eLabFTW upload endpoint with `multipart/form-data`
 
 :::::::::::::::::::::::::::::::::::::::::::::::
