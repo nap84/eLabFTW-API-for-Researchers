@@ -93,8 +93,8 @@ You can load the API key from a `secrets.env` file instead of pasting the secret
 
 Create such a file **in the workshop directory** and paste your token:
 
-```python
-ELAB_API_KEY='YOU_TOKEN_HERE'
+```bash
+ELAB_API_KEY='YOUR_TOKEN_HERE'
 ELAB_API_HOST='https://elab.parks.web.gateway.ionos.coscine.dev/api/v2'
 ```
 
@@ -149,6 +149,7 @@ _Feel free to modify!_
    "canwrite_base": 20,
    "canread": "{\"teams\": [], \"users\": [], \"teamgroups\": []}",
    "canwrite": "{\"teams\": [], \"users\": [], \"teamgroups\": []}",
+   "category": 27,
    "metadata": {
       "extra_fields": {
          "sample_id": {
@@ -180,7 +181,7 @@ Final code:
 
 ```bash
 curl -i -X POST \
-    -H "Authorization: YOUR_TOKEN" \
+    -H "Authorization: $ELAB_API_KEY" \
     -H "Accept: application/json" \
     -H "Content-Type: application/json" \
     -d '{
@@ -191,7 +192,6 @@ curl -i -X POST \
    "canread": "{\"teams\": [], \"users\": [], \"teamgroups\": []}",
    "canwrite": "{\"teams\": [], \"users\": [], \"teamgroups\": []}",
    "category": 27,
-   "
    "metadata": {
       "extra_fields": {
          "sample_id": {
@@ -217,23 +217,33 @@ curl -i -X POST \
       }
    }
 }' \
-   "https://{YOUR_ELAB_URL}/api/v2/experiments"
+   "$ELAB_API_HOST/experiments"
 ```
 
 ::::::::::::::::::::::::::::::::::::: challenge
 
-The below code intends to link the device resource [**Bluetooth Infrared Thermometer**](elab.parks.web.gateway.ionos.coscine.dev/database.php?mode=view&id=144) to the experiment experiment created above.
+The below code intends to link the device resource [**Bluetooth Infrared Thermometer**](https://elab.parks.web.gateway.ionos.coscine.dev/database.php?mode=view&id=144) to the experiment experiment created above.
 
 In it current state, it fails. What needs to be fixed?
 
-Hint: [Read the docs for LinksToExperiments](https://doc.elabftw.net/api/elabapi-html/#api-LinksToExperiments)
+::: hint
+
+You can use a GET request to the "$ELAB_API_HOST/experiments" endpoint to list all experiments and find the ID of the one you just created.
+
+:::
+
+::: hint
+
+[Read the docs for LinksToExperiments](https://doc.elabftw.net/api/elabapi-html/#api-LinksToExperiments)
+
+:::
 
 ```bash
 curl -X POST \
    -H "Authorization: $ELAB_API_KEY" \
    -H "Accept: application/json" \
    -H "Content-Type: application/json" \
-   "elab.parks.web.gateway.ionos.coscine.dev/items/144/experiment/{your_exp_id}"
+   "$ELAB_API_HOST/items/144/experiment/{your_exp_id}"
 ```
 
 :::::::::::::::::::::::: solution
@@ -246,7 +256,11 @@ curl -X POST \
 
 What would the command line `cURL` API call look like that retrieves the experiment we just created? Write and execute this command. Then, analyze the response and see if everything is as you imagined.
 
-Hint: Look for the `location` in the response from your last call to get the ID.
+::: hint
+
+Look for the `location` in the response from your last call to get the ID.
+
+:::
 
 :::::::::::::::::::::::: solution
 
