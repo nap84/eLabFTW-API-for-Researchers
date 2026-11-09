@@ -145,14 +145,69 @@ uploads_api.post_upload('experiments', experiment.id, file="50w_temp_time_plot.p
 
 Use the above snippets and function to write a code that
 
-1. Retrieves all desired experiments
+1. Retrieves all run experiments
 2. Plots and saves figures for each
 3. Attaches the plot back to the experiment
 4. Sets the experiment status to success
 
 Hint: make a small modification to the `download_matching_uploads_locally` so you can retrieve the file name.
 
-Bonus: if anyone can figure out how to add an image directly to the main text field, please share!
+**Bonus:** If anyone can figure out how to add an image directly to the main text field using the API, please share!
+
+::::::::::::::::::::::::::::::::::::: solution
+
+Here is one possible solution. This assumes you start with a new notebook or write a Python script, so it includes all data imports and retrieves the experiment information.
+
+```python
+import pandas as pd
+import elabapi_python
+
+
+
+def download_matching_uploads_locally(exp): 
+    downloaded_file_names = [] # initialize empty list to collect file names
+    for upload in uploads_api.read_uploads('experiments', exp.id): 
+        print(upload.id, upload.real_name, upload.comment, upload.state)
+        with open(upload.real_name, 'wb') as file: 
+            file.write(uploads_api.read_upload('experiments', exp.id, upload.id, format='binary', _preload_content=False).data) 
+        downloaded_file_names.append(upload.real_name) # add file name to list once downloaded
+    return downloaded_file_names #return file name so we can access outside of function
+
+
+heating_experiments = experiments_api.read_experiments(q='Heating', status = 47, scope=1) # retrieve experiment information with filters applied
+
+for experiment in heating_experiments: # loop over each heating experiment in our list
+    downloaded_file_names = download_matching_uploads_locally(experiment) # will download all files for each experiment we pass
+    for file_name in downloaded_file_names: # loop over downloaded files
+
+        if file_name.endswith('csv'): #make sure you're not trying to load some other type of file
+            measurement_data = pd.read_csv(file_name) # load into dataframe
+            power = file_name.split('_')[0] # get power setting from file name
+            title = f"Laser Power {power} W" # dynamically set plot title
+            ax = measurement_data.plot.scatter(x='time_s', y='temperature_C', title = title) # create plot
+            figure_name = f"{power}w_temp_time_plot.png" # dynamically set figure name 
+            ax.figure.savefig(figure_name, dpi=300) # save figure
+            uploads_api.post_upload('experiments', experiment.id, file=figure_name) # upload figure file
+
+```
+
+:::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::: instructor
+The following challenge is for playtime if time permits. Alternative would be to ask if learners want to see something specific.
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::: challenge
+This challenge is meant for extra play time and is one option of something you could try and do. It inlcudes things we have not directly covered yet. 
+
+1. Plot all three data files in one plot
+2. Save the plot
+3. Create a new experiment using the template "Heat Test Evaluation" (Hint: check UI for ID)
+4. Upload the saved plot
+5. Upload the Jupyter notebook
 
 ::::::::::::::::::::::::::::::::::::: solution
 TODO
