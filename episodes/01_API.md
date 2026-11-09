@@ -109,15 +109,30 @@ If you are _not_ logged in, you will get a `401` error since you are not authori
 
 ::::::::::::::::::::::::::::::::::::: challenge
 
-## Find your User ID
+## API vs. UI
 
-What is _your_ user ID? Find it and note for later. Ensure you have requested the ID from the instance you will be working with in this course.
+What information are you shown? How does this information correlate to what you can see in the UI? What information is not included in eLabFTW's GUI (for normal users).
 
 :::::::::::::::::::::::: solution
 
 ## Solution
 
-The top line has the `userid` attribute, which is your user ID. You can also use the browser's search function to find it: <kbd>ctrl</kbd>+<kbd>f</kbd> &rarr; type 'userid'.
+Most of the information can be find in the GUI. For example, the keyboard shortcut set in your user profile are:
+
+```json
+"sc_create": "c",
+"sc_edit": "e",
+"sc_favorite": "f",
+"sc_todo": "t",
+"sc_search": "s"
+```
+
+In our user settings:
+![screenshot of user setting keyboard shortcuts in the eLabFTW GUI](fig/screenshot_elabftw_shortcuts_settings.png)
+
+Similarly, we can see our teams, which we can also see in our user profile, and so on.
+
+The top line has the `userid` attribute, which is your user ID. This piece of information is only really visible to team and system admin in the GUI (probably since it is not a useful piece of information in the GUI for day-to-day use).
 
 :::::::::::::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::::::::::
