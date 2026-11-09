@@ -30,7 +30,6 @@ Here's an overview of the intended workflow:
 ```mermaid
 ---
 config:
-  theme: redux
   layout: fixed
 ---
 flowchart LR
@@ -52,7 +51,6 @@ flowchart LR
     n10 --> n5
     n11 --> n10
     n12(["Researcher"]) -- plans --> n3
-
 ```
 
 To this end, head to our eLabFTW test instance via your in your browser. Create at least three experiments using the Heating Test template. Enter a different Laser Power value for each in the extra fields metadata. _Note: You may change the title, just ensure the word 'Heating' remains._
