@@ -6,6 +6,7 @@ exercises: 30 # exercise time in minutes
 
 :::::::::::::::::::::::::::::::::::::: questions
 
+- How can I upload files attached to entries in eLabFTW?
 - How can I create a quick plot in Python?
 - How can I add images to my eLabFTW entries?
 
