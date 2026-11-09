@@ -14,7 +14,7 @@ exercises: 30 # exercise time in minutes
 
 ## Data Analysis Workflows
 
-Let's imagine we had used an automated workflow in episode 05 to create the files. Everything ran in our absence and we have the individual output files attached to the experiments.
+Let's imagine we had used an automated workflow in episode 04 to create the files. Everything ran in our absence and we have the individual output files attached to the experiments.
 
 We can now keep going and add some more information to our experiments, such as a plot to quickly see the data, for example:
 
