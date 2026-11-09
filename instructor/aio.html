@@ -914,7 +914,7 @@ above.</p>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint1" aria-expanded="false" aria-controls="collapseHint1">
   <h4 class="accordion-header" id="headingHint1"> Give me a hint </h4>
 </button>
-<div id="collapseHint1" class="accordion-collapse collapse" data-bs-parent="#accordionHint1" aria-labelledby="headingHint1">
+<div id="collapseHint1" class="accordion-collapse collapse" aria-labelledby="headingHint1" data-bs-parent="#accordionHint1">
 <div class="accordion-body">
 <p>You can use a GET request to the “$ELAB_API_HOST/experiments”
 endpoint to list all experiments and find the ID of the one you just
@@ -928,7 +928,7 @@ created.</p>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint2" aria-expanded="false" aria-controls="collapseHint2">
   <h4 class="accordion-header" id="headingHint2"> Give me a hint </h4>
 </button>
-<div id="collapseHint2" class="accordion-collapse collapse" data-bs-parent="#accordionHint2" aria-labelledby="headingHint2">
+<div id="collapseHint2" class="accordion-collapse collapse" aria-labelledby="headingHint2" data-bs-parent="#accordionHint2">
 <div class="accordion-body">
 <p><a href="https://doc.elabftw.net/api/elabapi-html/#api-LinksToExperiments" class="external-link">Read
 the docs for LinksToExperiments</a></p>
@@ -962,7 +962,7 @@ the docs for LinksToExperiments</a></p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 
 </div>
@@ -989,7 +989,7 @@ imagined.</p>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint3" aria-expanded="false" aria-controls="collapseHint3">
   <h4 class="accordion-header" id="headingHint3"> Give me a hint </h4>
 </button>
-<div id="collapseHint3" class="accordion-collapse collapse" data-bs-parent="#accordionHint3" aria-labelledby="headingHint3">
+<div id="collapseHint3" class="accordion-collapse collapse" aria-labelledby="headingHint3" data-bs-parent="#accordionHint3">
 <div class="accordion-body">
 <p>Look for the <code>location</code> in the response from your last
 call to get the ID.</p>
@@ -1002,7 +1002,7 @@ call to get the ID.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>The <code>POST</code> response includes the URL of the new experiment
 in its <code>Location</code> header. Copy the experiment ID from that
@@ -1250,7 +1250,7 @@ drop‑downs).</p></li>
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
   <h3 class="accordion-header" id="headingInstructor1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Instructor Note </h3>
 </button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
+<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
 <div class="accordion-body">
 <p>These will be live coded in a Jupyter notebook.</p>
 </div>
@@ -1437,7 +1437,7 @@ C. TypeError</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p><strong>B</strong> – Python variables are dynamically typed; the
 second assignment overwrites the first.</p>
@@ -1646,7 +1646,7 @@ saw this in <a href="01_API">episode 01</a>, as well.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>An example can be found in <a href="https://github.com/elabftw/elabapi-python/blob/master/examples/05-create-modify-item.py" class="external-link">05-create-modify-item</a>
 in line 6:</p>
@@ -1751,7 +1751,6 @@ at how to get and work with information from entries in eLabFTW.</p>
 <p>Here’s an overview of the intended workflow:</p>
 <pre class="mermaid"><code>---
 config:
-  theme: redux
   layout: fixed
 ---
 flowchart LR
@@ -1772,8 +1771,7 @@ flowchart LR
     n3 --&gt; n11
     n10 --&gt; n5
     n11 --&gt; n10
-    n12(["Researcher"]) -- plans --&gt; n3
-</code></pre>
+    n12(["Researcher"]) -- plans --&gt; n3</code></pre>
 <p>To this end, head to our eLabFTW test instance via your in your
 browser. Create at least three experiments using the Heating Test
 template. Enter a different Laser Power value for each in the extra
@@ -3008,7 +3006,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-05_data_analysis"><p>Content from <a href="05_data_analysis.html">Data Analysis Workflows</a></p>
 <hr>
-<p>Last updated on 2026-11-06 |
+<p>Last updated on 2026-11-09 |
 
         <a href="https://github.com/carpentries/workbench-template-md/edit/main/episodes/05_data_analysis.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 50 minutes</p>
@@ -3018,15 +3016,14 @@ any links that you are not going to use.
 <section><h2 class="section-heading" id="data-analysis-workflows">Data Analysis Workflows<a class="anchor" aria-label="anchor" href="#data-analysis-workflows"></a>
 </h2>
 <hr class="half-width">
-<p>Let’s imagine we had used an automated workflow in episode 05 to
+<p>Let’s imagine we had used an automated workflow in episode 04 to
 create the files. Everything ran in our absence and we have the
 individual output files attached to the experiments.</p>
 <p>We can now keep going and add some more information to our
 experiments, such as a plot to quickly see the data, for example:</p>
-<pre class="mermaid"><code>
+<!-- ```mermaid
 ---
 config:
-  theme: redux
   layout: dagre
 ---
 flowchart LR
@@ -3042,65 +3039,65 @@ flowchart LR
         s3
   end
 
-    n5 -- attach --&gt; n3
-    n3 --&gt; n11
-    n10 --&gt; n5
-    n11 --&gt; n10
-</code></pre>
-<p>We have not worked with Pandas or Matplotlib yet, but they are the
-most common Python libraries for data analysis and visualization. We
-will use them to load the CSV file and create a plot.</p>
-<p>Also note, we use aliases for certain libraries to make the code more
-concise. This is a common practice in Python, especially for frequently
-used libraries. <code>pd</code> is the standard alias for
-<code>pandas</code>.</p>
-<p>Since we’re in a new notebook, we set everything up by creating the
-API clients we need:</p>
+    n5 -- attach -->
+<p>n3 n3 –&gt; n11 n10 –&gt; n5 n11 –&gt; n10</p>
+<pre class="--&gt;"><code>
+We have not worked with Pandas or Matplotlib yet, but they are the most common Python libraries for data analysis and visualization. We will use them to load the CSV file and create a plot.
+
+Also note, we use aliases for certain libraries to make the code more concise. This is a common practice in Python, especially for frequently used libraries. `pd` is the standard alias for `pandas`.
+
+Since we're in a new notebook, we set everything up by importing the package and creating the API clients we need:
+
+```python
+import elabapi_python
+experiments_api = elabapi_python.ExperimentsApi(api_client)
+uploads_api = elabapi_python.UploadsApi(api_client)</code></pre>
+<p>Let’s access one of our experiments and download the data file.</p>
+<p>We will continue to use the <code>uploads_api</code> to interact with
+attached files. To ensure we have our experiment information, let’s
+retrieve these again. We will filter by status again, but remember, we
+changed this to <em>Running</em>. The GUI reminds us that this status
+has ID 47.</p>
 <div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1" aria-label="code-block-2-1"></a>experiments_api <span class="op">=</span> elabapi_python.ExperimentsApi(api_client)</span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1" aria-label="code-block-2-2"></a>uploads_api <span class="op">=</span> elabapi_python.UploadsApi(api_client)</span></code></pre>
-</div>
-<p>Let’s access the one of our experiments and download the data
-file.</p>
-<p>We keep using the <code>uploads_api</code> to interact with attached
-files. To ensure we have our experiment information, let’s retrieve
-these again. We will filter by status again, but remember, we changed
-this to <em>Running</em>. The GUI reminds us that this status has ID
-47.</p>
-<div class="codewrapper sourceCode" id="cb3">
-<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1" aria-label="code-block-3-1"></a>heating_experiments <span class="op">=</span> experiments_api.read_experiments(q<span class="op">=</span><span class="st">'Heating Test Run'</span>, status <span class="op">=</span> <span class="dv">47</span>, scope<span class="op">=</span><span class="dv">1</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1" aria-label="code-block-2-1"></a>heating_experiments <span class="op">=</span> experiments_api.read_experiments(q<span class="op">=</span><span class="st">'Heating'</span>, status <span class="op">=</span> <span class="dv">47</span>, scope<span class="op">=</span><span class="dv">1</span>)</span></code></pre>
 </div>
 <p>Let’s work with a single experiment and retrieve the data file. This
 is where we need the ID from the retrieved experiments. We will work
 with the first one in our list.</p>
-<p>Check out the example in <a href="https://github.com/elabftw/elabapi-python/blob/master/examples/03-experiment-file-handling.py" class="external-link">examples/03-experiment-file-handling.py</a>.
-That gives us a function to work with. Let’s copy and paste and then
+<p>Check out the example in <a href="https://github.com/elabftw/elabapi-python/blob/master/examples/03-experiment-file-handling.py" class="external-link">examples/03-experiment-file-handling.py</a>.</p>
+<figure><img src="../fig/screenshot_github_elabftw-python_download_files_functon.png" alt="screenshot of the function hat downloads files from eLabFTW entries" class="figure mx-auto d-block"><div class="figcaption">screenshot of the function hat downloads files
+from eLabFTW entries</div>
+</figure><p>That gives us a function to work with. Let’s copy and paste and then
 modify slightly:</p>
+<div class="codewrapper sourceCode" id="cb3">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1" aria-label="code-block-3-1"></a>experiment <span class="op">=</span> heating_experiments[<span class="dv">0</span>]</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1" aria-label="code-block-3-2"></a></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1" aria-label="code-block-3-3"></a><span class="kw">def</span> download_matching_uploads_locally(exp): <span class="co"># added experiment</span></span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1" aria-label="code-block-3-4"></a>    <span class="co"># display id, name and comment of the uploaded files and download them locally</span></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1" aria-label="code-block-3-5"></a>    <span class="cf">for</span> upload <span class="kw">in</span> uploads_api.read_uploads(<span class="st">'experiments'</span>, exp.<span class="bu">id</span>): <span class="co"># match uploads_api spelling</span></span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1" aria-label="code-block-3-6"></a>        <span class="bu">print</span>(upload.<span class="bu">id</span>, upload.real_name, upload.comment, upload.state)</span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1" aria-label="code-block-3-7"></a>        <span class="co"># get and save file</span></span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1" aria-label="code-block-3-8"></a>        <span class="cf">with</span> <span class="bu">open</span>(upload.real_name, <span class="st">'wb'</span>) <span class="im">as</span> <span class="bu">file</span>: <span class="co"># edited file name variable to match real name</span></span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1" aria-label="code-block-3-9"></a>            <span class="co"># the _preload_content flag is necessary so the api_client doesn't try and deserialize the response</span></span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1" aria-label="code-block-3-10"></a>            <span class="bu">file</span>.write(uploads_api.read_upload(<span class="st">'experiments'</span>, exp.<span class="bu">id</span>, upload.<span class="bu">id</span>, <span class="bu">format</span><span class="op">=</span><span class="st">'binary'</span>, _preload_content<span class="op">=</span><span class="va">False</span>).data) <span class="co"># edited exp.id, match uploads_api spelling </span></span></code></pre>
+</div>
+<p>This will download all files attached to the specified experiment. It
+does this by looping over the uploads, then using the uploads_api to
+read the file and write the file.</p>
+<p>After running the cell we can use the function.</p>
+<p>To call the it we write the name of the function, followed by
+parentheses, in which we pass the experiment in question:</p>
 <div class="codewrapper sourceCode" id="cb4">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" tabindex="-1" aria-label="code-block-4-1"></a>experiment <span class="op">=</span> heating_experiments[<span class="dv">0</span>]</span>
-<span id="cb4-2"><a href="#cb4-2" tabindex="-1" aria-label="code-block-4-2"></a></span>
-<span id="cb4-3"><a href="#cb4-3" tabindex="-1" aria-label="code-block-4-3"></a><span class="kw">def</span> download_matching_uploads_locally(exp): <span class="co"># added experiment</span></span>
-<span id="cb4-4"><a href="#cb4-4" tabindex="-1" aria-label="code-block-4-4"></a>    <span class="co"># display id, name and comment of the uploaded files and download them locally</span></span>
-<span id="cb4-5"><a href="#cb4-5" tabindex="-1" aria-label="code-block-4-5"></a>    <span class="cf">for</span> upload <span class="kw">in</span> uploads_api.read_uploads(<span class="st">'experiments'</span>, exp.<span class="bu">id</span>): <span class="co"># match uploads_api spelling</span></span>
-<span id="cb4-6"><a href="#cb4-6" tabindex="-1" aria-label="code-block-4-6"></a>        <span class="bu">print</span>(upload.<span class="bu">id</span>, upload.real_name, upload.comment, upload.state)</span>
-<span id="cb4-7"><a href="#cb4-7" tabindex="-1" aria-label="code-block-4-7"></a>        <span class="co"># get and save file</span></span>
-<span id="cb4-8"><a href="#cb4-8" tabindex="-1" aria-label="code-block-4-8"></a>        <span class="cf">with</span> <span class="bu">open</span>(upload.real_name, <span class="st">'wb'</span>) <span class="im">as</span> <span class="bu">file</span>: <span class="co"># edited file name variable to match real name</span></span>
-<span id="cb4-9"><a href="#cb4-9" tabindex="-1" aria-label="code-block-4-9"></a>            <span class="co"># the _preload_content flag is necessary so the api_client doesn't try and deserialize the response</span></span>
-<span id="cb4-10"><a href="#cb4-10" tabindex="-1" aria-label="code-block-4-10"></a>            <span class="bu">file</span>.write(uploads_api.read_upload(<span class="st">'experiments'</span>, exp.<span class="bu">id</span>, upload.<span class="bu">id</span>, <span class="bu">format</span><span class="op">=</span><span class="st">'binary'</span>, _preload_content<span class="op">=</span><span class="va">False</span>).data) <span class="co"># edited exp.id, match uploads_api spelling </span></span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" tabindex="-1" aria-label="code-block-4-1"></a>download_matching_uploads_locally(experiment)</span></code></pre>
 </div>
-<p>This will download all files attached to an experiment.</p>
-<p>To call the function and download the file:</p>
-<div class="codewrapper sourceCode" id="cb5">
-<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" tabindex="-1" aria-label="code-block-5-1"></a>download_matching_uploads_locally(experiment)</span></code></pre>
-</div>
+<p>If we check our workspace, we can see the file has been
+downloaded.</p>
 <div id="callout1" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
@@ -3119,47 +3116,47 @@ rather than the file itself.</p>
 </h2>
 <hr class="half-width">
 <p>Using pandas, we can easily read in and plot the data. First we
-import pandas. We use the alias <code>pd</code> here, which is the
-standard way to import pandas. We read the CSV by file name using the
-<code>read_csv</code> method. Then, we can use <code>head</code> to view
-the first few lines of the dataframe.</p>
+import pandas. Again, We use the alias <code>pd</code> here, which is
+the standard way to import pandas. We read the CSV by file name using
+the <code>read_csv</code> method. Then, we can use <code>head</code> to
+view the first few lines of the dataframe.</p>
+<div class="codewrapper sourceCode" id="cb5">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" tabindex="-1" aria-label="code-block-5-1"></a><span class="op">%</span>pip install pandas <span class="co"># if needed</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1" aria-label="code-block-5-2"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1" aria-label="code-block-5-3"></a></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1" aria-label="code-block-5-4"></a>measurement_data <span class="op">=</span> pd.read_csv(<span class="st">"50_measurement_2026-11-05T11:27:07.281399.csv"</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1" aria-label="code-block-5-5"></a>measurement_data.head()</span></code></pre>
+</div>
+<p>Now, let’s create a quick plot. Pandas uses the package matplotlib to
+do this in a built-in manner.</p>
 <div class="codewrapper sourceCode" id="cb6">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" tabindex="-1" aria-label="code-block-6-1"></a><span class="op">%</span>pip install pandas <span class="co"># if needed</span></span>
-<span id="cb6-2"><a href="#cb6-2" tabindex="-1" aria-label="code-block-6-2"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb6-3"><a href="#cb6-3" tabindex="-1" aria-label="code-block-6-3"></a></span>
-<span id="cb6-4"><a href="#cb6-4" tabindex="-1" aria-label="code-block-6-4"></a>measurement_data <span class="op">=</span> pd.read_csv(<span class="st">"50_measurement_2026-11-05T11:27:07.281399.csv"</span>)</span>
-<span id="cb6-5"><a href="#cb6-5" tabindex="-1" aria-label="code-block-6-5"></a>measurement_data.head()</span></code></pre>
-</div>
-<p>Now, let’s create a quick plot. Pandas uses the package matplotlib to
-do this.</p>
-<div class="codewrapper sourceCode" id="cb7">
-<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" tabindex="-1" aria-label="code-block-7-1"></a>measurement_data.plot.scatter(x<span class="op">=</span><span class="st">'time_s'</span>, y<span class="op">=</span><span class="st">'temperature_C'</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" tabindex="-1" aria-label="code-block-6-1"></a>measurement_data.plot.scatter(x<span class="op">=</span><span class="st">'time_s'</span>, y<span class="op">=</span><span class="st">'temperature_C'</span>)</span></code></pre>
 </div>
 <p>This is very basic. Let’s add a title. We can also save he figure to
 a variable so we can keep working with it. In this case we want to
 save.</p>
-<div class="codewrapper sourceCode" id="cb8">
+<div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" tabindex="-1" aria-label="code-block-8-1"></a>ax <span class="op">=</span> measurement_data.plot.scatter(x<span class="op">=</span><span class="st">'time_s'</span>, y<span class="op">=</span><span class="st">'temperature_C'</span>, title <span class="op">=</span> <span class="st">'Laser Power 50 W'</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" tabindex="-1" aria-label="code-block-7-1"></a>ax <span class="op">=</span> measurement_data.plot.scatter(x<span class="op">=</span><span class="st">'time_s'</span>, y<span class="op">=</span><span class="st">'temperature_C'</span>, title <span class="op">=</span> <span class="st">'Laser Power 50 W'</span>)</span></code></pre>
 </div>
 <p>We now have the plot with the title. You can make all kinds of
 changes here, from axis labels to colors, but for a quick overview, it’s
 sufficient. Let’s save it.</p>
+<div class="codewrapper sourceCode" id="cb8">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" tabindex="-1" aria-label="code-block-8-1"></a>ax.figure.savefig(<span class="st">"50w_temp_time_plot.png"</span>, dpi<span class="op">=</span><span class="dv">300</span>)</span></code></pre>
+</div>
+<p>Attach to the experiment:</p>
 <div class="codewrapper sourceCode" id="cb9">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" tabindex="-1" aria-label="code-block-9-1"></a>ax.figure.savefig(<span class="st">"50w_temp_time_plot.png"</span>, dpi<span class="op">=</span><span class="dv">300</span>)</span></code></pre>
-</div>
-<p>Attach to the experiment:</p>
-<div class="codewrapper sourceCode" id="cb10">
-<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" tabindex="-1" aria-label="code-block-10-1"></a>uploads_api.post_upload(<span class="st">'experiments'</span>, experiment.<span class="bu">id</span>, <span class="bu">file</span><span class="op">=</span><span class="st">"50w_temp_time_plot.png"</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" tabindex="-1" aria-label="code-block-9-1"></a>uploads_api.post_upload(<span class="st">'experiments'</span>, experiment.<span class="bu">id</span>, <span class="bu">file</span><span class="op">=</span><span class="st">"50w_temp_time_plot.png"</span>)</span></code></pre>
 </div>
 <div id="challenge1" class="callout challenge">
 <div class="callout-square">
@@ -3171,7 +3168,7 @@ sufficient. Let’s save it.</p>
 <div class="callout-content">
 <p>Use the above snippets and function to write a code that</p>
 <ol style="list-style-type: decimal">
-<li>Retrieves all desired experiments</li>
+<li>Retrieves all run experiments</li>
 <li>Plots and saves figures for each</li>
 <li>Attaches the plot back to the experiment</li>
 <li>Sets the experiment status to success</li>
@@ -3179,8 +3176,8 @@ sufficient. Let’s save it.</p>
 <p>Hint: make a small modification to the
 <code>download_matching_uploads_locally</code> so you can retrieve the
 file name.</p>
-<p>Bonus: if anyone can figure out how to add an image directly to the
-main text field, please share!</p>
+<p><strong>Bonus:</strong> If anyone can figure out how to add an image
+directly to the main text field using the API, please share!</p>
 </div>
 </div>
 </div>
@@ -3189,9 +3186,133 @@ main text field, please share!</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
-<p>TODO</p>
+<p>Here is one possible solution. This assumes you start with a new
+notebook or write a Python script, so it includes all data imports and
+retrieves the experiment information.</p>
+<div class="codewrapper sourceCode" id="cb10">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" tabindex="-1" aria-label="code-block-10-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1" aria-label="code-block-10-2"></a><span class="im">import</span> elabapi_python</span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1" aria-label="code-block-10-3"></a></span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1" aria-label="code-block-10-4"></a></span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1" aria-label="code-block-10-5"></a></span>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1" aria-label="code-block-10-6"></a><span class="kw">def</span> download_matching_uploads_locally(exp): </span>
+<span id="cb10-7"><a href="#cb10-7" tabindex="-1" aria-label="code-block-10-7"></a>    downloaded_file_names <span class="op">=</span> [] <span class="co"># initialize empty list to collect file names</span></span>
+<span id="cb10-8"><a href="#cb10-8" tabindex="-1" aria-label="code-block-10-8"></a>    <span class="cf">for</span> upload <span class="kw">in</span> uploads_api.read_uploads(<span class="st">'experiments'</span>, exp.<span class="bu">id</span>): </span>
+<span id="cb10-9"><a href="#cb10-9" tabindex="-1" aria-label="code-block-10-9"></a>        <span class="bu">print</span>(upload.<span class="bu">id</span>, upload.real_name, upload.comment, upload.state)</span>
+<span id="cb10-10"><a href="#cb10-10" tabindex="-1" aria-label="code-block-10-10"></a>        <span class="cf">with</span> <span class="bu">open</span>(upload.real_name, <span class="st">'wb'</span>) <span class="im">as</span> <span class="bu">file</span>: </span>
+<span id="cb10-11"><a href="#cb10-11" tabindex="-1" aria-label="code-block-10-11"></a>            <span class="bu">file</span>.write(uploads_api.read_upload(<span class="st">'experiments'</span>, exp.<span class="bu">id</span>, upload.<span class="bu">id</span>, <span class="bu">format</span><span class="op">=</span><span class="st">'binary'</span>, _preload_content<span class="op">=</span><span class="va">False</span>).data) </span>
+<span id="cb10-12"><a href="#cb10-12" tabindex="-1" aria-label="code-block-10-12"></a>        downloaded_file_names.append(upload.real_name) <span class="co"># add file name to list once downloaded</span></span>
+<span id="cb10-13"><a href="#cb10-13" tabindex="-1" aria-label="code-block-10-13"></a>    <span class="cf">return</span> downloaded_file_names <span class="co">#return file name so we can access outside of function</span></span>
+<span id="cb10-14"><a href="#cb10-14" tabindex="-1" aria-label="code-block-10-14"></a></span>
+<span id="cb10-15"><a href="#cb10-15" tabindex="-1" aria-label="code-block-10-15"></a></span>
+<span id="cb10-16"><a href="#cb10-16" tabindex="-1" aria-label="code-block-10-16"></a>heating_experiments <span class="op">=</span> experiments_api.read_experiments(q<span class="op">=</span><span class="st">'Heating'</span>, status <span class="op">=</span> <span class="dv">47</span>, scope<span class="op">=</span><span class="dv">1</span>) <span class="co"># retrieve experiment information with filters applied</span></span>
+<span id="cb10-17"><a href="#cb10-17" tabindex="-1" aria-label="code-block-10-17"></a></span>
+<span id="cb10-18"><a href="#cb10-18" tabindex="-1" aria-label="code-block-10-18"></a><span class="cf">for</span> experiment <span class="kw">in</span> heating_experiments: <span class="co"># loop over each heating experiment in our list</span></span>
+<span id="cb10-19"><a href="#cb10-19" tabindex="-1" aria-label="code-block-10-19"></a>    downloaded_file_names <span class="op">=</span> download_matching_uploads_locally(experiment) <span class="co"># will download all files for each experiment we pass</span></span>
+<span id="cb10-20"><a href="#cb10-20" tabindex="-1" aria-label="code-block-10-20"></a>    <span class="cf">for</span> file_name <span class="kw">in</span> downloaded_file_names: <span class="co"># loop over downloaded files</span></span>
+<span id="cb10-21"><a href="#cb10-21" tabindex="-1" aria-label="code-block-10-21"></a></span>
+<span id="cb10-22"><a href="#cb10-22" tabindex="-1" aria-label="code-block-10-22"></a>        <span class="cf">if</span> file_name.endswith(<span class="st">'csv'</span>): <span class="co">#make sure you're not trying to load some other type of file</span></span>
+<span id="cb10-23"><a href="#cb10-23" tabindex="-1" aria-label="code-block-10-23"></a>            measurement_data <span class="op">=</span> pd.read_csv(file_name) <span class="co"># load into dataframe</span></span>
+<span id="cb10-24"><a href="#cb10-24" tabindex="-1" aria-label="code-block-10-24"></a>            power <span class="op">=</span> file_name.split(<span class="st">'_'</span>)[<span class="dv">0</span>] <span class="co"># get power setting from file name</span></span>
+<span id="cb10-25"><a href="#cb10-25" tabindex="-1" aria-label="code-block-10-25"></a>            title <span class="op">=</span> <span class="ss">f"Laser Power </span><span class="sc">{</span>power<span class="sc">}</span><span class="ss"> W"</span> <span class="co"># dynamically set plot title</span></span>
+<span id="cb10-26"><a href="#cb10-26" tabindex="-1" aria-label="code-block-10-26"></a>            ax <span class="op">=</span> measurement_data.plot.scatter(x<span class="op">=</span><span class="st">'time_s'</span>, y<span class="op">=</span><span class="st">'temperature_C'</span>, title <span class="op">=</span> title) <span class="co"># create plot</span></span>
+<span id="cb10-27"><a href="#cb10-27" tabindex="-1" aria-label="code-block-10-27"></a>            figure_name <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span>power<span class="sc">}</span><span class="ss">w_temp_time_plot.png"</span> <span class="co"># dynamically set figure name </span></span>
+<span id="cb10-28"><a href="#cb10-28" tabindex="-1" aria-label="code-block-10-28"></a>            ax.figure.savefig(figure_name, dpi<span class="op">=</span><span class="dv">300</span>) <span class="co"># save figure</span></span>
+<span id="cb10-29"><a href="#cb10-29" tabindex="-1" aria-label="code-block-10-29"></a>            uploads_api.post_upload(<span class="st">'experiments'</span>, experiment.<span class="bu">id</span>, <span class="bu">file</span><span class="op">=</span>figure_name) <span class="co"># upload figure file</span></span></code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="accordionInstructor1" class="accordion instructor-note accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
+  <h3 class="accordion-header" id="headingInstructor1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Instructor Note </h3>
+</button>
+<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
+<div class="accordion-body">
+<p>The following challenge is for playtime if time permits. Alternative
+would be to ask if learners want to see something specific.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="challenge2" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<span class="callout-header">Challenge</span>
+<div class="callout-inner">
+<h3 class="callout-title">Challenge</h3>
+<div class="callout-content">
+<p>This is play time. Below are ideas of things you can try out. The
+solution provides hints rather than actual solutions for each point.</p>
+<ul>
+<li>Change permissions on your create experiments</li>
+<li>Book a device</li>
+<li>Export entries in different formats</li>
+<li>Create individual resources from a CSV (where each row represents a
+resource)</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
+  <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
+</button>
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div class="accordion-body">
+<p>Hints and places to start:</p>
+<ul>
+<li><p>Change permissions on your create experiments: <a href="https://github.com/elabftw/elabapi-python/blob/master/examples/14-fix-user-exp-permissions.py" class="external-link">examples/14-fix-user-exp-permissions.py</a></p></li>
+<li><p>Book a resource: <a href="https://github.com/elabftw/elabapi-python/blob/master/examples/13-events.py" class="external-link">examples/13-events.py</a>,
+<a href="https://doc.elabftw.net/api/elabapi-html/#api-Events-postEvents" class="external-link">doc.elabftw.net/api/elabapi-html/#api-Events-postEvents</a></p></li>
+<li>
+<p>Export entries in different formats</p>
+<p>For ELN files:</p>
+<div class="codewrapper sourceCode" id="cb11">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" tabindex="-1" aria-label="code-block-11-1"></a><span class="kw">def</span> download_eln_archive(</span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1" aria-label="code-block-11-2"></a>    experiment_id: <span class="bu">int</span>,</span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1" aria-label="code-block-11-3"></a>    download_folder: Path <span class="op">=</span> Path(<span class="st">"eln_downloads"</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" tabindex="-1" aria-label="code-block-11-4"></a>):</span>
+<span id="cb11-5"><a href="#cb11-5" tabindex="-1" aria-label="code-block-11-5"></a>    <span class="co">"""</span></span>
+<span id="cb11-6"><a href="#cb11-6" tabindex="-1" aria-label="code-block-11-6"></a><span class="co">    Download an experiment's ELN archive and save it to the specified folder.</span></span>
+<span id="cb11-7"><a href="#cb11-7" tabindex="-1" aria-label="code-block-11-7"></a><span class="co">    """</span></span>
+<span id="cb11-8"><a href="#cb11-8" tabindex="-1" aria-label="code-block-11-8"></a>    <span class="co"># ensure the download folder exists</span></span>
+<span id="cb11-9"><a href="#cb11-9" tabindex="-1" aria-label="code-block-11-9"></a>    download_folder.mkdir(parents<span class="op">=</span><span class="va">True</span>, exist_ok<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb11-10"><a href="#cb11-10" tabindex="-1" aria-label="code-block-11-10"></a></span>
+<span id="cb11-11"><a href="#cb11-11" tabindex="-1" aria-label="code-block-11-11"></a>    eln_file_path <span class="op">=</span> download_folder <span class="op">/</span> Path(<span class="ss">f"</span><span class="sc">{</span>experiment_id<span class="sc">}</span><span class="ss">-export.eln"</span>)</span>
+<span id="cb11-12"><a href="#cb11-12" tabindex="-1" aria-label="code-block-11-12"></a></span>
+<span id="cb11-13"><a href="#cb11-13" tabindex="-1" aria-label="code-block-11-13"></a>    <span class="cf">try</span>:</span>
+<span id="cb11-14"><a href="#cb11-14" tabindex="-1" aria-label="code-block-11-14"></a>        <span class="cf">with</span> <span class="bu">open</span>(eln_file_path, <span class="st">"wb"</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
+<span id="cb11-15"><a href="#cb11-15" tabindex="-1" aria-label="code-block-11-15"></a>            response <span class="op">=</span> experimentsApi.get_experiment(</span>
+<span id="cb11-16"><a href="#cb11-16" tabindex="-1" aria-label="code-block-11-16"></a>                experiment_id, <span class="bu">format</span><span class="op">=</span><span class="st">"eln"</span>, _preload_content<span class="op">=</span><span class="va">False</span></span>
+<span id="cb11-17"><a href="#cb11-17" tabindex="-1" aria-label="code-block-11-17"></a>            )</span>
+<span id="cb11-18"><a href="#cb11-18" tabindex="-1" aria-label="code-block-11-18"></a>            <span class="bu">file</span>.write(response.data)</span>
+<span id="cb11-19"><a href="#cb11-19" tabindex="-1" aria-label="code-block-11-19"></a>        logger.info(</span>
+<span id="cb11-20"><a href="#cb11-20" tabindex="-1" aria-label="code-block-11-20"></a>            <span class="ss">f"Downloaded ELN archive for experiment </span><span class="sc">{</span>experiment_id<span class="sc">}</span><span class="ss"> to </span><span class="sc">{</span>eln_file_path<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb11-21"><a href="#cb11-21" tabindex="-1" aria-label="code-block-11-21"></a>        )</span>
+<span id="cb11-22"><a href="#cb11-22" tabindex="-1" aria-label="code-block-11-22"></a>        <span class="cf">return</span> eln_file_path</span>
+<span id="cb11-23"><a href="#cb11-23" tabindex="-1" aria-label="code-block-11-23"></a>    <span class="cf">except</span> <span class="pp">Exception</span> <span class="im">as</span> e:</span>
+<span id="cb11-24"><a href="#cb11-24" tabindex="-1" aria-label="code-block-11-24"></a>        logger.error(</span>
+<span id="cb11-25"><a href="#cb11-25" tabindex="-1" aria-label="code-block-11-25"></a>            <span class="ss">f"Failed to download ELN archive for experiment </span><span class="sc">{</span>experiment_id<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>e<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb11-26"><a href="#cb11-26" tabindex="-1" aria-label="code-block-11-26"></a>        )</span>
+<span id="cb11-27"><a href="#cb11-27" tabindex="-1" aria-label="code-block-11-27"></a>        <span class="cf">raise</span></span></code></pre>
+</div>
+</li>
+</ul>
+<p>Create individual resources from a CSV (where each row represents a
+resource) <a href="https://github.com/elabftw/elabapi-python/blob/master/examples/09-import-csv.py" class="external-link">examples/09-import-csv.py</a></p>
+<p>If you would like to contribute your solutions, please don’t hesitate
+to do so. We can include them here for future courses.</p>
 </div>
 </div>
 </div>
@@ -3206,9 +3327,9 @@ main text field, please share!</p>
 <ul>
 <li>The eLabFTW Python API client allows you to retrieve all or specific
 files attached to an experiment</li>
-<li>pandas can turn downloaded CSV data into a table ready for
+<li>Pandas can turn downloaded CSV data into a table ready for
 analysis</li>
-<li>pandas has built-in matplotlib to visualize data and save plots</li>
+<li>Pandas has built-in matplotlib to visualize data and save plots</li>
 </ul>
 </div>
 </div>
