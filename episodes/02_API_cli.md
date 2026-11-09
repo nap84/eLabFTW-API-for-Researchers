@@ -61,10 +61,13 @@ Unlike our browser, through which we have been identified by logging in, we now 
 1. Head your eLabFTW instance
 2. click your initials on the top right-hand side
 3. click `settings`
-4. Select the `API KEYS` header
-5. Under `Create new key`, enter a name for your key and select `Read/Write` from the permissions drop-down menu.
-6. click `Generate an API Key`
-7. Copy and paste this to the `secrets.env` file in your `research_computer/` folder for later use. It will only be shown once in the ELN's GUI!
+![screenshot showing how to find user settings in the eLabFTW GUI](fig/screenshot_elabftw_user_settings.png)
+1. Select the `API KEYS` header
+![screenshot showing where to find the API Key header in the eLabFTW GUI](fig/screenshot_elabftw_api_key_header.png)
+2. Under `Create new key`, enter a name for your key and select `Read/Write` from the permissions drop-down menu.
+3. click `Generate an API Key`
+![screenshot showing how to generate an api key in in elabftw GUI](fig/screenshot_elabftw_api_key.png)
+4. Copy and paste this to the `secrets.env` file in your `research_computer/` folder for later use. It will only be shown once in the ELN's GUI!
 
 Now we can start editing the request:
 
@@ -106,8 +109,9 @@ source research_computer/secrets.env
 set +a
 ```
 
-The `secrets.env` file should contain `ELAB_API_KEY` and `ELAB_API_HOST`. The key is
-then available as the `$ELAB_API_KEY` environment variable. Use it in the request like this:
+This `set -a` turns the **allexport** option on, while `set +a` turns it off again. Alternative, you could set single variables with `export MY_VAR=value` without having to turn allexport on and off.
+
+The `secrets.env` file should contain `ELAB_API_KEY` and `ELAB_API_HOST`. The key is then available as the `$ELAB_API_KEY` environment variable. Use it in the request like this:
 
 ```bash
 curl -i -X POST \
@@ -131,7 +135,7 @@ Scroll to the [Experiments](https://doc.elabftw.net/api/elabapi-html/#api-Experi
 1. Copy and paste your token to the terminal, replacing `[[apiKey]]`
 2. Replace `https://elab.local:3148` with your eLabFTW URL
 3. Add experiment info using the template below. Once done, add `\` at the end of the last line, <kbd>enter</kbd> for a new line and add `-d '{"title":"my api exp"}` (replace info in curly brackets with the full data)
-4. Add `-i` before `-X` in the top line. This ensures the response is output.
+4. Add `-i` (include) before `-X` (allows you to set HTTP method explicitly) in the top line. This ensures the response is output.
 5. Copy and paste into your terminal
 6. Hit <kbd>enter</kbd> to run
 
