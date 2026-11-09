@@ -333,7 +333,7 @@
       </div>
     </nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Working with Data from eLabFTW</h1>
-        <p>Last updated on 2026-11-06 |
+        <p>Last updated on 2026-11-09 |
 
         <a href="https://github.com/carpentries/workbench-template-md/edit/main/episodes/04_working_with_data.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -1507,13 +1507,13 @@ easily access each one in later steps.</p>
 <span id="cb29-4"><a href="#cb29-4" tabindex="-1" aria-label="code-block-29-4"></a></span>
 <span id="cb29-5"><a href="#cb29-5" tabindex="-1" aria-label="code-block-29-5"></a><span class="cf">for</span> exp <span class="kw">in</span> heating_experiments_full:</span>
 <span id="cb29-6"><a href="#cb29-6" tabindex="-1" aria-label="code-block-29-6"></a>    off_temp <span class="op">=</span> exp[<span class="st">'metadata_decoded'</span>][<span class="st">'extra_fields'</span>][<span class="st">'Switch-off Temperature'</span>][<span class="st">'value'</span>]</span>
-<span id="cb29-7"><a href="#cb29-7" tabindex="-1" aria-label="code-block-29-7"></a>    </span>
+<span id="cb29-7"><a href="#cb29-7" tabindex="-1" aria-label="code-block-29-7"></a></span>
 <span id="cb29-8"><a href="#cb29-8" tabindex="-1" aria-label="code-block-29-8"></a>    laser_power <span class="op">=</span> exp[<span class="st">'metadata_decoded'</span>][<span class="st">'extra_fields'</span>][<span class="st">'Laser Power'</span>][<span class="st">'value'</span>]</span>
-<span id="cb29-9"><a href="#cb29-9" tabindex="-1" aria-label="code-block-29-9"></a>    </span>
+<span id="cb29-9"><a href="#cb29-9" tabindex="-1" aria-label="code-block-29-9"></a></span>
 <span id="cb29-10"><a href="#cb29-10" tabindex="-1" aria-label="code-block-29-10"></a>    <span class="bu">print</span>(<span class="ss">f"Running measurement with laser poser </span><span class="sc">{</span>laser_power<span class="sc">}</span><span class="ss"> and shut-off temperature </span><span class="sc">{</span>off_temp<span class="sc">}</span><span class="ss">..."</span>)</span>
-<span id="cb29-11"><a href="#cb29-11" tabindex="-1" aria-label="code-block-29-11"></a>    </span>
+<span id="cb29-11"><a href="#cb29-11" tabindex="-1" aria-label="code-block-29-11"></a></span>
 <span id="cb29-12"><a href="#cb29-12" tabindex="-1" aria-label="code-block-29-12"></a>    output_path <span class="op">=</span> generate_measurement(power_w <span class="op">=</span> <span class="bu">float</span>(laser_power), break_temp<span class="op">=</span><span class="bu">float</span>(off_temp))</span>
-<span id="cb29-13"><a href="#cb29-13" tabindex="-1" aria-label="code-block-29-13"></a>    </span>
+<span id="cb29-13"><a href="#cb29-13" tabindex="-1" aria-label="code-block-29-13"></a></span>
 <span id="cb29-14"><a href="#cb29-14" tabindex="-1" aria-label="code-block-29-14"></a>    <span class="bu">print</span>(<span class="ss">f"Output file saved to </span><span class="sc">{</span>output_path<span class="sc">}</span><span class="ss">"</span>)</span>
 <span id="cb29-15"><a href="#cb29-15" tabindex="-1" aria-label="code-block-29-15"></a>    measurement_files.append(output_path)</span></code></pre>
 </div>
@@ -1535,9 +1535,8 @@ GitHub Python examples to see how we upload files to entries.</p>
 <span id="cb30-7"><a href="#cb30-7" tabindex="-1" aria-label="code-block-30-7"></a>                <span class="st">"experiments"</span>,</span>
 <span id="cb30-8"><a href="#cb30-8" tabindex="-1" aria-label="code-block-30-8"></a>                exp_id,</span>
 <span id="cb30-9"><a href="#cb30-9" tabindex="-1" aria-label="code-block-30-9"></a>                <span class="bu">file</span><span class="op">=</span><span class="bu">str</span>(<span class="bu">file</span>),</span>
-<span id="cb30-10"><a href="#cb30-10" tabindex="-1" aria-label="code-block-30-10"></a>            </span>
-<span id="cb30-11"><a href="#cb30-11" tabindex="-1" aria-label="code-block-30-11"></a>    )</span>
-<span id="cb30-12"><a href="#cb30-12" tabindex="-1" aria-label="code-block-30-12"></a>    </span></code></pre>
+<span id="cb30-10"><a href="#cb30-10" tabindex="-1" aria-label="code-block-30-10"></a></span>
+<span id="cb30-11"><a href="#cb30-11" tabindex="-1" aria-label="code-block-30-11"></a>    )</span></code></pre>
 </div>
 <p>If we check our experiments in the GUI, we should see your attached
 files:</p>
@@ -1696,8 +1695,8 @@ any links that you are not going to use.
   "url": "https://carpentries.github.io/workbench-template-md/04_working_with_data.html",
   "identifier": "https://carpentries.github.io/workbench-template-md/04_working_with_data.html",
   "dateCreated": "2026-10-13",
-  "dateModified": "2026-11-06",
-  "datePublished": "2026-11-06"
+  "dateModified": "2026-11-09",
+  "datePublished": "2026-11-09"
 }
 
   </script><script>
