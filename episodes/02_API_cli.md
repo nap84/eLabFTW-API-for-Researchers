@@ -109,8 +109,9 @@ source research_computer/secrets.env
 set +a
 ```
 
-The `secrets.env` file should contain `ELAB_API_KEY` and `ELAB_API_HOST`. The key is
-then available as the `$ELAB_API_KEY` environment variable. Use it in the request like this:
+This `set -a` turns the **allexport** option on, while `set +a` turns it off again. Alternative, you could set single variables with `export MY_VAR=value` without having to turn allexport on and off.
+
+The `secrets.env` file should contain `ELAB_API_KEY` and `ELAB_API_HOST`. The key is then available as the `$ELAB_API_KEY` environment variable. Use it in the request like this:
 
 ```bash
 curl -i -X POST \
@@ -134,7 +135,7 @@ Scroll to the [Experiments](https://doc.elabftw.net/api/elabapi-html/#api-Experi
 1. Copy and paste your token to the terminal, replacing `[[apiKey]]`
 2. Replace `https://elab.local:3148` with your eLabFTW URL
 3. Add experiment info using the template below. Once done, add `\` at the end of the last line, <kbd>enter</kbd> for a new line and add `-d '{"title":"my api exp"}` (replace info in curly brackets with the full data)
-4. Add `-i` before `-X` in the top line. This ensures the response is output.
+4. Add `-i` (include) before `-X` (allows you to set HTTP method explicitly) in the top line. This ensures the response is output.
 5. Copy and paste into your terminal
 6. Hit <kbd>enter</kbd> to run
 
