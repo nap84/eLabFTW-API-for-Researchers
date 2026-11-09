@@ -18,7 +18,7 @@ Let's imagine we had used an automated workflow in episode 04 to create the file
 
 We can now keep going and add some more information to our experiments, such as a plot to quickly see the data, for example:
 
-<!-- ```mermaid
+```mermaid
 ---
 config:
   layout: dagre
@@ -41,7 +41,7 @@ flowchart LR
     n10 --> n5
     n11 --> n10
 
-``` -->
+```
 
 We have not worked with Pandas or Matplotlib yet, but they are the most common Python libraries for data analysis and visualization. We will use them to load the CSV file and create a plot.
 
