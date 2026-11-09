@@ -22,7 +22,6 @@ We can now keep going and add some more information to our experiments, such as 
 
 ---
 config:
-  theme: redux
   layout: dagre
 ---
 flowchart LR
