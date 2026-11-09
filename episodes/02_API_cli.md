@@ -61,10 +61,11 @@ Unlike our browser, through which we have been identified by logging in, we now 
 1. Head your eLabFTW instance
 2. click your initials on the top right-hand side
 3. click `settings`
-4. Select the `API KEYS` header
-5. Under `Create new key`, enter a name for your key and select `Read/Write` from the permissions drop-down menu.
-6. click `Generate an API Key`
-7. Copy and paste this to the `secrets.env` file in your `research_computer/` folder for later use. It will only be shown once in the ELN's GUI!
+![screenshot showing how to find user settings in the eLabFTW GUI](fig/screenshot_elabftw_user_settings.png)
+1. Select the `API KEYS` header
+2. Under `Create new key`, enter a name for your key and select `Read/Write` from the permissions drop-down menu.
+3. click `Generate an API Key`
+4. Copy and paste this to the `secrets.env` file in your `research_computer/` folder for later use. It will only be shown once in the ELN's GUI!
 
 Now we can start editing the request:
 
