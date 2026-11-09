@@ -201,16 +201,9 @@ The following challenge is for playtime if time permits. Alternative would be to
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: challenge
-This challenge is meant for extra play time and is one option of something you could try and do. It inlcudes things we have not directly covered yet. 
-
-1. Plot all three data files in one plot
-2. Save the plot
-3. Create a new experiment using the template "Heat Test Evaluation" (Hint: check UI for ID)
-4. Upload the saved plot
-5. Upload the Jupyter notebook
 
 ::::::::::::::::::::::::::::::::::::: solution
-TODO
+
 :::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
