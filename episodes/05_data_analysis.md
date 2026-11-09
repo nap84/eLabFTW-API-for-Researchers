@@ -18,8 +18,7 @@ Let's imagine we had used an automated workflow in episode 04 to create the file
 
 We can now keep going and add some more information to our experiments, such as a plot to quickly see the data, for example:
 
-```mermaid
-
+<!-- ```mermaid
 ---
 config:
   layout: dagre
@@ -42,7 +41,7 @@ flowchart LR
     n10 --> n5
     n11 --> n10
 
-```
+``` -->
 
 We have not worked with Pandas or Matplotlib yet, but they are the most common Python libraries for data analysis and visualization. We will use them to load the CSV file and create a plot.
 
@@ -196,17 +195,67 @@ for experiment in heating_experiments: # loop over each heating experiment in ou
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: instructor
+
 The following challenge is for playtime if time permits. Alternative would be to ask if learners want to see something specific.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: challenge
 
+This is play time. Below are ideas of things you can try out. The solution provides hints rather than actual solutions for each point.
+
+- Change permissions on your create experiments
+- Book a device
+- Export entries in different formats
+- Create individual resources from a CSV (where each row represents a resource)
+
 ::::::::::::::::::::::::::::::::::::: solution
 
+Hints and places to start:
+
+- Change permissions on your create experiments: [examples/14-fix-user-exp-permissions.py](https://github.com/elabftw/elabapi-python/blob/master/examples/14-fix-user-exp-permissions.py)
+- Book a resource: [examples/13-events.py](https://github.com/elabftw/elabapi-python/blob/master/examples/13-events.py), [doc.elabftw.net/api/elabapi-html/#api-Events-postEvents](https://doc.elabftw.net/api/elabapi-html/#api-Events-postEvents)
+- Export entries in different formats
+
+    For ELN files:
+
+    ```python
+    def download_eln_archive(
+        experiment_id: int,
+        download_folder: Path = Path("eln_downloads")
+    ):
+        """
+        Download an experiment's ELN archive and save it to the specified folder.
+        """
+        # ensure the download folder exists
+        download_folder.mkdir(parents=True, exist_ok=True)
+
+        eln_file_path = download_folder / Path(f"{experiment_id}-export.eln")
+
+        try:
+            with open(eln_file_path, "wb") as file:
+                response = experimentsApi.get_experiment(
+                    experiment_id, format="eln", _preload_content=False
+                )
+                file.write(response.data)
+            logger.info(
+                f"Downloaded ELN archive for experiment {experiment_id} to {eln_file_path}"
+            )
+            return eln_file_path
+        except Exception as e:
+            logger.error(
+                f"Failed to download ELN archive for experiment {experiment_id}: {e}"
+            )
+            raise
+    ```
+
+ Create individual resources from a CSV (where each row represents a resource) [examples/09-import-csv.py](https://github.com/elabftw/elabapi-python/blob/master/examples/09-import-csv.py)
+
+If you would like to contribute your solutions, please don't hesitate to do so. We can include them here for future courses.
 :::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
+
 
 ::::::::::::::::::::::::::::::::::::: keypoints
 
