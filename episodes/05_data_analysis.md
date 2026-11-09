@@ -218,7 +218,7 @@ TODO
 ::::::::::::::::::::::::::::::::::::: keypoints
 
 - The eLabFTW Python API client allows you to retrieve all or specific files attached to an experiment
-- pandas can turn downloaded CSV data into a table ready for analysis
-- pandas has built-in matplotlib to visualize data and save plots
+- Pandas can turn downloaded CSV data into a table ready for analysis
+- Pandas has built-in matplotlib to visualize data and save plots
 
 :::::::::::::::::::::::::::::::::::::::::::::::
