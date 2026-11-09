@@ -48,25 +48,30 @@ We have not worked with Pandas or Matplotlib yet, but they are the most common P
 
 Also note, we use aliases for certain libraries to make the code more concise. This is a common practice in Python, especially for frequently used libraries. `pd` is the standard alias for `pandas`.
 
-Since we're in a new notebook, we set everything up by creating the API clients we need:
+Since we're in a new notebook, we set everything up by importing the package and creating the API clients we need:
 
 ```python
+import elabapi_python
 experiments_api = elabapi_python.ExperimentsApi(api_client)
 uploads_api = elabapi_python.UploadsApi(api_client)
 ```
 
-Let's access the one of our experiments and download the data file.
+Let's access one of our experiments and download the data file.
 
-We keep using the `uploads_api` to interact with attached files. To ensure we have our experiment information, let's retrieve these again. We will filter by status again, but remember, we changed this to _Running_. The GUI reminds us that this status has ID 47.
+We will continue to use the `uploads_api` to interact with attached files. To ensure we have our experiment information, let's retrieve these again. We will filter by status again, but remember, we changed this to _Running_. The GUI reminds us that this status has ID 47.
 
 ```python
-heating_experiments = experiments_api.read_experiments(q='Heating Test Run', status = 47, scope=1)
+heating_experiments = experiments_api.read_experiments(q='Heating', status = 47, scope=1)
 
 ```
 
 Let's work with a single experiment and retrieve the data file. This is where we need the ID from the retrieved experiments. We will work with the first one in our list.
 
-Check out the example in [examples/03-experiment-file-handling.py](https://github.com/elabftw/elabapi-python/blob/master/examples/03-experiment-file-handling.py). That gives us a function to work with. Let's copy and paste and then modify slightly:
+Check out the example in [examples/03-experiment-file-handling.py](https://github.com/elabftw/elabapi-python/blob/master/examples/03-experiment-file-handling.py).
+
+![screenshot of the function hat downloads files from eLabFTW entries](fig/screenshot_github_elabftw-python_download_files_functon.png)
+
+That gives us a function to work with. Let's copy and paste and then modify slightly:
 
 ```python
 experiment = heating_experiments[0]
@@ -81,13 +86,17 @@ def download_matching_uploads_locally(exp): # added experiment
             file.write(uploads_api.read_upload('experiments', exp.id, upload.id, format='binary', _preload_content=False).data) # edited exp.id, match uploads_api spelling 
 ```
 
-This will download all files attached to an experiment.
+This will download all files attached to the specified experiment. It does this by looping over the uploads, then using the uploads_api to read the file and write the file.
 
-To call the function and download the file:
+After running the cell we can use the function.
+
+To call the it we write the name of the function, followed by parentheses, in which we pass the experiment in question:
 
 ```python
 download_matching_uploads_locally(experiment)
 ```
+
+If we check our workspace, we can see the file has been downloaded.
 
 ::::::::::::::::::::::::::::::::::::: callout
 
@@ -98,7 +107,7 @@ downloading file content. Without `format="binary"`, the request returns upload 
 
 ## Visualize the Data
 
-Using pandas, we can easily read in and plot the data. First we import pandas. We use the alias `pd` here, which is the standard way to import pandas. We read the CSV by file name using the `read_csv` method. Then, we can use `head` to view the first few lines of the dataframe.
+Using pandas, we can easily read in and plot the data. First we import pandas. Again, We use the alias `pd` here, which is the standard way to import pandas. We read the CSV by file name using the `read_csv` method. Then, we can use `head` to view the first few lines of the dataframe.
 
 ```python
 %pip install pandas # if needed
@@ -108,7 +117,7 @@ measurement_data = pd.read_csv("50_measurement_2026-11-05T11:27:07.281399.csv")
 measurement_data.head()
 ```
 
-Now, let's create a quick plot. Pandas uses the package matplotlib to do this.
+Now, let's create a quick plot. Pandas uses the package matplotlib to do this in a built-in manner.
 
 ```python
 measurement_data.plot.scatter(x='time_s', y='temperature_C')
