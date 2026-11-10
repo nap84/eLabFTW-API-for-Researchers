@@ -334,7 +334,7 @@
       </div>
     </nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Data Analysis Workflows</h1>
-        <p>Last updated on 2026-11-09 |
+        <p>Last updated on 2026-11-10 |
 
         <a href="https://github.com/carpentries/workbench-template-md/edit/main/episodes/05_data_analysis.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -352,8 +352,7 @@ create the files. Everything ran in our absence and we have the
 individual output files attached to the experiments.</p>
 <p>We can now keep going and add some more information to our
 experiments, such as a plot to quickly see the data, for example:</p>
-<!-- ```mermaid
----
+<pre class="mermaid"><code>---
 config:
   layout: dagre
 ---
@@ -370,29 +369,36 @@ flowchart LR
         s3
   end
 
-    n5 -- attach -->
-<p>n3 n3 –&gt; n11 n10 –&gt; n5 n11 –&gt; n10</p>
-<pre class="--&gt;"><code>
-We have not worked with Pandas or Matplotlib yet, but they are the most common Python libraries for data analysis and visualization. We will use them to load the CSV file and create a plot.
-
-Also note, we use aliases for certain libraries to make the code more concise. This is a common practice in Python, especially for frequently used libraries. `pd` is the standard alias for `pandas`.
-
-Since we're in a new notebook, we set everything up by importing the package and creating the API clients we need:
-
-```python
-import elabapi_python
-experiments_api = elabapi_python.ExperimentsApi(api_client)
-uploads_api = elabapi_python.UploadsApi(api_client)</code></pre>
+    n5 -- attach --&gt; n3
+    n3 --&gt; n11
+    n10 --&gt; n5
+    n11 --&gt; n10</code></pre>
+<p>We have not worked with Pandas or Matplotlib yet, but they are the
+most common Python libraries for data analysis and visualization. We
+will use them to load the CSV file and create a plot.</p>
+<p>Also note, we use aliases for certain libraries to make the code more
+concise. This is a common practice in Python, especially for frequently
+used libraries. <code>pd</code> is the standard alias for
+<code>pandas</code>.</p>
+<p>Since we’re in a new notebook, we set everything up by importing the
+package and creating the API clients we need:</p>
+<div class="codewrapper sourceCode" id="cb2">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1" aria-label="code-block-2-1"></a><span class="im">import</span> elabapi_python</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1" aria-label="code-block-2-2"></a>experiments_api <span class="op">=</span> elabapi_python.ExperimentsApi(api_client)</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1" aria-label="code-block-2-3"></a>uploads_api <span class="op">=</span> elabapi_python.UploadsApi(api_client)</span></code></pre>
+</div>
 <p>Let’s access one of our experiments and download the data file.</p>
 <p>We will continue to use the <code>uploads_api</code> to interact with
 attached files. To ensure we have our experiment information, let’s
 retrieve these again. We will filter by status again, but remember, we
 changed this to <em>Running</em>. The GUI reminds us that this status
 has ID 47.</p>
-<div class="codewrapper sourceCode" id="cb2">
+<div class="codewrapper sourceCode" id="cb3">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1" aria-label="code-block-2-1"></a>heating_experiments <span class="op">=</span> experiments_api.read_experiments(q<span class="op">=</span><span class="st">'Heating'</span>, status <span class="op">=</span> <span class="dv">47</span>, scope<span class="op">=</span><span class="dv">1</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1" aria-label="code-block-3-1"></a>heating_experiments <span class="op">=</span> experiments_api.read_experiments(q<span class="op">=</span><span class="st">'Heating'</span>, status <span class="op">=</span> <span class="dv">47</span>, scope<span class="op">=</span><span class="dv">1</span>)</span></code></pre>
 </div>
 <p>Let’s work with a single experiment and retrieve the data file. This
 is where we need the ID from the retrieved experiments. We will work
@@ -402,19 +408,19 @@ with the first one in our list.</p>
 from eLabFTW entries</div>
 </figure><p>That gives us a function to work with. Let’s copy and paste and then
 modify slightly:</p>
-<div class="codewrapper sourceCode" id="cb3">
+<div class="codewrapper sourceCode" id="cb4">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1" aria-label="code-block-3-1"></a>experiment <span class="op">=</span> heating_experiments[<span class="dv">0</span>]</span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1" aria-label="code-block-3-2"></a></span>
-<span id="cb3-3"><a href="#cb3-3" tabindex="-1" aria-label="code-block-3-3"></a><span class="kw">def</span> download_matching_uploads_locally(exp): <span class="co"># added experiment</span></span>
-<span id="cb3-4"><a href="#cb3-4" tabindex="-1" aria-label="code-block-3-4"></a>    <span class="co"># display id, name and comment of the uploaded files and download them locally</span></span>
-<span id="cb3-5"><a href="#cb3-5" tabindex="-1" aria-label="code-block-3-5"></a>    <span class="cf">for</span> upload <span class="kw">in</span> uploads_api.read_uploads(<span class="st">'experiments'</span>, exp.<span class="bu">id</span>): <span class="co"># match uploads_api spelling</span></span>
-<span id="cb3-6"><a href="#cb3-6" tabindex="-1" aria-label="code-block-3-6"></a>        <span class="bu">print</span>(upload.<span class="bu">id</span>, upload.real_name, upload.comment, upload.state)</span>
-<span id="cb3-7"><a href="#cb3-7" tabindex="-1" aria-label="code-block-3-7"></a>        <span class="co"># get and save file</span></span>
-<span id="cb3-8"><a href="#cb3-8" tabindex="-1" aria-label="code-block-3-8"></a>        <span class="cf">with</span> <span class="bu">open</span>(upload.real_name, <span class="st">'wb'</span>) <span class="im">as</span> <span class="bu">file</span>: <span class="co"># edited file name variable to match real name</span></span>
-<span id="cb3-9"><a href="#cb3-9" tabindex="-1" aria-label="code-block-3-9"></a>            <span class="co"># the _preload_content flag is necessary so the api_client doesn't try and deserialize the response</span></span>
-<span id="cb3-10"><a href="#cb3-10" tabindex="-1" aria-label="code-block-3-10"></a>            <span class="bu">file</span>.write(uploads_api.read_upload(<span class="st">'experiments'</span>, exp.<span class="bu">id</span>, upload.<span class="bu">id</span>, <span class="bu">format</span><span class="op">=</span><span class="st">'binary'</span>, _preload_content<span class="op">=</span><span class="va">False</span>).data) <span class="co"># edited exp.id, match uploads_api spelling </span></span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" tabindex="-1" aria-label="code-block-4-1"></a>experiment <span class="op">=</span> heating_experiments[<span class="dv">0</span>]</span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1" aria-label="code-block-4-2"></a></span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1" aria-label="code-block-4-3"></a><span class="kw">def</span> download_matching_uploads_locally(exp): <span class="co"># added experiment</span></span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1" aria-label="code-block-4-4"></a>    <span class="co"># display id, name and comment of the uploaded files and download them locally</span></span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1" aria-label="code-block-4-5"></a>    <span class="cf">for</span> upload <span class="kw">in</span> uploads_api.read_uploads(<span class="st">'experiments'</span>, exp.<span class="bu">id</span>): <span class="co"># match uploads_api spelling</span></span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1" aria-label="code-block-4-6"></a>        <span class="bu">print</span>(upload.<span class="bu">id</span>, upload.real_name, upload.comment, upload.state)</span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1" aria-label="code-block-4-7"></a>        <span class="co"># get and save file</span></span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1" aria-label="code-block-4-8"></a>        <span class="cf">with</span> <span class="bu">open</span>(upload.real_name, <span class="st">'wb'</span>) <span class="im">as</span> <span class="bu">file</span>: <span class="co"># edited file name variable to match real name</span></span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1" aria-label="code-block-4-9"></a>            <span class="co"># the _preload_content flag is necessary so the api_client doesn't try and deserialize the response</span></span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1" aria-label="code-block-4-10"></a>            <span class="bu">file</span>.write(uploads_api.read_upload(<span class="st">'experiments'</span>, exp.<span class="bu">id</span>, upload.<span class="bu">id</span>, <span class="bu">format</span><span class="op">=</span><span class="st">'binary'</span>, _preload_content<span class="op">=</span><span class="va">False</span>).data) <span class="co"># edited exp.id, match uploads_api spelling </span></span></code></pre>
 </div>
 <p>This will download all files attached to the specified experiment. It
 does this by looping over the uploads, then using the uploads_api to
@@ -422,10 +428,10 @@ read the file and write the file.</p>
 <p>After running the cell we can use the function.</p>
 <p>To call the it we write the name of the function, followed by
 parentheses, in which we pass the experiment in question:</p>
-<div class="codewrapper sourceCode" id="cb4">
+<div class="codewrapper sourceCode" id="cb5">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" tabindex="-1" aria-label="code-block-4-1"></a>download_matching_uploads_locally(experiment)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" tabindex="-1" aria-label="code-block-5-1"></a>download_matching_uploads_locally(experiment)</span></code></pre>
 </div>
 <p>If we check our workspace, we can see the file has been
 downloaded.</p>
@@ -449,43 +455,43 @@ import pandas. Again, We use the alias <code>pd</code> here, which is
 the standard way to import pandas. We read the CSV by file name using
 the <code>read_csv</code> method. Then, we can use <code>head</code> to
 view the first few lines of the dataframe.</p>
-<div class="codewrapper sourceCode" id="cb5">
-<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" tabindex="-1" aria-label="code-block-5-1"></a><span class="op">%</span>pip install pandas <span class="co"># if needed</span></span>
-<span id="cb5-2"><a href="#cb5-2" tabindex="-1" aria-label="code-block-5-2"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb5-3"><a href="#cb5-3" tabindex="-1" aria-label="code-block-5-3"></a></span>
-<span id="cb5-4"><a href="#cb5-4" tabindex="-1" aria-label="code-block-5-4"></a>measurement_data <span class="op">=</span> pd.read_csv(<span class="st">"50_measurement_2026-11-05T11:27:07.281399.csv"</span>)</span>
-<span id="cb5-5"><a href="#cb5-5" tabindex="-1" aria-label="code-block-5-5"></a>measurement_data.head()</span></code></pre>
-</div>
-<p>Now, let’s create a quick plot. Pandas uses the package matplotlib to
-do this in a built-in manner.</p>
 <div class="codewrapper sourceCode" id="cb6">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" tabindex="-1" aria-label="code-block-6-1"></a>measurement_data.plot.scatter(x<span class="op">=</span><span class="st">'time_s'</span>, y<span class="op">=</span><span class="st">'temperature_C'</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" tabindex="-1" aria-label="code-block-6-1"></a><span class="op">%</span>pip install pandas <span class="co"># if needed</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1" aria-label="code-block-6-2"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1" aria-label="code-block-6-3"></a></span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1" aria-label="code-block-6-4"></a>measurement_data <span class="op">=</span> pd.read_csv(<span class="st">"50_measurement_2026-11-05T11:27:07.281399.csv"</span>)</span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1" aria-label="code-block-6-5"></a>measurement_data.head()</span></code></pre>
+</div>
+<p>Now, let’s create a quick plot. Pandas uses the package matplotlib to
+do this in a built-in manner.</p>
+<div class="codewrapper sourceCode" id="cb7">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" tabindex="-1" aria-label="code-block-7-1"></a>measurement_data.plot.scatter(x<span class="op">=</span><span class="st">'time_s'</span>, y<span class="op">=</span><span class="st">'temperature_C'</span>)</span></code></pre>
 </div>
 <p>This is very basic. Let’s add a title. We can also save he figure to
 a variable so we can keep working with it. In this case we want to
 save.</p>
-<div class="codewrapper sourceCode" id="cb7">
+<div class="codewrapper sourceCode" id="cb8">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" tabindex="-1" aria-label="code-block-7-1"></a>ax <span class="op">=</span> measurement_data.plot.scatter(x<span class="op">=</span><span class="st">'time_s'</span>, y<span class="op">=</span><span class="st">'temperature_C'</span>, title <span class="op">=</span> <span class="st">'Laser Power 50 W'</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" tabindex="-1" aria-label="code-block-8-1"></a>ax <span class="op">=</span> measurement_data.plot.scatter(x<span class="op">=</span><span class="st">'time_s'</span>, y<span class="op">=</span><span class="st">'temperature_C'</span>, title <span class="op">=</span> <span class="st">'Laser Power 50 W'</span>)</span></code></pre>
 </div>
 <p>We now have the plot with the title. You can make all kinds of
 changes here, from axis labels to colors, but for a quick overview, it’s
 sufficient. Let’s save it.</p>
-<div class="codewrapper sourceCode" id="cb8">
-<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" tabindex="-1" aria-label="code-block-8-1"></a>ax.figure.savefig(<span class="st">"50w_temp_time_plot.png"</span>, dpi<span class="op">=</span><span class="dv">300</span>)</span></code></pre>
-</div>
-<p>Attach to the experiment:</p>
 <div class="codewrapper sourceCode" id="cb9">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" tabindex="-1" aria-label="code-block-9-1"></a>uploads_api.post_upload(<span class="st">'experiments'</span>, experiment.<span class="bu">id</span>, <span class="bu">file</span><span class="op">=</span><span class="st">"50w_temp_time_plot.png"</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" tabindex="-1" aria-label="code-block-9-1"></a>ax.figure.savefig(<span class="st">"50w_temp_time_plot.png"</span>, dpi<span class="op">=</span><span class="dv">300</span>)</span></code></pre>
+</div>
+<p>Attach to the experiment:</p>
+<div class="codewrapper sourceCode" id="cb10">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" tabindex="-1" aria-label="code-block-10-1"></a>uploads_api.post_upload(<span class="st">'experiments'</span>, experiment.<span class="bu">id</span>, <span class="bu">file</span><span class="op">=</span><span class="st">"50w_temp_time_plot.png"</span>)</span></code></pre>
 </div>
 <div id="challenge1" class="callout challenge">
 <div class="callout-square">
@@ -518,38 +524,38 @@ directly to the main text field using the API, please share!</p>
 <p>Here is one possible solution. This assumes you start with a new
 notebook or write a Python script, so it includes all data imports and
 retrieves the experiment information.</p>
-<div class="codewrapper sourceCode" id="cb10">
+<div class="codewrapper sourceCode" id="cb11">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" tabindex="-1" aria-label="code-block-10-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb10-2"><a href="#cb10-2" tabindex="-1" aria-label="code-block-10-2"></a><span class="im">import</span> elabapi_python</span>
-<span id="cb10-3"><a href="#cb10-3" tabindex="-1" aria-label="code-block-10-3"></a></span>
-<span id="cb10-4"><a href="#cb10-4" tabindex="-1" aria-label="code-block-10-4"></a></span>
-<span id="cb10-5"><a href="#cb10-5" tabindex="-1" aria-label="code-block-10-5"></a></span>
-<span id="cb10-6"><a href="#cb10-6" tabindex="-1" aria-label="code-block-10-6"></a><span class="kw">def</span> download_matching_uploads_locally(exp): </span>
-<span id="cb10-7"><a href="#cb10-7" tabindex="-1" aria-label="code-block-10-7"></a>    downloaded_file_names <span class="op">=</span> [] <span class="co"># initialize empty list to collect file names</span></span>
-<span id="cb10-8"><a href="#cb10-8" tabindex="-1" aria-label="code-block-10-8"></a>    <span class="cf">for</span> upload <span class="kw">in</span> uploads_api.read_uploads(<span class="st">'experiments'</span>, exp.<span class="bu">id</span>): </span>
-<span id="cb10-9"><a href="#cb10-9" tabindex="-1" aria-label="code-block-10-9"></a>        <span class="bu">print</span>(upload.<span class="bu">id</span>, upload.real_name, upload.comment, upload.state)</span>
-<span id="cb10-10"><a href="#cb10-10" tabindex="-1" aria-label="code-block-10-10"></a>        <span class="cf">with</span> <span class="bu">open</span>(upload.real_name, <span class="st">'wb'</span>) <span class="im">as</span> <span class="bu">file</span>: </span>
-<span id="cb10-11"><a href="#cb10-11" tabindex="-1" aria-label="code-block-10-11"></a>            <span class="bu">file</span>.write(uploads_api.read_upload(<span class="st">'experiments'</span>, exp.<span class="bu">id</span>, upload.<span class="bu">id</span>, <span class="bu">format</span><span class="op">=</span><span class="st">'binary'</span>, _preload_content<span class="op">=</span><span class="va">False</span>).data) </span>
-<span id="cb10-12"><a href="#cb10-12" tabindex="-1" aria-label="code-block-10-12"></a>        downloaded_file_names.append(upload.real_name) <span class="co"># add file name to list once downloaded</span></span>
-<span id="cb10-13"><a href="#cb10-13" tabindex="-1" aria-label="code-block-10-13"></a>    <span class="cf">return</span> downloaded_file_names <span class="co">#return file name so we can access outside of function</span></span>
-<span id="cb10-14"><a href="#cb10-14" tabindex="-1" aria-label="code-block-10-14"></a></span>
-<span id="cb10-15"><a href="#cb10-15" tabindex="-1" aria-label="code-block-10-15"></a></span>
-<span id="cb10-16"><a href="#cb10-16" tabindex="-1" aria-label="code-block-10-16"></a>heating_experiments <span class="op">=</span> experiments_api.read_experiments(q<span class="op">=</span><span class="st">'Heating'</span>, status <span class="op">=</span> <span class="dv">47</span>, scope<span class="op">=</span><span class="dv">1</span>) <span class="co"># retrieve experiment information with filters applied</span></span>
-<span id="cb10-17"><a href="#cb10-17" tabindex="-1" aria-label="code-block-10-17"></a></span>
-<span id="cb10-18"><a href="#cb10-18" tabindex="-1" aria-label="code-block-10-18"></a><span class="cf">for</span> experiment <span class="kw">in</span> heating_experiments: <span class="co"># loop over each heating experiment in our list</span></span>
-<span id="cb10-19"><a href="#cb10-19" tabindex="-1" aria-label="code-block-10-19"></a>    downloaded_file_names <span class="op">=</span> download_matching_uploads_locally(experiment) <span class="co"># will download all files for each experiment we pass</span></span>
-<span id="cb10-20"><a href="#cb10-20" tabindex="-1" aria-label="code-block-10-20"></a>    <span class="cf">for</span> file_name <span class="kw">in</span> downloaded_file_names: <span class="co"># loop over downloaded files</span></span>
-<span id="cb10-21"><a href="#cb10-21" tabindex="-1" aria-label="code-block-10-21"></a></span>
-<span id="cb10-22"><a href="#cb10-22" tabindex="-1" aria-label="code-block-10-22"></a>        <span class="cf">if</span> file_name.endswith(<span class="st">'csv'</span>): <span class="co">#make sure you're not trying to load some other type of file</span></span>
-<span id="cb10-23"><a href="#cb10-23" tabindex="-1" aria-label="code-block-10-23"></a>            measurement_data <span class="op">=</span> pd.read_csv(file_name) <span class="co"># load into dataframe</span></span>
-<span id="cb10-24"><a href="#cb10-24" tabindex="-1" aria-label="code-block-10-24"></a>            power <span class="op">=</span> file_name.split(<span class="st">'_'</span>)[<span class="dv">0</span>] <span class="co"># get power setting from file name</span></span>
-<span id="cb10-25"><a href="#cb10-25" tabindex="-1" aria-label="code-block-10-25"></a>            title <span class="op">=</span> <span class="ss">f"Laser Power </span><span class="sc">{</span>power<span class="sc">}</span><span class="ss"> W"</span> <span class="co"># dynamically set plot title</span></span>
-<span id="cb10-26"><a href="#cb10-26" tabindex="-1" aria-label="code-block-10-26"></a>            ax <span class="op">=</span> measurement_data.plot.scatter(x<span class="op">=</span><span class="st">'time_s'</span>, y<span class="op">=</span><span class="st">'temperature_C'</span>, title <span class="op">=</span> title) <span class="co"># create plot</span></span>
-<span id="cb10-27"><a href="#cb10-27" tabindex="-1" aria-label="code-block-10-27"></a>            figure_name <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span>power<span class="sc">}</span><span class="ss">w_temp_time_plot.png"</span> <span class="co"># dynamically set figure name </span></span>
-<span id="cb10-28"><a href="#cb10-28" tabindex="-1" aria-label="code-block-10-28"></a>            ax.figure.savefig(figure_name, dpi<span class="op">=</span><span class="dv">300</span>) <span class="co"># save figure</span></span>
-<span id="cb10-29"><a href="#cb10-29" tabindex="-1" aria-label="code-block-10-29"></a>            uploads_api.post_upload(<span class="st">'experiments'</span>, experiment.<span class="bu">id</span>, <span class="bu">file</span><span class="op">=</span>figure_name) <span class="co"># upload figure file</span></span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" tabindex="-1" aria-label="code-block-11-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1" aria-label="code-block-11-2"></a><span class="im">import</span> elabapi_python</span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1" aria-label="code-block-11-3"></a></span>
+<span id="cb11-4"><a href="#cb11-4" tabindex="-1" aria-label="code-block-11-4"></a></span>
+<span id="cb11-5"><a href="#cb11-5" tabindex="-1" aria-label="code-block-11-5"></a></span>
+<span id="cb11-6"><a href="#cb11-6" tabindex="-1" aria-label="code-block-11-6"></a><span class="kw">def</span> download_matching_uploads_locally(exp): </span>
+<span id="cb11-7"><a href="#cb11-7" tabindex="-1" aria-label="code-block-11-7"></a>    downloaded_file_names <span class="op">=</span> [] <span class="co"># initialize empty list to collect file names</span></span>
+<span id="cb11-8"><a href="#cb11-8" tabindex="-1" aria-label="code-block-11-8"></a>    <span class="cf">for</span> upload <span class="kw">in</span> uploads_api.read_uploads(<span class="st">'experiments'</span>, exp.<span class="bu">id</span>): </span>
+<span id="cb11-9"><a href="#cb11-9" tabindex="-1" aria-label="code-block-11-9"></a>        <span class="bu">print</span>(upload.<span class="bu">id</span>, upload.real_name, upload.comment, upload.state)</span>
+<span id="cb11-10"><a href="#cb11-10" tabindex="-1" aria-label="code-block-11-10"></a>        <span class="cf">with</span> <span class="bu">open</span>(upload.real_name, <span class="st">'wb'</span>) <span class="im">as</span> <span class="bu">file</span>: </span>
+<span id="cb11-11"><a href="#cb11-11" tabindex="-1" aria-label="code-block-11-11"></a>            <span class="bu">file</span>.write(uploads_api.read_upload(<span class="st">'experiments'</span>, exp.<span class="bu">id</span>, upload.<span class="bu">id</span>, <span class="bu">format</span><span class="op">=</span><span class="st">'binary'</span>, _preload_content<span class="op">=</span><span class="va">False</span>).data) </span>
+<span id="cb11-12"><a href="#cb11-12" tabindex="-1" aria-label="code-block-11-12"></a>        downloaded_file_names.append(upload.real_name) <span class="co"># add file name to list once downloaded</span></span>
+<span id="cb11-13"><a href="#cb11-13" tabindex="-1" aria-label="code-block-11-13"></a>    <span class="cf">return</span> downloaded_file_names <span class="co">#return file name so we can access outside of function</span></span>
+<span id="cb11-14"><a href="#cb11-14" tabindex="-1" aria-label="code-block-11-14"></a></span>
+<span id="cb11-15"><a href="#cb11-15" tabindex="-1" aria-label="code-block-11-15"></a></span>
+<span id="cb11-16"><a href="#cb11-16" tabindex="-1" aria-label="code-block-11-16"></a>heating_experiments <span class="op">=</span> experiments_api.read_experiments(q<span class="op">=</span><span class="st">'Heating'</span>, status <span class="op">=</span> <span class="dv">47</span>, scope<span class="op">=</span><span class="dv">1</span>) <span class="co"># retrieve experiment information with filters applied</span></span>
+<span id="cb11-17"><a href="#cb11-17" tabindex="-1" aria-label="code-block-11-17"></a></span>
+<span id="cb11-18"><a href="#cb11-18" tabindex="-1" aria-label="code-block-11-18"></a><span class="cf">for</span> experiment <span class="kw">in</span> heating_experiments: <span class="co"># loop over each heating experiment in our list</span></span>
+<span id="cb11-19"><a href="#cb11-19" tabindex="-1" aria-label="code-block-11-19"></a>    downloaded_file_names <span class="op">=</span> download_matching_uploads_locally(experiment) <span class="co"># will download all files for each experiment we pass</span></span>
+<span id="cb11-20"><a href="#cb11-20" tabindex="-1" aria-label="code-block-11-20"></a>    <span class="cf">for</span> file_name <span class="kw">in</span> downloaded_file_names: <span class="co"># loop over downloaded files</span></span>
+<span id="cb11-21"><a href="#cb11-21" tabindex="-1" aria-label="code-block-11-21"></a></span>
+<span id="cb11-22"><a href="#cb11-22" tabindex="-1" aria-label="code-block-11-22"></a>        <span class="cf">if</span> file_name.endswith(<span class="st">'csv'</span>): <span class="co">#make sure you're not trying to load some other type of file</span></span>
+<span id="cb11-23"><a href="#cb11-23" tabindex="-1" aria-label="code-block-11-23"></a>            measurement_data <span class="op">=</span> pd.read_csv(file_name) <span class="co"># load into dataframe</span></span>
+<span id="cb11-24"><a href="#cb11-24" tabindex="-1" aria-label="code-block-11-24"></a>            power <span class="op">=</span> file_name.split(<span class="st">'_'</span>)[<span class="dv">0</span>] <span class="co"># get power setting from file name</span></span>
+<span id="cb11-25"><a href="#cb11-25" tabindex="-1" aria-label="code-block-11-25"></a>            title <span class="op">=</span> <span class="ss">f"Laser Power </span><span class="sc">{</span>power<span class="sc">}</span><span class="ss"> W"</span> <span class="co"># dynamically set plot title</span></span>
+<span id="cb11-26"><a href="#cb11-26" tabindex="-1" aria-label="code-block-11-26"></a>            ax <span class="op">=</span> measurement_data.plot.scatter(x<span class="op">=</span><span class="st">'time_s'</span>, y<span class="op">=</span><span class="st">'temperature_C'</span>, title <span class="op">=</span> title) <span class="co"># create plot</span></span>
+<span id="cb11-27"><a href="#cb11-27" tabindex="-1" aria-label="code-block-11-27"></a>            figure_name <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span>power<span class="sc">}</span><span class="ss">w_temp_time_plot.png"</span> <span class="co"># dynamically set figure name </span></span>
+<span id="cb11-28"><a href="#cb11-28" tabindex="-1" aria-label="code-block-11-28"></a>            ax.figure.savefig(figure_name, dpi<span class="op">=</span><span class="dv">300</span>) <span class="co"># save figure</span></span>
+<span id="cb11-29"><a href="#cb11-29" tabindex="-1" aria-label="code-block-11-29"></a>            uploads_api.post_upload(<span class="st">'experiments'</span>, experiment.<span class="bu">id</span>, <span class="bu">file</span><span class="op">=</span>figure_name) <span class="co"># upload figure file</span></span></code></pre>
 </div>
 </div>
 </div>
@@ -588,36 +594,36 @@ resource)</li>
 <li>
 <p>Export entries in different formats</p>
 <p>For ELN files:</p>
-<div class="codewrapper sourceCode" id="cb11">
+<div class="codewrapper sourceCode" id="cb12">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" tabindex="-1" aria-label="code-block-11-1"></a><span class="kw">def</span> download_eln_archive(</span>
-<span id="cb11-2"><a href="#cb11-2" tabindex="-1" aria-label="code-block-11-2"></a>    experiment_id: <span class="bu">int</span>,</span>
-<span id="cb11-3"><a href="#cb11-3" tabindex="-1" aria-label="code-block-11-3"></a>    download_folder: Path <span class="op">=</span> Path(<span class="st">"eln_downloads"</span>)</span>
-<span id="cb11-4"><a href="#cb11-4" tabindex="-1" aria-label="code-block-11-4"></a>):</span>
-<span id="cb11-5"><a href="#cb11-5" tabindex="-1" aria-label="code-block-11-5"></a>    <span class="co">"""</span></span>
-<span id="cb11-6"><a href="#cb11-6" tabindex="-1" aria-label="code-block-11-6"></a><span class="co">    Download an experiment's ELN archive and save it to the specified folder.</span></span>
-<span id="cb11-7"><a href="#cb11-7" tabindex="-1" aria-label="code-block-11-7"></a><span class="co">    """</span></span>
-<span id="cb11-8"><a href="#cb11-8" tabindex="-1" aria-label="code-block-11-8"></a>    <span class="co"># ensure the download folder exists</span></span>
-<span id="cb11-9"><a href="#cb11-9" tabindex="-1" aria-label="code-block-11-9"></a>    download_folder.mkdir(parents<span class="op">=</span><span class="va">True</span>, exist_ok<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb11-10"><a href="#cb11-10" tabindex="-1" aria-label="code-block-11-10"></a></span>
-<span id="cb11-11"><a href="#cb11-11" tabindex="-1" aria-label="code-block-11-11"></a>    eln_file_path <span class="op">=</span> download_folder <span class="op">/</span> Path(<span class="ss">f"</span><span class="sc">{</span>experiment_id<span class="sc">}</span><span class="ss">-export.eln"</span>)</span>
-<span id="cb11-12"><a href="#cb11-12" tabindex="-1" aria-label="code-block-11-12"></a></span>
-<span id="cb11-13"><a href="#cb11-13" tabindex="-1" aria-label="code-block-11-13"></a>    <span class="cf">try</span>:</span>
-<span id="cb11-14"><a href="#cb11-14" tabindex="-1" aria-label="code-block-11-14"></a>        <span class="cf">with</span> <span class="bu">open</span>(eln_file_path, <span class="st">"wb"</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
-<span id="cb11-15"><a href="#cb11-15" tabindex="-1" aria-label="code-block-11-15"></a>            response <span class="op">=</span> experimentsApi.get_experiment(</span>
-<span id="cb11-16"><a href="#cb11-16" tabindex="-1" aria-label="code-block-11-16"></a>                experiment_id, <span class="bu">format</span><span class="op">=</span><span class="st">"eln"</span>, _preload_content<span class="op">=</span><span class="va">False</span></span>
-<span id="cb11-17"><a href="#cb11-17" tabindex="-1" aria-label="code-block-11-17"></a>            )</span>
-<span id="cb11-18"><a href="#cb11-18" tabindex="-1" aria-label="code-block-11-18"></a>            <span class="bu">file</span>.write(response.data)</span>
-<span id="cb11-19"><a href="#cb11-19" tabindex="-1" aria-label="code-block-11-19"></a>        logger.info(</span>
-<span id="cb11-20"><a href="#cb11-20" tabindex="-1" aria-label="code-block-11-20"></a>            <span class="ss">f"Downloaded ELN archive for experiment </span><span class="sc">{</span>experiment_id<span class="sc">}</span><span class="ss"> to </span><span class="sc">{</span>eln_file_path<span class="sc">}</span><span class="ss">"</span></span>
-<span id="cb11-21"><a href="#cb11-21" tabindex="-1" aria-label="code-block-11-21"></a>        )</span>
-<span id="cb11-22"><a href="#cb11-22" tabindex="-1" aria-label="code-block-11-22"></a>        <span class="cf">return</span> eln_file_path</span>
-<span id="cb11-23"><a href="#cb11-23" tabindex="-1" aria-label="code-block-11-23"></a>    <span class="cf">except</span> <span class="pp">Exception</span> <span class="im">as</span> e:</span>
-<span id="cb11-24"><a href="#cb11-24" tabindex="-1" aria-label="code-block-11-24"></a>        logger.error(</span>
-<span id="cb11-25"><a href="#cb11-25" tabindex="-1" aria-label="code-block-11-25"></a>            <span class="ss">f"Failed to download ELN archive for experiment </span><span class="sc">{</span>experiment_id<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>e<span class="sc">}</span><span class="ss">"</span></span>
-<span id="cb11-26"><a href="#cb11-26" tabindex="-1" aria-label="code-block-11-26"></a>        )</span>
-<span id="cb11-27"><a href="#cb11-27" tabindex="-1" aria-label="code-block-11-27"></a>        <span class="cf">raise</span></span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" tabindex="-1" aria-label="code-block-12-1"></a><span class="kw">def</span> download_eln_archive(</span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1" aria-label="code-block-12-2"></a>    experiment_id: <span class="bu">int</span>,</span>
+<span id="cb12-3"><a href="#cb12-3" tabindex="-1" aria-label="code-block-12-3"></a>    download_folder: Path <span class="op">=</span> Path(<span class="st">"eln_downloads"</span>)</span>
+<span id="cb12-4"><a href="#cb12-4" tabindex="-1" aria-label="code-block-12-4"></a>):</span>
+<span id="cb12-5"><a href="#cb12-5" tabindex="-1" aria-label="code-block-12-5"></a>    <span class="co">"""</span></span>
+<span id="cb12-6"><a href="#cb12-6" tabindex="-1" aria-label="code-block-12-6"></a><span class="co">    Download an experiment's ELN archive and save it to the specified folder.</span></span>
+<span id="cb12-7"><a href="#cb12-7" tabindex="-1" aria-label="code-block-12-7"></a><span class="co">    """</span></span>
+<span id="cb12-8"><a href="#cb12-8" tabindex="-1" aria-label="code-block-12-8"></a>    <span class="co"># ensure the download folder exists</span></span>
+<span id="cb12-9"><a href="#cb12-9" tabindex="-1" aria-label="code-block-12-9"></a>    download_folder.mkdir(parents<span class="op">=</span><span class="va">True</span>, exist_ok<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb12-10"><a href="#cb12-10" tabindex="-1" aria-label="code-block-12-10"></a></span>
+<span id="cb12-11"><a href="#cb12-11" tabindex="-1" aria-label="code-block-12-11"></a>    eln_file_path <span class="op">=</span> download_folder <span class="op">/</span> Path(<span class="ss">f"</span><span class="sc">{</span>experiment_id<span class="sc">}</span><span class="ss">-export.eln"</span>)</span>
+<span id="cb12-12"><a href="#cb12-12" tabindex="-1" aria-label="code-block-12-12"></a></span>
+<span id="cb12-13"><a href="#cb12-13" tabindex="-1" aria-label="code-block-12-13"></a>    <span class="cf">try</span>:</span>
+<span id="cb12-14"><a href="#cb12-14" tabindex="-1" aria-label="code-block-12-14"></a>        <span class="cf">with</span> <span class="bu">open</span>(eln_file_path, <span class="st">"wb"</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
+<span id="cb12-15"><a href="#cb12-15" tabindex="-1" aria-label="code-block-12-15"></a>            response <span class="op">=</span> experimentsApi.get_experiment(</span>
+<span id="cb12-16"><a href="#cb12-16" tabindex="-1" aria-label="code-block-12-16"></a>                experiment_id, <span class="bu">format</span><span class="op">=</span><span class="st">"eln"</span>, _preload_content<span class="op">=</span><span class="va">False</span></span>
+<span id="cb12-17"><a href="#cb12-17" tabindex="-1" aria-label="code-block-12-17"></a>            )</span>
+<span id="cb12-18"><a href="#cb12-18" tabindex="-1" aria-label="code-block-12-18"></a>            <span class="bu">file</span>.write(response.data)</span>
+<span id="cb12-19"><a href="#cb12-19" tabindex="-1" aria-label="code-block-12-19"></a>        logger.info(</span>
+<span id="cb12-20"><a href="#cb12-20" tabindex="-1" aria-label="code-block-12-20"></a>            <span class="ss">f"Downloaded ELN archive for experiment </span><span class="sc">{</span>experiment_id<span class="sc">}</span><span class="ss"> to </span><span class="sc">{</span>eln_file_path<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb12-21"><a href="#cb12-21" tabindex="-1" aria-label="code-block-12-21"></a>        )</span>
+<span id="cb12-22"><a href="#cb12-22" tabindex="-1" aria-label="code-block-12-22"></a>        <span class="cf">return</span> eln_file_path</span>
+<span id="cb12-23"><a href="#cb12-23" tabindex="-1" aria-label="code-block-12-23"></a>    <span class="cf">except</span> <span class="pp">Exception</span> <span class="im">as</span> e:</span>
+<span id="cb12-24"><a href="#cb12-24" tabindex="-1" aria-label="code-block-12-24"></a>        logger.error(</span>
+<span id="cb12-25"><a href="#cb12-25" tabindex="-1" aria-label="code-block-12-25"></a>            <span class="ss">f"Failed to download ELN archive for experiment </span><span class="sc">{</span>experiment_id<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>e<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb12-26"><a href="#cb12-26" tabindex="-1" aria-label="code-block-12-26"></a>        )</span>
+<span id="cb12-27"><a href="#cb12-27" tabindex="-1" aria-label="code-block-12-27"></a>        <span class="cf">raise</span></span></code></pre>
 </div>
 </li>
 </ul><p>Create individual resources from a CSV (where each row represents a
@@ -707,8 +713,8 @@ any links that you are not going to use.
   "url": "https://carpentries.github.io/workbench-template-md/05_data_analysis.html",
   "identifier": "https://carpentries.github.io/workbench-template-md/05_data_analysis.html",
   "dateCreated": "2026-10-13",
-  "dateModified": "2026-11-09",
-  "datePublished": "2026-11-09"
+  "dateModified": "2026-11-10",
+  "datePublished": "2026-11-10"
 }
 
   </script><script>

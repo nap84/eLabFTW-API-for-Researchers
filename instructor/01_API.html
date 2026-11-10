@@ -336,7 +336,7 @@
       </div>
     </nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>The eLabFTW API</h1>
-        <p>Last updated on 2026-11-06 |
+        <p>Last updated on 2026-11-10 |
 
         <a href="https://github.com/carpentries/workbench-template-md/edit/main/episodes/01_API.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -485,17 +485,17 @@ using the clipboard icon).</li>
 </ol><p>If you are <em>not</em> logged in, you will get a <code>401</code>
 error since you are not authorized to view this information. Log in to
 eLabFTW, then refresh the page.</p>
-<div id="find-your-user-id" class="callout challenge">
+<div id="api-vs.-ui" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <span class="callout-header">Challenge</span>
-<div id="find-your-user-id" class="callout-inner">
-<h3 class="callout-title">Find your User ID</h3>
+<div id="api-vs.-ui" class="callout-inner">
+<h3 class="callout-title">API vs. UI</h3>
 <div class="callout-content">
-<p>What is <em>your</em> user ID? Find it and note for later. Ensure you
-have requested the ID from the instance you will be working with in this
-course.</p>
+<p>What information are you shown? How does this information correlate
+to what you can see in the UI? What information is not included in
+eLabFTW’s GUI (for normal users).</p>
 </div>
 </div>
 </div>
@@ -504,11 +504,26 @@ course.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
+<p>Most of the information can be find in the GUI. For example, the
+keyboard shortcut set in your user profile are:</p>
+<div class="codewrapper sourceCode" id="cb1">
+<h3 class="code-label">JSON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode json" tabindex="0"><code class="sourceCode json"><span id="cb1-1"><a href="#cb1-1" tabindex="-1" aria-label="code-block-1-1"></a><span class="st">"sc_create"</span><span class="er">:</span> <span class="st">"c"</span><span class="er">,</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1" aria-label="code-block-1-2"></a><span class="st">"sc_edit"</span><span class="er">:</span> <span class="st">"e"</span><span class="er">,</span></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1" aria-label="code-block-1-3"></a><span class="st">"sc_favorite"</span><span class="er">:</span> <span class="st">"f"</span><span class="er">,</span></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1" aria-label="code-block-1-4"></a><span class="st">"sc_todo"</span><span class="er">:</span> <span class="st">"t"</span><span class="er">,</span></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1" aria-label="code-block-1-5"></a><span class="st">"sc_search"</span><span class="er">:</span> <span class="st">"s"</span></span></code></pre>
+</div>
+<p>In our user settings: <img src="../fig/screenshot_elabftw_shortcuts_settings.png" alt="screenshot of user setting keyboard shortcuts in the eLabFTW GUI" class="figure"></p>
+<p>Similarly, we can see our teams, which we can also see in our user
+profile, and so on.</p>
 <p>The top line has the <code>userid</code> attribute, which is your
-user ID. You can also use the browser’s search function to find it:
-<kbd>ctrl</kbd>+<kbd>f</kbd> → type ‘userid’.</p>
+user ID. This piece of information is only really visible to team and
+system admin in the GUI (probably since it is not a useful piece of
+information in the GUI for day-to-day use).</p>
 </div>
 </div>
 </div>
@@ -602,8 +617,8 @@ any links that you are not going to use.
   "url": "https://carpentries.github.io/workbench-template-md/instructor/01_API.html",
   "identifier": "https://carpentries.github.io/workbench-template-md/instructor/01_API.html",
   "dateCreated": "2026-10-13",
-  "dateModified": "2026-11-06",
-  "datePublished": "2026-11-09"
+  "dateModified": "2026-11-10",
+  "datePublished": "2026-11-10"
 }
 
   </script><script>

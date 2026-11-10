@@ -333,7 +333,7 @@
       </div>
     </nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>The API in the Terminal</h1>
-        <p>Last updated on 2026-11-09 |
+        <p>Last updated on 2026-11-10 |
 
         <a href="https://github.com/carpentries/workbench-template-md/edit/main/episodes/02_API_cli.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -421,13 +421,11 @@ in, we now need to tell the ELN we are allowed to have access. This is
 done by creating a token:</p>
 <ol style="list-style-type: decimal"><li>Head your eLabFTW instance</li>
 <li>click your initials on the top right-hand side</li>
-<li>click <code>settings</code>
-</li>
-<li>Select the <code>API KEYS</code> header</li>
+<li>click <code>settings</code> <img src="../fig/screenshot_elabftw_user_settings.png" alt="screenshot showing how to find user settings in the eLabFTW GUI" class="figure"></li>
+<li>Select the <code>API KEYS</code> header <img src="../fig/screenshot_elabftw_api_key_header.png" alt="screenshot showing where to find the API Key header in the eLabFTW GUI" class="figure"></li>
 <li>Under <code>Create new key</code>, enter a name for your key and
 select <code>Read/Write</code> from the permissions drop-down menu.</li>
-<li>click <code>Generate an API Key</code>
-</li>
+<li>click <code>Generate an API Key</code> <img src="../fig/screenshot_elabftw_api_key.png" alt="screenshot showing how to generate an api key in in elabftw GUI" class="figure"></li>
 <li>Copy and paste this to the <code>secrets.env</code> file in your
 <code>research_computer/</code> folder for later use. It will only be
 shown once in the ELN’s GUI!</li>
@@ -494,6 +492,10 @@ paste your token:</p>
 <span id="cb2-2"><a href="#cb2-2" tabindex="-1" aria-label="code-block-2-2"></a><span class="bu">source</span> research_computer/secrets.env</span>
 <span id="cb2-3"><a href="#cb2-3" tabindex="-1" aria-label="code-block-2-3"></a><span class="bu">set</span> +a</span></code></pre>
 </div>
+<p>This <code>set -a</code> turns the <strong>allexport</strong> option
+on, while <code>set +a</code> turns it off again. Alternative, you could
+set single variables with <code>export MY_VAR=value</code> without
+having to turn allexport on and off.</p>
 <p>The <code>secrets.env</code> file should contain
 <code>ELAB_API_KEY</code> and <code>ELAB_API_HOST</code>. The key is
 then available as the <code>$ELAB_API_KEY</code> environment variable.
@@ -530,8 +532,9 @@ URL</li>
 <code>\</code> at the end of the last line, <kbd>enter</kbd> for a new
 line and add <code>-d '{"title":"my api exp"}</code> (replace info in
 curly brackets with the full data)</li>
-<li>Add <code>-i</code> before <code>-X</code> in the top line. This
-ensures the response is output.</li>
+<li>Add <code>-i</code> (include) before <code>-X</code> (allows you to
+set HTTP method explicitly) in the top line. This ensures the response
+is output.</li>
 <li>Copy and paste into your terminal</li>
 <li>Hit <kbd>enter</kbd> to run</li>
 </ol><p>Note: Don’t forget to add spaces between the <code>\</code> and the
@@ -638,7 +641,7 @@ above.</p>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint1" aria-expanded="false" aria-controls="collapseHint1">
   <h4 class="accordion-header" id="headingHint1"> Give me a hint </h4>
 </button>
-<div id="collapseHint1" class="accordion-collapse collapse" aria-labelledby="headingHint1" data-bs-parent="#accordionHint1">
+<div id="collapseHint1" class="accordion-collapse collapse" data-bs-parent="#accordionHint1" aria-labelledby="headingHint1">
 <div class="accordion-body">
 <p>You can use a GET request to the “$ELAB_API_HOST/experiments”
 endpoint to list all experiments and find the ID of the one you just
@@ -652,7 +655,7 @@ created.</p>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint2" aria-expanded="false" aria-controls="collapseHint2">
   <h4 class="accordion-header" id="headingHint2"> Give me a hint </h4>
 </button>
-<div id="collapseHint2" class="accordion-collapse collapse" aria-labelledby="headingHint2" data-bs-parent="#accordionHint2">
+<div id="collapseHint2" class="accordion-collapse collapse" data-bs-parent="#accordionHint2" aria-labelledby="headingHint2">
 <div class="accordion-body">
 <p><a href="https://doc.elabftw.net/api/elabapi-html/#api-LinksToExperiments" class="external-link">Read
 the docs for LinksToExperiments</a></p>
@@ -686,7 +689,7 @@ the docs for LinksToExperiments</a></p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 
 </div>
@@ -713,7 +716,7 @@ imagined.</p>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint3" aria-expanded="false" aria-controls="collapseHint3">
   <h4 class="accordion-header" id="headingHint3"> Give me a hint </h4>
 </button>
-<div id="collapseHint3" class="accordion-collapse collapse" aria-labelledby="headingHint3" data-bs-parent="#accordionHint3">
+<div id="collapseHint3" class="accordion-collapse collapse" data-bs-parent="#accordionHint3" aria-labelledby="headingHint3">
 <div class="accordion-body">
 <p>Look for the <code>location</code> in the response from your last
 call to get the ID.</p>
@@ -726,7 +729,7 @@ call to get the ID.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>The <code>POST</code> response includes the URL of the new experiment
 in its <code>Location</code> header. Copy the experiment ID from that
@@ -926,8 +929,8 @@ any links that you are not going to use.
   "url": "https://carpentries.github.io/workbench-template-md/instructor/02_API_cli.html",
   "identifier": "https://carpentries.github.io/workbench-template-md/instructor/02_API_cli.html",
   "dateCreated": "2026-10-13",
-  "dateModified": "2026-11-09",
-  "datePublished": "2026-11-09"
+  "dateModified": "2026-11-10",
+  "datePublished": "2026-11-10"
 }
 
   </script><script>
