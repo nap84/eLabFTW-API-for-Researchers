@@ -20,7 +20,7 @@ from dotenv import find_dotenv, load_dotenv
 
 found_dotenv = find_dotenv('secrets.env')
 if not found_dotenv:
-    find_dotenv('secrets.env')
+    find_dotenv('.env')
 if found_dotenv:
     logging.info("secrets found")
     load_dotenv(found_dotenv)    
