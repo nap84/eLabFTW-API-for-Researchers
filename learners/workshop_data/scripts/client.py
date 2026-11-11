@@ -2,10 +2,12 @@
 
 # We will use the standard "os" module to read values from environment
 import os
-from pathlib import Path
+import logging
+logger = logging.getLogger(__name__)
+logging.basicConfig(level=logging.INFO)
 
-# Load values from either supported env file beside this script.
-from dotenv import load_dotenv
+# Load values from the .env file beside this script.
+#from dotenv import load_dotenv
 
 # You must have elabapi-python installed so it can be imported
 # This line will make the library available in our script
@@ -14,14 +16,16 @@ import elabapi_python
 
 # START CONFIG
 # Basic configuration: Api Key and Host URL
-# Existing environment variables take precedence over values in either file.
-# If both files define a variable, .env takes precedence over secrets.env.
-ENV_FILES = (
-    Path(__file__).with_name(".env"), #__file__ --> directly of this script
-    Path(__file__).with_name("secrets.env"),
-)
-for env_file in ENV_FILES:
-    load_dotenv(dotenv_path=env_file, override=False)
+from dotenv import find_dotenv, load_dotenv
+
+found_dotenv = find_dotenv('secrets.env')
+if not found_dotenv:
+    find_dotenv('secrets.env')
+if found_dotenv:
+    logging.info("secrets found")
+    load_dotenv(found_dotenv)    
+else:
+    logging.error('no secrets file found')
 
 # Read the variable names used by the workshop .env file.
 API_KEY = os.getenv("ELAB_API_KEY")
