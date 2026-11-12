@@ -2,12 +2,12 @@
 
 # We will use the standard "os" module to read values from environment
 import os
-import logging
-logger = logging.getLogger(__name__)
-logging.basicConfig(level=logging.INFO)
-
 # Load values from the .env file beside this script.
-#from dotenv import load_dotenv
+from dotenv import find_dotenv, load_dotenv
+# import
+import logging
+
+
 
 # You must have elabapi-python installed so it can be imported
 # This line will make the library available in our script
@@ -16,7 +16,6 @@ import elabapi_python
 
 # START CONFIG
 # Basic configuration: Api Key and Host URL
-from dotenv import find_dotenv, load_dotenv
 
 found_dotenv = find_dotenv('secrets.env')
 if not found_dotenv:
