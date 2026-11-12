@@ -67,6 +67,8 @@ Let's use an analogy from the real world: a restaurant.
 
 ## The eLabFTW API
 
+_Note: we've included a notepad in your workshop folder that has some useful things, such as links, to copy and paste._
+
 eLabFTW's API let's you interact with the ELN, e.g., retrieve and write information from it, without using the graphical user interface (GUI). This is something you may want to do to create automated workflows and avoid repetitive work.
 
 Sticking with our restaurant analogy, we first need to figure out what is available to us, in programmatic terms: what requests we may make (or in restaurant terms: what orders we may place).
