@@ -53,7 +53,7 @@ Most things appear to remain saved in Jupyter Hub - but I would still recommend 
 2. Follow the instructions to sign in
 3. Accept the acceptable use policy
 4. Give your new Jupyter Lab a name. The base configuration should be sufficient.
-5. Click 'Start`
+5. Click `Start`
 
 Remember to download everything if you want to keep it after the course!
 
