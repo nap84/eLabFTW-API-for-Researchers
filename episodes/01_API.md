@@ -89,6 +89,16 @@ Selecting a methods gives us more information, e.g., we can see that `postExperi
 
 ![screenshot of the postExperiment API method](fig/screenshot_postExperiments_HTMLdocs.png)
 
+Looking at the description, a lot of this is similar to what we seen in the GUI: we have the body (main text), some permissions settings, category settings, and so on.
+
+On things to keep in mind is that, opposed to the GUI, we usually need to use an ID to indicate certain attributes. For example, we would not use the name of a category but it's ID. One way to find these visually is in the address bar of our browser when we filter for certain attributes.
+
+::::::::::::::::::::::::::::::::::::::::::: instructor
+Filter for a experiment category in the browser and show how its ID shows up in the URL.
+
+These values may also be retrieved with the API, of course, but that is a bit beyond the scope of this basics course.
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
 ## Constructing Requests
 
 The first time you see these types of docs pages, it may seem a bit daunting. So let's construct our first API call using a tool we're all familiar with: our browser.
