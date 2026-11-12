@@ -241,23 +241,25 @@ len(sample)
 
 See the [Python Docs on built-in functions](https://docs.python.org/3/builtins/functions.html).
 
-<!--TODO better challenge-->
 ::::::::::::::::::::::::::::::::::::::::::: challenge
 What will be printed?
 
 ```python
-x = 5
-x = "five"
-print(x)
+def add_five(value):
+  return value + 5
+
+result = add_five(5)
+next_value = result + 1
+print(result)
 ```
 
-A. 5  
-B. five  
+A. 11
+B. 10  
 C. TypeError  
 
 ::::::::::::::::::::::::::::::::::::::: solution
 
-**B** – Python variables are dynamically typed; the second assignment overwrites the first.
+**B** – The function adds 5 to the passed value of 5, returning the value of 10. This returned valued is stored in `result` and doesn't change afterwards.
 
 :::::::::::::::::::::::::::::::::
 
