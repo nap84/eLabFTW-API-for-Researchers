@@ -341,7 +341,13 @@ We import the main api client into our notebook using:
 from scripts.client import api_client
 ```
 
-Note: ensure your are in the correct directory.
+Note: ensure your are in the correct directory, `workshop_data/`.
+
+:::::::::::::::::::::::::::::::::::::::::::::::::: callout
+
+When writing, you can avoid a lot of spelling errors by using <kbd>tab</kbd> to get suggestions.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 You may get an error here for missing packages, especially dotenv:
 
