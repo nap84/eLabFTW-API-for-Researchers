@@ -134,7 +134,7 @@ In the HTML Docs, Scroll to the [Experiments](https://doc.elabftw.net/api/elabap
 
 1. Copy and paste your token to the terminal, replacing `[[apiKey]]`
 2. Replace `https://elab.local:3148` with your eLabFTW URL
-3. Add experiment info using the template below. Once done, add `\` at the end of the last line, <kbd>enter</kbd> for a new line and add `-d '{"title":"my api exp"}` (replace info in curly brackets with the full data)
+3. Add experiment info using the template below. Once done, add `\` at the end of the last line, <kbd>enter</kbd> for a new line and add `-d '{"title":"my api exp"}'` (replace info in curly brackets with the full data)
 4. Add `-i` (include) before `-X` (allows you to set HTTP method explicitly) in the top line. This ensures the response is output.
 5. Copy and paste into your terminal
 6. Hit <kbd>enter</kbd> to run
