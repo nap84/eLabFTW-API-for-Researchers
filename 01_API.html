@@ -422,7 +422,9 @@ food from the kitchen they get from the waiter.</li>
 <li>In software, the user uses an application to work with data from a
 server provided by its API.</li>
 </ul></section><section><h2 class="section-heading" id="the-elabftw-api">The eLabFTW API<a class="anchor" aria-label="anchor" href="#the-elabftw-api"></a></h2>
-<hr class="half-width"><p>eLabFTW’s API let’s you interact with the ELN, e.g., retrieve and
+<hr class="half-width"><p><em>Note: we’ve included a notepad in your workshop folder that has
+some useful things, such as links, to copy and paste.</em></p>
+<p>eLabFTW’s API let’s you interact with the ELN, e.g., retrieve and
 write information from it, without using the graphical user interface
 (GUI). This is something you may want to do to create automated
 workflows and avoid repetitive work.</p>
@@ -459,7 +461,16 @@ examples in different programming languages and the parameters we can
 give our API request.</p>
 <figure><img src="fig/screenshot_postExperiments_HTMLdocs.png" alt="screenshot of the postExperiment API method" class="figure mx-auto d-block"><div class="figcaption">screenshot of the postExperiment API
 method</div>
-</figure></section><section><h2 class="section-heading" id="constructing-requests">Constructing Requests<a class="anchor" aria-label="anchor" href="#constructing-requests"></a></h2>
+</figure><p>Looking at the description, a lot of this is similar to what we seen
+in the GUI: we have the body (main text), some permissions settings,
+category settings, and so on.</p>
+<p>On things to keep in mind is that, opposed to the GUI, we usually
+need to use an ID to indicate certain attributes. For example, we would
+not use the name of a category but it’s ID. One way to find these
+visually is in the address bar of our browser when we filter for certain
+attributes.</p>
+
+</section><section><h2 class="section-heading" id="constructing-requests">Constructing Requests<a class="anchor" aria-label="anchor" href="#constructing-requests"></a></h2>
 <hr class="half-width"><p>The first time you see these types of docs pages, it may seem a bit
 daunting. So let’s construct our first API call using a tool we’re all
 familiar with: our browser.</p>
@@ -503,7 +514,7 @@ eLabFTW’s GUI (for normal users).</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>Most of the information can be find in the GUI. For example, the
 keyboard shortcut set in your user profile are:</p>

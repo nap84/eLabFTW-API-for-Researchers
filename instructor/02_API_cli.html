@@ -333,7 +333,7 @@
       </div>
     </nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>The API in the Terminal</h1>
-        <p>Last updated on 2026-11-10 |
+        <p>Last updated on 2026-11-12 |
 
         <a href="https://github.com/carpentries/workbench-template-md/edit/main/episodes/02_API_cli.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -427,8 +427,8 @@ done by creating a token:</p>
 select <code>Read/Write</code> from the permissions drop-down menu.</li>
 <li>click <code>Generate an API Key</code> <img src="../fig/screenshot_elabftw_api_key.png" alt="screenshot showing how to generate an api key in in elabftw GUI" class="figure"></li>
 <li>Copy and paste this to the <code>secrets.env</code> file in your
-<code>research_computer/</code> folder for later use. It will only be
-shown once in the ELN’s GUI!</li>
+<code>workshop_data/scripts/</code> folder for later use. It will only
+be shown once in the ELN’s GUI!</li>
 </ol><p>Now we can start editing the request:</p>
 <ol style="list-style-type: decimal"><li>Paste your token, replacing <code>[[apiKey]]</code>
 </li>
@@ -474,32 +474,32 @@ easier and it is easier to catch problems.</p>
 <span class="callout-header">Callout</span>
 <div class="callout-inner">
 <div class="callout-content">
-<p>You can load the API key from a <code>secrets.env</code> file instead
-of pasting the secret into the command.</p>
-<p>Create such a file <strong>in the workshop directory</strong> and
-paste your token:</p>
+<p>You can load the API key from the <code>secrets.env</code> file
+instead of pasting the secret into the command.</p>
+<p>We’ve included a template in the workshop folder under
+<code>scripts/</code>. If you need to create one, it should look like
+this:</p>
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1" aria-label="code-block-1-1"></a><span class="va">ELAB_API_KEY</span><span class="op">=</span><span class="st">'YOUR_TOKEN_HERE'</span></span>
 <span id="cb1-2"><a href="#cb1-2" tabindex="-1" aria-label="code-block-1-2"></a><span class="va">ELAB_API_HOST</span><span class="op">=</span><span class="st">'https://elab.parks.web.gateway.ionos.coscine.dev/api/v2'</span></span></code></pre>
 </div>
-<p>From the <strong>workshop directory</strong>, run:</p>
+<p>To load them, from the <strong>workshop directory</strong>, run:</p>
 <div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1" aria-label="code-block-2-1"></a><span class="bu">set</span> <span class="at">-a</span></span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1" aria-label="code-block-2-2"></a><span class="bu">source</span> research_computer/secrets.env</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1" aria-label="code-block-2-2"></a><span class="bu">source</span> scripts/secrets.env</span>
 <span id="cb2-3"><a href="#cb2-3" tabindex="-1" aria-label="code-block-2-3"></a><span class="bu">set</span> +a</span></code></pre>
 </div>
 <p>This <code>set -a</code> turns the <strong>allexport</strong> option
 on, while <code>set +a</code> turns it off again. Alternative, you could
 set single variables with <code>export MY_VAR=value</code> without
 having to turn allexport on and off.</p>
-<p>The <code>secrets.env</code> file should contain
-<code>ELAB_API_KEY</code> and <code>ELAB_API_HOST</code>. The key is
-then available as the <code>$ELAB_API_KEY</code> environment variable.
-Use it in the request like this:</p>
+<p>The key and host is will now available as the
+<code>$ELAB_API_KEY</code> and <code>$ELAB_API_HOST</code> environment
+variable. Use it in the request like this:</p>
 <div class="codewrapper sourceCode" id="cb3">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -519,10 +519,12 @@ immediately hides these.</p>
 </div>
 </div>
 <p>Now, let’s make a new request and create an experiment:</p>
-<p>Scroll to the <a href="https://doc.elabftw.net/api/elabapi-html/#api-Experiments" class="external-link">Experiments</a>
+<p>In the HTML Docs, Scroll to the <a href="https://doc.elabftw.net/api/elabapi-html/#api-Experiments" class="external-link">Experiments</a>
 section on the left and click <a href="https://doc.elabftw.net/api/elabapi-html/#api-Experiments-postExperiment" class="external-link"><code>postExperiment</code></a>.
-Again, we will look at the cURL usage example and copy and paste it into
-our text editor. Similar to the steps above:</p>
+Posting basically means we are creating something new, while patch, for
+example, would mean we are modifying something. Again, we will look at
+the cURL usage example and copy and paste it into our text editor.
+Similar to the steps above:</p>
 <ol style="list-style-type: decimal"><li>Copy and paste your token to the terminal, replacing
 <code>[[apiKey]]</code>
 </li>
@@ -530,7 +532,7 @@ our text editor. Similar to the steps above:</p>
 URL</li>
 <li>Add experiment info using the template below. Once done, add
 <code>\</code> at the end of the last line, <kbd>enter</kbd> for a new
-line and add <code>-d '{"title":"my api exp"}</code> (replace info in
+line and add <code>-d '{"title":"my api exp"}'</code> (replace info in
 curly brackets with the full data)</li>
 <li>Add <code>-i</code> (include) before <code>-X</code> (allows you to
 set HTTP method explicitly) in the top line. This ensures the response
@@ -539,7 +541,8 @@ is output.</li>
 <li>Hit <kbd>enter</kbd> to run</li>
 </ol><p>Note: Don’t forget to add spaces between the <code>\</code> and the
 end of the line.</p>
-<p>Template for data:</p>
+<p>Template for data - find this in
+<code>workshop_data/notepad.md</code>:</p>
 <p><em>Feel free to modify!</em></p>
 <div class="codewrapper sourceCode" id="cb4">
 <h3 class="code-label">JSON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -583,8 +586,8 @@ end of the line.</p>
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" tabindex="-1" aria-label="code-block-5-1"></a><span class="ex">curl</span> <span class="at">-i</span> <span class="at">-X</span> POST <span class="dt">\</span></span>
-<span id="cb5-2"><a href="#cb5-2" tabindex="-1" aria-label="code-block-5-2"></a>    <span class="at">-H</span> <span class="st">"Authorization: </span><span class="va">$ELAB_API_KEY</span><span class="st">"</span> <span class="dt">\</span></span>
-<span id="cb5-3"><a href="#cb5-3" tabindex="-1" aria-label="code-block-5-3"></a>    <span class="at">-H</span> <span class="st">"Accept: application/json"</span> <span class="dt">\</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1" aria-label="code-block-5-2"></a>    <span class="at">-H</span> <span class="st">"Authorization: </span><span class="va">$ELAB_API_KEY</span><span class="st">"</span> <span class="dt">\ </span></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1" aria-label="code-block-5-3"></a>    <span class="ex">-H</span> <span class="st">"Accept: application/json"</span> <span class="dt">\</span></span>
 <span id="cb5-4"><a href="#cb5-4" tabindex="-1" aria-label="code-block-5-4"></a>    <span class="at">-H</span> <span class="st">"Content-Type: application/json"</span> <span class="dt">\</span></span>
 <span id="cb5-5"><a href="#cb5-5" tabindex="-1" aria-label="code-block-5-5"></a>    <span class="at">-d</span> <span class="st">'{</span></span>
 <span id="cb5-6"><a href="#cb5-6" tabindex="-1" aria-label="code-block-5-6"></a><span class="st">   "title": "Temperature calibration",</span></span>
@@ -619,84 +622,24 @@ end of the line.</p>
 <span id="cb5-35"><a href="#cb5-35" tabindex="-1" aria-label="code-block-5-35"></a><span class="st">      }</span></span>
 <span id="cb5-36"><a href="#cb5-36" tabindex="-1" aria-label="code-block-5-36"></a><span class="st">   }</span></span>
 <span id="cb5-37"><a href="#cb5-37" tabindex="-1" aria-label="code-block-5-37"></a><span class="st">}'</span> <span class="dt">\</span></span>
-<span id="cb5-38"><a href="#cb5-38" tabindex="-1" aria-label="code-block-5-38"></a>   <span class="st">"</span><span class="va">$ELAB_API_HOST</span><span class="st">/experiments"</span></span></code></pre>
+<span id="cb5-38"><a href="#cb5-38" tabindex="-1" aria-label="code-block-5-38"></a>   <span class="st">"https://elab.parks.web.gateway.ionos.coscine.dev/api/v2/experiments"</span></span></code></pre>
+</div>
+<p>If we run the code without the <code>-i</code> it will run all the
+same, but will not output any information.</p>
+<div id="callout3" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<span class="callout-header">Callout</span>
+<div class="callout-inner">
+<div class="callout-content">
+<p>Code pieces such as <code>-i</code> are called <em>flags</em> or
+<em>options</em>. Find out more in the <a href="https://curl.se/docs/manpage.html" class="external-link">cURL Documentation Man
+Page</a>.</p>
+</div>
+</div>
 </div>
 <div id="challenge1" class="callout challenge">
-<div class="callout-square">
-<i class="callout-icon" data-feather="zap"></i>
-</div>
-<span class="callout-header">Challenge</span>
-<div class="callout-inner">
-<h3 class="callout-title">Challenge</h3>
-<div class="callout-content">
-<p>The below code intends to link the device resource <a href="https://elab.parks.web.gateway.ionos.coscine.dev/database.php?mode=view&amp;id=144" class="external-link"><strong>Bluetooth
-Infrared Thermometer</strong></a> to the experiment experiment created
-above.</p>
-<p>In it current state, it fails. What needs to be fixed?</p>
-</div>
-</div>
-</div>
-<div id="accordionHint1" class="accordion challenge-accordion accordion-flush">
-<div class="accordion-item">
-<button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint1" aria-expanded="false" aria-controls="collapseHint1">
-  <h4 class="accordion-header" id="headingHint1"> Give me a hint </h4>
-</button>
-<div id="collapseHint1" class="accordion-collapse collapse" aria-labelledby="headingHint1" data-bs-parent="#accordionHint1">
-<div class="accordion-body">
-<p>You can use a GET request to the “$ELAB_API_HOST/experiments”
-endpoint to list all experiments and find the ID of the one you just
-created.</p>
-</div>
-</div>
-</div>
-</div>
-<div id="accordionHint2" class="accordion challenge-accordion accordion-flush">
-<div class="accordion-item">
-<button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint2" aria-expanded="false" aria-controls="collapseHint2">
-  <h4 class="accordion-header" id="headingHint2"> Give me a hint </h4>
-</button>
-<div id="collapseHint2" class="accordion-collapse collapse" aria-labelledby="headingHint2" data-bs-parent="#accordionHint2">
-<div class="accordion-body">
-<p><a href="https://doc.elabftw.net/api/elabapi-html/#api-LinksToExperiments" class="external-link">Read
-the docs for LinksToExperiments</a></p>
-</div>
-</div>
-</div>
-</div>
-<div id="challenge2" class="callout challenge">
-<div class="callout-square">
-<i class="callout-icon" data-feather="zap"></i>
-</div>
-<span class="callout-header">Challenge</span>
-<div class="callout-inner">
-<h3 class="callout-title">Challenge<em> (continued)</em>
-</h3>
-<div class="callout-content">
-<div class="codewrapper sourceCode" id="cb6">
-<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" tabindex="-1" aria-label="code-block-6-1"></a><span class="ex">curl</span> <span class="at">-X</span> POST <span class="dt">\</span></span>
-<span id="cb6-2"><a href="#cb6-2" tabindex="-1" aria-label="code-block-6-2"></a>   <span class="at">-H</span> <span class="st">"Authorization: </span><span class="va">$ELAB_API_KEY</span><span class="st">"</span> <span class="dt">\</span></span>
-<span id="cb6-3"><a href="#cb6-3" tabindex="-1" aria-label="code-block-6-3"></a>   <span class="at">-H</span> <span class="st">"Accept: application/json"</span> <span class="dt">\</span></span>
-<span id="cb6-4"><a href="#cb6-4" tabindex="-1" aria-label="code-block-6-4"></a>   <span class="at">-H</span> <span class="st">"Content-Type: application/json"</span> <span class="dt">\</span></span>
-<span id="cb6-5"><a href="#cb6-5" tabindex="-1" aria-label="code-block-6-5"></a>   <span class="st">"</span><span class="va">$ELAB_API_HOST</span><span class="st">/items/144/experiment/{your_exp_id}"</span></span></code></pre>
-</div>
-</div>
-</div>
-</div>
-<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
-<div class="accordion-item">
-<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
-  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
-</button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
-<div class="accordion-body">
-
-</div>
-</div>
-</div>
-</div>
-<div id="challenge3" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
@@ -711,15 +654,134 @@ imagined.</p>
 </div>
 </div>
 </div>
-<div id="accordionHint3" class="accordion challenge-accordion accordion-flush">
+<div id="accordionHint1" class="accordion challenge-accordion accordion-flush">
 <div class="accordion-item">
-<button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint3" aria-expanded="false" aria-controls="collapseHint3">
-  <h4 class="accordion-header" id="headingHint3"> Give me a hint </h4>
+<button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint1" aria-expanded="false" aria-controls="collapseHint1">
+  <h4 class="accordion-header" id="headingHint1"> Give me a hint </h4>
 </button>
-<div id="collapseHint3" class="accordion-collapse collapse" aria-labelledby="headingHint3" data-bs-parent="#accordionHint3">
+<div id="collapseHint1" class="accordion-collapse collapse" aria-labelledby="headingHint1" data-bs-parent="#accordionHint1">
 <div class="accordion-body">
 <p>Look for the <code>location</code> in the response from your last
 call to get the ID.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div class="accordion-body">
+<p>The <code>POST</code> response includes the URL of the new experiment
+in its <code>Location</code> header. Copy the experiment ID from that
+URL, then use it in a <code>GET</code> request:</p>
+<div class="codewrapper sourceCode" id="cb6">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" tabindex="-1" aria-label="code-block-6-1"></a><span class="ex">curl</span> <span class="at">-X</span> GET <span class="dt">\</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1" aria-label="code-block-6-2"></a>   <span class="at">-H</span> <span class="st">"Authorization: </span><span class="va">$ELAB_API_KEY</span><span class="st">"</span> <span class="dt">\</span></span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1" aria-label="code-block-6-3"></a>   <span class="at">-H</span> <span class="st">"Accept: application/json"</span> <span class="dt">\</span></span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1" aria-label="code-block-6-4"></a>   <span class="st">"</span><span class="va">$ELAB_API_HOST</span><span class="st">/experiments/&lt;EXPERIMENT_ID&gt;"</span></span></code></pre>
+</div>
+<p>This prints the JSON response directly in the terminal. The response
+should contain the experiment title and body, its creation and
+modification details, the permission settings, and the values in
+<code>metadata.extra_fields</code>.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="callout4" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<span class="callout-header">Callout</span>
+<div class="callout-inner">
+<div class="callout-content">
+<p><strong>If you have admin rights</strong>, for more readable,
+indented JSON, you can pipe the response through <code>jq</code> :</p>
+<div class="codewrapper sourceCode" id="cb7">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" tabindex="-1" aria-label="code-block-7-1"></a><span class="ex">curl</span> <span class="at">-sS</span> <span class="dt">\</span></span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1" aria-label="code-block-7-2"></a>   <span class="at">-H</span> <span class="st">"Authorization: </span><span class="va">$ELAB_API_KEY</span><span class="st">"</span> <span class="dt">\</span></span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1" aria-label="code-block-7-3"></a>   <span class="at">-H</span> <span class="st">"Accept: application/json"</span> <span class="dt">\</span></span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1" aria-label="code-block-7-4"></a>   <span class="st">"</span><span class="va">$ELAB_API_HOST</span><span class="st">/experiments/&lt;EXPERIMENT_ID&gt;"</span> <span class="kw">|</span> <span class="ex">jq</span> .</span></code></pre>
+</div>
+<p>Here, <code>|</code> passes the response to <code>jq</code>, and
+<code>.</code> tells <code>jq</code> to display the complete JSON
+document. If <code>jq</code> is not installed, install it with one of
+these commands:</p>
+<div class="codewrapper sourceCode" id="cb8">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" tabindex="-1" aria-label="code-block-8-1"></a><span class="co"># macOS with Homebrew</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1" aria-label="code-block-8-2"></a><span class="ex">brew</span> install jq</span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1" aria-label="code-block-8-3"></a></span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1" aria-label="code-block-8-4"></a><span class="co"># Debian or Ubuntu</span></span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1" aria-label="code-block-8-5"></a><span class="fu">sudo</span> apt install jq</span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1" aria-label="code-block-8-6"></a></span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1" aria-label="code-block-8-7"></a><span class="co"># Windows PowerShell with winget</span></span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1" aria-label="code-block-8-8"></a><span class="ex">winget</span> install jqlang.jq</span></code></pre>
+</div>
+<p>On Windows PowerShell, use <code>curl.exe</code> rather than
+<code>curl</code> to call cURL explicitly, because <code>curl</code> may
+be an alias for a PowerShell command (shortened example):</p>
+<div class="codewrapper sourceCode" id="cb9">
+<h3 class="code-label">POWERSHELL<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode powershell" tabindex="0"><code class="sourceCode powershell"><span id="cb9-1"><a href="#cb9-1" tabindex="-1" aria-label="code-block-9-1"></a><span class="fu">curl</span><span class="op">.</span><span class="fu">exe</span> <span class="op">...</span> <span class="op">|</span> jq <span class="op">.</span></span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div id="challenge2" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<span class="callout-header">Challenge</span>
+<div class="callout-inner">
+<h3 class="callout-title">Challenge</h3>
+<div class="callout-content">
+<p>The below code intends to link the device resource <a href="https://elab.parks.web.gateway.ionos.coscine.dev/database.php?mode=view&amp;id=144" class="external-link"><strong>Bluetooth
+Infrared Thermometer</strong></a> to the experiment experiment created
+above.</p>
+<p>In it current state, it fails. What needs to be fixed?</p>
+</div>
+</div>
+</div>
+<div id="accordionHint2" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint2" aria-expanded="false" aria-controls="collapseHint2">
+  <h4 class="accordion-header" id="headingHint2"> Give me a hint </h4>
+</button>
+<div id="collapseHint2" class="accordion-collapse collapse" aria-labelledby="headingHint2" data-bs-parent="#accordionHint2">
+<div class="accordion-body">
+<p><a href="https://doc.elabftw.net/api/elabapi-html#api-LinksToItems-postEntityItemsLinks" class="external-link">Read
+the docs for LinksToItems</a></p>
+</div>
+</div>
+</div>
+</div>
+<div id="challenge3" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<span class="callout-header">Challenge</span>
+<div class="callout-inner">
+<h3 class="callout-title">Challenge<em> (continued)</em>
+</h3>
+<div class="callout-content">
+<div class="codewrapper sourceCode" id="cb10">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" tabindex="-1" aria-label="code-block-10-1"></a><span class="ex">curl</span> <span class="at">-X</span> POST <span class="dt">\</span></span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1" aria-label="code-block-10-2"></a>   <span class="at">-H</span> <span class="st">"Authorization: </span><span class="va">$ELAB_API_KEY</span><span class="st">"</span> <span class="dt">\</span></span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1" aria-label="code-block-10-3"></a>   <span class="at">-H</span> <span class="st">"Accept: application/json"</span> <span class="dt">\</span></span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1" aria-label="code-block-10-4"></a>   <span class="at">-H</span> <span class="st">"Content-Type: application/json"</span> <span class="dt">\</span></span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1" aria-label="code-block-10-5"></a>   <span class="st">"https://elab.parks.web.gateway.ionos.coscine.dev/items/144/experiment/id"</span></span></code></pre>
 </div>
 </div>
 </div>
@@ -731,65 +793,19 @@ call to get the ID.</p>
 </button>
 <div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
-<p>The <code>POST</code> response includes the URL of the new experiment
-in its <code>Location</code> header. Copy the experiment ID from that
-URL, then use it in a <code>GET</code> request:</p>
-<div class="codewrapper sourceCode" id="cb7">
+<p>Assuming the token has been setup in the environment (or you have
+modified the code accordingly), the code was missing
+<code>api/v2/</code> in the host url as well as the experiment id
+(modify with your id).</p>
+<div class="codewrapper sourceCode" id="cb11">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" tabindex="-1" aria-label="code-block-7-1"></a><span class="ex">curl</span> <span class="at">-X</span> GET <span class="dt">\</span></span>
-<span id="cb7-2"><a href="#cb7-2" tabindex="-1" aria-label="code-block-7-2"></a>   <span class="at">-H</span> <span class="st">"Authorization: </span><span class="va">$ELAB_API_KEY</span><span class="st">"</span> <span class="dt">\</span></span>
-<span id="cb7-3"><a href="#cb7-3" tabindex="-1" aria-label="code-block-7-3"></a>   <span class="at">-H</span> <span class="st">"Accept: application/json"</span> <span class="dt">\</span></span>
-<span id="cb7-4"><a href="#cb7-4" tabindex="-1" aria-label="code-block-7-4"></a>   <span class="st">"</span><span class="va">$ELAB_API_HOST</span><span class="st">/experiments/&lt;EXPERIMENT_ID&gt;"</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" tabindex="-1" aria-label="code-block-11-1"></a><span class="ex">curl</span> <span class="at">-X</span> POST <span class="dt">\</span></span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1" aria-label="code-block-11-2"></a>   <span class="at">-H</span> <span class="st">"Authorization: </span><span class="va">$ELAB_API_KEY</span><span class="st">"</span> <span class="dt">\</span></span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1" aria-label="code-block-11-3"></a>   <span class="at">-H</span> <span class="st">"Accept: application/json"</span> <span class="dt">\</span></span>
+<span id="cb11-4"><a href="#cb11-4" tabindex="-1" aria-label="code-block-11-4"></a>   <span class="at">-H</span> <span class="st">"Content-Type: application/json"</span> <span class="dt">\</span></span>
+<span id="cb11-5"><a href="#cb11-5" tabindex="-1" aria-label="code-block-11-5"></a>   <span class="st">"https://elab.parks.web.gateway.ionos.coscine.dev/api/v2/items/144/experiment/132"</span></span></code></pre>
 </div>
-<p>This prints the JSON response directly in the terminal. The response
-should contain the experiment title and body, its creation and
-modification details, the permission settings, and the values in
-<code>metadata.extra_fields</code>.</p>
-</div>
-</div>
-</div>
-</div>
-<div id="callout3" class="callout">
-<div class="callout-square">
-<i class="callout-icon" data-feather="bell"></i>
-</div>
-<span class="callout-header">Callout</span>
-<div class="callout-inner">
-<div class="callout-content">
-<p><strong>If you have admin rights</strong>, for more readable,
-indented JSON, you can pipe the response through <code>jq</code> :</p>
-<div class="codewrapper sourceCode" id="cb8">
-<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" tabindex="-1" aria-label="code-block-8-1"></a><span class="ex">curl</span> <span class="at">-sS</span> <span class="dt">\</span></span>
-<span id="cb8-2"><a href="#cb8-2" tabindex="-1" aria-label="code-block-8-2"></a>   <span class="at">-H</span> <span class="st">"Authorization: </span><span class="va">$ELAB_API_KEY</span><span class="st">"</span> <span class="dt">\</span></span>
-<span id="cb8-3"><a href="#cb8-3" tabindex="-1" aria-label="code-block-8-3"></a>   <span class="at">-H</span> <span class="st">"Accept: application/json"</span> <span class="dt">\</span></span>
-<span id="cb8-4"><a href="#cb8-4" tabindex="-1" aria-label="code-block-8-4"></a>   <span class="st">"</span><span class="va">$ELAB_API_HOST</span><span class="st">/experiments/&lt;EXPERIMENT_ID&gt;"</span> <span class="kw">|</span> <span class="ex">jq</span> .</span></code></pre>
-</div>
-<p>Here, <code>|</code> passes the response to <code>jq</code>, and
-<code>.</code> tells <code>jq</code> to display the complete JSON
-document. If <code>jq</code> is not installed, install it with one of
-these commands:</p>
-<div class="codewrapper sourceCode" id="cb9">
-<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" tabindex="-1" aria-label="code-block-9-1"></a><span class="co"># macOS with Homebrew</span></span>
-<span id="cb9-2"><a href="#cb9-2" tabindex="-1" aria-label="code-block-9-2"></a><span class="ex">brew</span> install jq</span>
-<span id="cb9-3"><a href="#cb9-3" tabindex="-1" aria-label="code-block-9-3"></a></span>
-<span id="cb9-4"><a href="#cb9-4" tabindex="-1" aria-label="code-block-9-4"></a><span class="co"># Debian or Ubuntu</span></span>
-<span id="cb9-5"><a href="#cb9-5" tabindex="-1" aria-label="code-block-9-5"></a><span class="fu">sudo</span> apt install jq</span>
-<span id="cb9-6"><a href="#cb9-6" tabindex="-1" aria-label="code-block-9-6"></a></span>
-<span id="cb9-7"><a href="#cb9-7" tabindex="-1" aria-label="code-block-9-7"></a><span class="co"># Windows PowerShell with winget</span></span>
-<span id="cb9-8"><a href="#cb9-8" tabindex="-1" aria-label="code-block-9-8"></a><span class="ex">winget</span> install jqlang.jq</span></code></pre>
-</div>
-<p>On Windows PowerShell, use <code>curl.exe</code> rather than
-<code>curl</code> to call cURL explicitly, because <code>curl</code> may
-be an alias for a PowerShell command (shortened example):</p>
-<div class="codewrapper sourceCode" id="cb10">
-<h3 class="code-label">POWERSHELL<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode powershell" tabindex="0"><code class="sourceCode powershell"><span id="cb10-1"><a href="#cb10-1" tabindex="-1" aria-label="code-block-10-1"></a><span class="fu">curl</span><span class="op">.</span><span class="fu">exe</span> <span class="op">...</span> <span class="op">|</span> jq <span class="op">.</span></span></code></pre>
 </div>
 </div>
 </div>
@@ -929,7 +945,7 @@ any links that you are not going to use.
   "url": "https://carpentries.github.io/workbench-template-md/instructor/02_API_cli.html",
   "identifier": "https://carpentries.github.io/workbench-template-md/instructor/02_API_cli.html",
   "dateCreated": "2026-10-13",
-  "dateModified": "2026-11-10",
+  "dateModified": "2026-11-12",
   "datePublished": "2026-11-12"
 }
 

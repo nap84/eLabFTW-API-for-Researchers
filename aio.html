@@ -473,6 +473,8 @@ server provided by its API.</li>
 </ul></section><section><h2 class="section-heading" id="the-elabftw-api">The eLabFTW API<a class="anchor" aria-label="anchor" href="#the-elabftw-api"></a>
 </h2>
 <hr class="half-width">
+<p><em>Note: we’ve included a notepad in your workshop folder that has
+some useful things, such as links, to copy and paste.</em></p>
 <p>eLabFTW’s API let’s you interact with the ELN, e.g., retrieve and
 write information from it, without using the graphical user interface
 (GUI). This is something you may want to do to create automated
@@ -510,7 +512,16 @@ examples in different programming languages and the parameters we can
 give our API request.</p>
 <figure><img src="fig/screenshot_postExperiments_HTMLdocs.png" alt="screenshot of the postExperiment API method" class="figure mx-auto d-block"><div class="figcaption">screenshot of the postExperiment API
 method</div>
-</figure></section><section><h2 class="section-heading" id="constructing-requests">Constructing Requests<a class="anchor" aria-label="anchor" href="#constructing-requests"></a>
+</figure><p>Looking at the description, a lot of this is similar to what we seen
+in the GUI: we have the body (main text), some permissions settings,
+category settings, and so on.</p>
+<p>On things to keep in mind is that, opposed to the GUI, we usually
+need to use an ID to indicate certain attributes. For example, we would
+not use the name of a category but it’s ID. One way to find these
+visually is in the address bar of our browser when we filter for certain
+attributes.</p>
+
+</section><section><h2 class="section-heading" id="constructing-requests">Constructing Requests<a class="anchor" aria-label="anchor" href="#constructing-requests"></a>
 </h2>
 <hr class="half-width">
 <p>The first time you see these types of docs pages, it may seem a bit
@@ -558,7 +569,7 @@ eLabFTW’s GUI (for normal users).</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>Most of the information can be find in the GUI. For example, the
 keyboard shortcut set in your user profile are:</p>
@@ -617,7 +628,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-02_API_cli"><p>Content from <a href="02_API_cli.html">The API in the Terminal</a></p>
 <hr>
-<p>Last updated on 2026-11-10 |
+<p>Last updated on 2026-11-12 |
 
         <a href="https://github.com/carpentries/workbench-template-md/edit/main/episodes/02_API_cli.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -713,8 +724,8 @@ select <code>Read/Write</code> from the permissions drop-down menu.</li>
 <li>click <code>Generate an API Key</code> <img src="fig/screenshot_elabftw_api_key.png" alt="screenshot showing how to generate an api key in in elabftw GUI" class="figure">
 </li>
 <li>Copy and paste this to the <code>secrets.env</code> file in your
-<code>research_computer/</code> folder for later use. It will only be
-shown once in the ELN’s GUI!</li>
+<code>workshop_data/scripts/</code> folder for later use. It will only
+be shown once in the ELN’s GUI!</li>
 </ol>
 <p>Now we can start editing the request:</p>
 <ol style="list-style-type: decimal">
@@ -763,32 +774,32 @@ easier and it is easier to catch problems.</p>
 <span class="callout-header">Callout</span>
 <div class="callout-inner">
 <div class="callout-content">
-<p>You can load the API key from a <code>secrets.env</code> file instead
-of pasting the secret into the command.</p>
-<p>Create such a file <strong>in the workshop directory</strong> and
-paste your token:</p>
+<p>You can load the API key from the <code>secrets.env</code> file
+instead of pasting the secret into the command.</p>
+<p>We’ve included a template in the workshop folder under
+<code>scripts/</code>. If you need to create one, it should look like
+this:</p>
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1" aria-label="code-block-1-1"></a><span class="va">ELAB_API_KEY</span><span class="op">=</span><span class="st">'YOUR_TOKEN_HERE'</span></span>
 <span id="cb1-2"><a href="#cb1-2" tabindex="-1" aria-label="code-block-1-2"></a><span class="va">ELAB_API_HOST</span><span class="op">=</span><span class="st">'https://elab.parks.web.gateway.ionos.coscine.dev/api/v2'</span></span></code></pre>
 </div>
-<p>From the <strong>workshop directory</strong>, run:</p>
+<p>To load them, from the <strong>workshop directory</strong>, run:</p>
 <div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1" aria-label="code-block-2-1"></a><span class="bu">set</span> <span class="at">-a</span></span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1" aria-label="code-block-2-2"></a><span class="bu">source</span> research_computer/secrets.env</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1" aria-label="code-block-2-2"></a><span class="bu">source</span> scripts/secrets.env</span>
 <span id="cb2-3"><a href="#cb2-3" tabindex="-1" aria-label="code-block-2-3"></a><span class="bu">set</span> +a</span></code></pre>
 </div>
 <p>This <code>set -a</code> turns the <strong>allexport</strong> option
 on, while <code>set +a</code> turns it off again. Alternative, you could
 set single variables with <code>export MY_VAR=value</code> without
 having to turn allexport on and off.</p>
-<p>The <code>secrets.env</code> file should contain
-<code>ELAB_API_KEY</code> and <code>ELAB_API_HOST</code>. The key is
-then available as the <code>$ELAB_API_KEY</code> environment variable.
-Use it in the request like this:</p>
+<p>The key and host is will now available as the
+<code>$ELAB_API_KEY</code> and <code>$ELAB_API_HOST</code> environment
+variable. Use it in the request like this:</p>
 <div class="codewrapper sourceCode" id="cb3">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -808,10 +819,12 @@ immediately hides these.</p>
 </div>
 </div>
 <p>Now, let’s make a new request and create an experiment:</p>
-<p>Scroll to the <a href="https://doc.elabftw.net/api/elabapi-html/#api-Experiments" class="external-link">Experiments</a>
+<p>In the HTML Docs, Scroll to the <a href="https://doc.elabftw.net/api/elabapi-html/#api-Experiments" class="external-link">Experiments</a>
 section on the left and click <a href="https://doc.elabftw.net/api/elabapi-html/#api-Experiments-postExperiment" class="external-link"><code>postExperiment</code></a>.
-Again, we will look at the cURL usage example and copy and paste it into
-our text editor. Similar to the steps above:</p>
+Posting basically means we are creating something new, while patch, for
+example, would mean we are modifying something. Again, we will look at
+the cURL usage example and copy and paste it into our text editor.
+Similar to the steps above:</p>
 <ol style="list-style-type: decimal">
 <li>Copy and paste your token to the terminal, replacing
 <code>[[apiKey]]</code>
@@ -820,7 +833,7 @@ our text editor. Similar to the steps above:</p>
 URL</li>
 <li>Add experiment info using the template below. Once done, add
 <code>\</code> at the end of the last line, <kbd>enter</kbd> for a new
-line and add <code>-d '{"title":"my api exp"}</code> (replace info in
+line and add <code>-d '{"title":"my api exp"}'</code> (replace info in
 curly brackets with the full data)</li>
 <li>Add <code>-i</code> (include) before <code>-X</code> (allows you to
 set HTTP method explicitly) in the top line. This ensures the response
@@ -830,7 +843,8 @@ is output.</li>
 </ol>
 <p>Note: Don’t forget to add spaces between the <code>\</code> and the
 end of the line.</p>
-<p>Template for data:</p>
+<p>Template for data - find this in
+<code>workshop_data/notepad.md</code>:</p>
 <p><em>Feel free to modify!</em></p>
 <div class="codewrapper sourceCode" id="cb4">
 <h3 class="code-label">JSON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -874,8 +888,8 @@ end of the line.</p>
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" tabindex="-1" aria-label="code-block-5-1"></a><span class="ex">curl</span> <span class="at">-i</span> <span class="at">-X</span> POST <span class="dt">\</span></span>
-<span id="cb5-2"><a href="#cb5-2" tabindex="-1" aria-label="code-block-5-2"></a>    <span class="at">-H</span> <span class="st">"Authorization: </span><span class="va">$ELAB_API_KEY</span><span class="st">"</span> <span class="dt">\</span></span>
-<span id="cb5-3"><a href="#cb5-3" tabindex="-1" aria-label="code-block-5-3"></a>    <span class="at">-H</span> <span class="st">"Accept: application/json"</span> <span class="dt">\</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1" aria-label="code-block-5-2"></a>    <span class="at">-H</span> <span class="st">"Authorization: </span><span class="va">$ELAB_API_KEY</span><span class="st">"</span> <span class="dt">\ </span></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1" aria-label="code-block-5-3"></a>    <span class="ex">-H</span> <span class="st">"Accept: application/json"</span> <span class="dt">\</span></span>
 <span id="cb5-4"><a href="#cb5-4" tabindex="-1" aria-label="code-block-5-4"></a>    <span class="at">-H</span> <span class="st">"Content-Type: application/json"</span> <span class="dt">\</span></span>
 <span id="cb5-5"><a href="#cb5-5" tabindex="-1" aria-label="code-block-5-5"></a>    <span class="at">-d</span> <span class="st">'{</span></span>
 <span id="cb5-6"><a href="#cb5-6" tabindex="-1" aria-label="code-block-5-6"></a><span class="st">   "title": "Temperature calibration",</span></span>
@@ -910,84 +924,24 @@ end of the line.</p>
 <span id="cb5-35"><a href="#cb5-35" tabindex="-1" aria-label="code-block-5-35"></a><span class="st">      }</span></span>
 <span id="cb5-36"><a href="#cb5-36" tabindex="-1" aria-label="code-block-5-36"></a><span class="st">   }</span></span>
 <span id="cb5-37"><a href="#cb5-37" tabindex="-1" aria-label="code-block-5-37"></a><span class="st">}'</span> <span class="dt">\</span></span>
-<span id="cb5-38"><a href="#cb5-38" tabindex="-1" aria-label="code-block-5-38"></a>   <span class="st">"</span><span class="va">$ELAB_API_HOST</span><span class="st">/experiments"</span></span></code></pre>
+<span id="cb5-38"><a href="#cb5-38" tabindex="-1" aria-label="code-block-5-38"></a>   <span class="st">"https://elab.parks.web.gateway.ionos.coscine.dev/api/v2/experiments"</span></span></code></pre>
+</div>
+<p>If we run the code without the <code>-i</code> it will run all the
+same, but will not output any information.</p>
+<div id="callout3" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<span class="callout-header">Callout</span>
+<div class="callout-inner">
+<div class="callout-content">
+<p>Code pieces such as <code>-i</code> are called <em>flags</em> or
+<em>options</em>. Find out more in the <a href="https://curl.se/docs/manpage.html" class="external-link">cURL Documentation Man
+Page</a>.</p>
+</div>
+</div>
 </div>
 <div id="challenge1" class="callout challenge">
-<div class="callout-square">
-<i class="callout-icon" data-feather="zap"></i>
-</div>
-<span class="callout-header">Challenge</span>
-<div class="callout-inner">
-<h3 class="callout-title">Challenge</h3>
-<div class="callout-content">
-<p>The below code intends to link the device resource <a href="https://elab.parks.web.gateway.ionos.coscine.dev/database.php?mode=view&amp;id=144" class="external-link"><strong>Bluetooth
-Infrared Thermometer</strong></a> to the experiment experiment created
-above.</p>
-<p>In it current state, it fails. What needs to be fixed?</p>
-</div>
-</div>
-</div>
-<div id="accordionHint1" class="accordion challenge-accordion accordion-flush">
-<div class="accordion-item">
-<button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint1" aria-expanded="false" aria-controls="collapseHint1">
-  <h4 class="accordion-header" id="headingHint1"> Give me a hint </h4>
-</button>
-<div id="collapseHint1" class="accordion-collapse collapse" aria-labelledby="headingHint1" data-bs-parent="#accordionHint1">
-<div class="accordion-body">
-<p>You can use a GET request to the “$ELAB_API_HOST/experiments”
-endpoint to list all experiments and find the ID of the one you just
-created.</p>
-</div>
-</div>
-</div>
-</div>
-<div id="accordionHint2" class="accordion challenge-accordion accordion-flush">
-<div class="accordion-item">
-<button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint2" aria-expanded="false" aria-controls="collapseHint2">
-  <h4 class="accordion-header" id="headingHint2"> Give me a hint </h4>
-</button>
-<div id="collapseHint2" class="accordion-collapse collapse" aria-labelledby="headingHint2" data-bs-parent="#accordionHint2">
-<div class="accordion-body">
-<p><a href="https://doc.elabftw.net/api/elabapi-html/#api-LinksToExperiments" class="external-link">Read
-the docs for LinksToExperiments</a></p>
-</div>
-</div>
-</div>
-</div>
-<div id="challenge2" class="callout challenge">
-<div class="callout-square">
-<i class="callout-icon" data-feather="zap"></i>
-</div>
-<span class="callout-header">Challenge</span>
-<div class="callout-inner">
-<h3 class="callout-title">Challenge<em> (continued)</em>
-</h3>
-<div class="callout-content">
-<div class="codewrapper sourceCode" id="cb6">
-<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" tabindex="-1" aria-label="code-block-6-1"></a><span class="ex">curl</span> <span class="at">-X</span> POST <span class="dt">\</span></span>
-<span id="cb6-2"><a href="#cb6-2" tabindex="-1" aria-label="code-block-6-2"></a>   <span class="at">-H</span> <span class="st">"Authorization: </span><span class="va">$ELAB_API_KEY</span><span class="st">"</span> <span class="dt">\</span></span>
-<span id="cb6-3"><a href="#cb6-3" tabindex="-1" aria-label="code-block-6-3"></a>   <span class="at">-H</span> <span class="st">"Accept: application/json"</span> <span class="dt">\</span></span>
-<span id="cb6-4"><a href="#cb6-4" tabindex="-1" aria-label="code-block-6-4"></a>   <span class="at">-H</span> <span class="st">"Content-Type: application/json"</span> <span class="dt">\</span></span>
-<span id="cb6-5"><a href="#cb6-5" tabindex="-1" aria-label="code-block-6-5"></a>   <span class="st">"</span><span class="va">$ELAB_API_HOST</span><span class="st">/items/144/experiment/{your_exp_id}"</span></span></code></pre>
-</div>
-</div>
-</div>
-</div>
-<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
-<div class="accordion-item">
-<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
-  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
-</button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
-<div class="accordion-body">
-
-</div>
-</div>
-</div>
-</div>
-<div id="challenge3" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
@@ -1002,15 +956,134 @@ imagined.</p>
 </div>
 </div>
 </div>
-<div id="accordionHint3" class="accordion challenge-accordion accordion-flush">
+<div id="accordionHint1" class="accordion challenge-accordion accordion-flush">
 <div class="accordion-item">
-<button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint3" aria-expanded="false" aria-controls="collapseHint3">
-  <h4 class="accordion-header" id="headingHint3"> Give me a hint </h4>
+<button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint1" aria-expanded="false" aria-controls="collapseHint1">
+  <h4 class="accordion-header" id="headingHint1"> Give me a hint </h4>
 </button>
-<div id="collapseHint3" class="accordion-collapse collapse" aria-labelledby="headingHint3" data-bs-parent="#accordionHint3">
+<div id="collapseHint1" class="accordion-collapse collapse" aria-labelledby="headingHint1" data-bs-parent="#accordionHint1">
 <div class="accordion-body">
 <p>Look for the <code>location</code> in the response from your last
 call to get the ID.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div class="accordion-body">
+<p>The <code>POST</code> response includes the URL of the new experiment
+in its <code>Location</code> header. Copy the experiment ID from that
+URL, then use it in a <code>GET</code> request:</p>
+<div class="codewrapper sourceCode" id="cb6">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" tabindex="-1" aria-label="code-block-6-1"></a><span class="ex">curl</span> <span class="at">-X</span> GET <span class="dt">\</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1" aria-label="code-block-6-2"></a>   <span class="at">-H</span> <span class="st">"Authorization: </span><span class="va">$ELAB_API_KEY</span><span class="st">"</span> <span class="dt">\</span></span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1" aria-label="code-block-6-3"></a>   <span class="at">-H</span> <span class="st">"Accept: application/json"</span> <span class="dt">\</span></span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1" aria-label="code-block-6-4"></a>   <span class="st">"</span><span class="va">$ELAB_API_HOST</span><span class="st">/experiments/&lt;EXPERIMENT_ID&gt;"</span></span></code></pre>
+</div>
+<p>This prints the JSON response directly in the terminal. The response
+should contain the experiment title and body, its creation and
+modification details, the permission settings, and the values in
+<code>metadata.extra_fields</code>.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="callout4" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<span class="callout-header">Callout</span>
+<div class="callout-inner">
+<div class="callout-content">
+<p><strong>If you have admin rights</strong>, for more readable,
+indented JSON, you can pipe the response through <code>jq</code> :</p>
+<div class="codewrapper sourceCode" id="cb7">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" tabindex="-1" aria-label="code-block-7-1"></a><span class="ex">curl</span> <span class="at">-sS</span> <span class="dt">\</span></span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1" aria-label="code-block-7-2"></a>   <span class="at">-H</span> <span class="st">"Authorization: </span><span class="va">$ELAB_API_KEY</span><span class="st">"</span> <span class="dt">\</span></span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1" aria-label="code-block-7-3"></a>   <span class="at">-H</span> <span class="st">"Accept: application/json"</span> <span class="dt">\</span></span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1" aria-label="code-block-7-4"></a>   <span class="st">"</span><span class="va">$ELAB_API_HOST</span><span class="st">/experiments/&lt;EXPERIMENT_ID&gt;"</span> <span class="kw">|</span> <span class="ex">jq</span> .</span></code></pre>
+</div>
+<p>Here, <code>|</code> passes the response to <code>jq</code>, and
+<code>.</code> tells <code>jq</code> to display the complete JSON
+document. If <code>jq</code> is not installed, install it with one of
+these commands:</p>
+<div class="codewrapper sourceCode" id="cb8">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" tabindex="-1" aria-label="code-block-8-1"></a><span class="co"># macOS with Homebrew</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1" aria-label="code-block-8-2"></a><span class="ex">brew</span> install jq</span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1" aria-label="code-block-8-3"></a></span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1" aria-label="code-block-8-4"></a><span class="co"># Debian or Ubuntu</span></span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1" aria-label="code-block-8-5"></a><span class="fu">sudo</span> apt install jq</span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1" aria-label="code-block-8-6"></a></span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1" aria-label="code-block-8-7"></a><span class="co"># Windows PowerShell with winget</span></span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1" aria-label="code-block-8-8"></a><span class="ex">winget</span> install jqlang.jq</span></code></pre>
+</div>
+<p>On Windows PowerShell, use <code>curl.exe</code> rather than
+<code>curl</code> to call cURL explicitly, because <code>curl</code> may
+be an alias for a PowerShell command (shortened example):</p>
+<div class="codewrapper sourceCode" id="cb9">
+<h3 class="code-label">POWERSHELL<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode powershell" tabindex="0"><code class="sourceCode powershell"><span id="cb9-1"><a href="#cb9-1" tabindex="-1" aria-label="code-block-9-1"></a><span class="fu">curl</span><span class="op">.</span><span class="fu">exe</span> <span class="op">...</span> <span class="op">|</span> jq <span class="op">.</span></span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div id="challenge2" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<span class="callout-header">Challenge</span>
+<div class="callout-inner">
+<h3 class="callout-title">Challenge</h3>
+<div class="callout-content">
+<p>The below code intends to link the device resource <a href="https://elab.parks.web.gateway.ionos.coscine.dev/database.php?mode=view&amp;id=144" class="external-link"><strong>Bluetooth
+Infrared Thermometer</strong></a> to the experiment experiment created
+above.</p>
+<p>In it current state, it fails. What needs to be fixed?</p>
+</div>
+</div>
+</div>
+<div id="accordionHint2" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint2" aria-expanded="false" aria-controls="collapseHint2">
+  <h4 class="accordion-header" id="headingHint2"> Give me a hint </h4>
+</button>
+<div id="collapseHint2" class="accordion-collapse collapse" aria-labelledby="headingHint2" data-bs-parent="#accordionHint2">
+<div class="accordion-body">
+<p><a href="https://doc.elabftw.net/api/elabapi-html#api-LinksToItems-postEntityItemsLinks" class="external-link">Read
+the docs for LinksToItems</a></p>
+</div>
+</div>
+</div>
+</div>
+<div id="challenge3" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<span class="callout-header">Challenge</span>
+<div class="callout-inner">
+<h3 class="callout-title">Challenge<em> (continued)</em>
+</h3>
+<div class="callout-content">
+<div class="codewrapper sourceCode" id="cb10">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" tabindex="-1" aria-label="code-block-10-1"></a><span class="ex">curl</span> <span class="at">-X</span> POST <span class="dt">\</span></span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1" aria-label="code-block-10-2"></a>   <span class="at">-H</span> <span class="st">"Authorization: </span><span class="va">$ELAB_API_KEY</span><span class="st">"</span> <span class="dt">\</span></span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1" aria-label="code-block-10-3"></a>   <span class="at">-H</span> <span class="st">"Accept: application/json"</span> <span class="dt">\</span></span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1" aria-label="code-block-10-4"></a>   <span class="at">-H</span> <span class="st">"Content-Type: application/json"</span> <span class="dt">\</span></span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1" aria-label="code-block-10-5"></a>   <span class="st">"https://elab.parks.web.gateway.ionos.coscine.dev/items/144/experiment/id"</span></span></code></pre>
 </div>
 </div>
 </div>
@@ -1022,65 +1095,19 @@ call to get the ID.</p>
 </button>
 <div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
-<p>The <code>POST</code> response includes the URL of the new experiment
-in its <code>Location</code> header. Copy the experiment ID from that
-URL, then use it in a <code>GET</code> request:</p>
-<div class="codewrapper sourceCode" id="cb7">
+<p>Assuming the token has been setup in the environment (or you have
+modified the code accordingly), the code was missing
+<code>api/v2/</code> in the host url as well as the experiment id
+(modify with your id).</p>
+<div class="codewrapper sourceCode" id="cb11">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" tabindex="-1" aria-label="code-block-7-1"></a><span class="ex">curl</span> <span class="at">-X</span> GET <span class="dt">\</span></span>
-<span id="cb7-2"><a href="#cb7-2" tabindex="-1" aria-label="code-block-7-2"></a>   <span class="at">-H</span> <span class="st">"Authorization: </span><span class="va">$ELAB_API_KEY</span><span class="st">"</span> <span class="dt">\</span></span>
-<span id="cb7-3"><a href="#cb7-3" tabindex="-1" aria-label="code-block-7-3"></a>   <span class="at">-H</span> <span class="st">"Accept: application/json"</span> <span class="dt">\</span></span>
-<span id="cb7-4"><a href="#cb7-4" tabindex="-1" aria-label="code-block-7-4"></a>   <span class="st">"</span><span class="va">$ELAB_API_HOST</span><span class="st">/experiments/&lt;EXPERIMENT_ID&gt;"</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" tabindex="-1" aria-label="code-block-11-1"></a><span class="ex">curl</span> <span class="at">-X</span> POST <span class="dt">\</span></span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1" aria-label="code-block-11-2"></a>   <span class="at">-H</span> <span class="st">"Authorization: </span><span class="va">$ELAB_API_KEY</span><span class="st">"</span> <span class="dt">\</span></span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1" aria-label="code-block-11-3"></a>   <span class="at">-H</span> <span class="st">"Accept: application/json"</span> <span class="dt">\</span></span>
+<span id="cb11-4"><a href="#cb11-4" tabindex="-1" aria-label="code-block-11-4"></a>   <span class="at">-H</span> <span class="st">"Content-Type: application/json"</span> <span class="dt">\</span></span>
+<span id="cb11-5"><a href="#cb11-5" tabindex="-1" aria-label="code-block-11-5"></a>   <span class="st">"https://elab.parks.web.gateway.ionos.coscine.dev/api/v2/items/144/experiment/132"</span></span></code></pre>
 </div>
-<p>This prints the JSON response directly in the terminal. The response
-should contain the experiment title and body, its creation and
-modification details, the permission settings, and the values in
-<code>metadata.extra_fields</code>.</p>
-</div>
-</div>
-</div>
-</div>
-<div id="callout3" class="callout">
-<div class="callout-square">
-<i class="callout-icon" data-feather="bell"></i>
-</div>
-<span class="callout-header">Callout</span>
-<div class="callout-inner">
-<div class="callout-content">
-<p><strong>If you have admin rights</strong>, for more readable,
-indented JSON, you can pipe the response through <code>jq</code> :</p>
-<div class="codewrapper sourceCode" id="cb8">
-<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" tabindex="-1" aria-label="code-block-8-1"></a><span class="ex">curl</span> <span class="at">-sS</span> <span class="dt">\</span></span>
-<span id="cb8-2"><a href="#cb8-2" tabindex="-1" aria-label="code-block-8-2"></a>   <span class="at">-H</span> <span class="st">"Authorization: </span><span class="va">$ELAB_API_KEY</span><span class="st">"</span> <span class="dt">\</span></span>
-<span id="cb8-3"><a href="#cb8-3" tabindex="-1" aria-label="code-block-8-3"></a>   <span class="at">-H</span> <span class="st">"Accept: application/json"</span> <span class="dt">\</span></span>
-<span id="cb8-4"><a href="#cb8-4" tabindex="-1" aria-label="code-block-8-4"></a>   <span class="st">"</span><span class="va">$ELAB_API_HOST</span><span class="st">/experiments/&lt;EXPERIMENT_ID&gt;"</span> <span class="kw">|</span> <span class="ex">jq</span> .</span></code></pre>
-</div>
-<p>Here, <code>|</code> passes the response to <code>jq</code>, and
-<code>.</code> tells <code>jq</code> to display the complete JSON
-document. If <code>jq</code> is not installed, install it with one of
-these commands:</p>
-<div class="codewrapper sourceCode" id="cb9">
-<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" tabindex="-1" aria-label="code-block-9-1"></a><span class="co"># macOS with Homebrew</span></span>
-<span id="cb9-2"><a href="#cb9-2" tabindex="-1" aria-label="code-block-9-2"></a><span class="ex">brew</span> install jq</span>
-<span id="cb9-3"><a href="#cb9-3" tabindex="-1" aria-label="code-block-9-3"></a></span>
-<span id="cb9-4"><a href="#cb9-4" tabindex="-1" aria-label="code-block-9-4"></a><span class="co"># Debian or Ubuntu</span></span>
-<span id="cb9-5"><a href="#cb9-5" tabindex="-1" aria-label="code-block-9-5"></a><span class="fu">sudo</span> apt install jq</span>
-<span id="cb9-6"><a href="#cb9-6" tabindex="-1" aria-label="code-block-9-6"></a></span>
-<span id="cb9-7"><a href="#cb9-7" tabindex="-1" aria-label="code-block-9-7"></a><span class="co"># Windows PowerShell with winget</span></span>
-<span id="cb9-8"><a href="#cb9-8" tabindex="-1" aria-label="code-block-9-8"></a><span class="ex">winget</span> install jqlang.jq</span></code></pre>
-</div>
-<p>On Windows PowerShell, use <code>curl.exe</code> rather than
-<code>curl</code> to call cURL explicitly, because <code>curl</code> may
-be an alias for a PowerShell command (shortened example):</p>
-<div class="codewrapper sourceCode" id="cb10">
-<h3 class="code-label">POWERSHELL<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode powershell" tabindex="0"><code class="sourceCode powershell"><span id="cb10-1"><a href="#cb10-1" tabindex="-1" aria-label="code-block-10-1"></a><span class="fu">curl</span><span class="op">.</span><span class="fu">exe</span> <span class="op">...</span> <span class="op">|</span> jq <span class="op">.</span></span></code></pre>
 </div>
 </div>
 </div>
@@ -1164,7 +1191,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-03_python_jupyter"><p>Content from <a href="03_python_jupyter.html">Using the API with Python in Jupyter Notebooks</a></p>
 <hr>
-<p>Last updated on 2026-11-06 |
+<p>Last updated on 2026-11-12 |
 
         <a href="https://github.com/carpentries/workbench-template-md/edit/main/episodes/03_python_jupyter.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -1225,9 +1252,15 @@ compiled extensions or off‑load heavy work to specialized tools.</li>
 </ul></section><section><h2 class="section-heading" id="what-is-a-jupyter-notebook">What is a Jupyter Notebook<a class="anchor" aria-label="anchor" href="#what-is-a-jupyter-notebook"></a>
 </h2>
 <hr class="half-width">
+<p>Let’s open a new Jupyter Notebook called
+<code>ep_3_python_jupyter.ipynb</code>. In Jupyter Lab, you can do this
+by clicking the blue <code>+</code> button, and then clicking the Python
+tile under notebook. Right-click the newly created notebook to and
+select rename to rename it.</p>
+
 <p>A Jupyter Notebook is an interactive web‑based document that combines
 executable code, rich text, plots, and multimedia in a single, linear
-layout.You open it in a browser, but the Python (or other language)
+layout. You open it in a browser, but the Python (or other language)
 kernel runs on your computer (or on a remote server) and evaluates each
 cell on demand. Core concepts</p>
 <ul>
@@ -1252,10 +1285,10 @@ document results.</li>
 code. The notebook UI sends the cell’s source to the kernel, receives
 the result, and displays it. You can restart, interrupt, or switch
 kernels (e.g., Python 3, R) without leaving the notebook.</p></li>
-<li><p><strong>Output</strong> – Anything that a normal REPL would print
-can appear: plain text, JSON, tables, Matplotlib/Plotly figures, HTML,
-LaTeX‑rendered equations, or interactive widgets (sliders,
-drop‑downs).</p></li>
+<li><p><strong>Output</strong> – Anything that a normal read–eval–print
+loop (REPL) would print can appear: plain text, JSON, tables,
+Matplotlib/Plotly figures, HTML, LaTeX‑rendered equations, or
+interactive widgets (sliders, drop‑downs).</p></li>
 </ul></section><section><h2 class="section-heading" id="crash-course-python-basics">Crash course: Python Basics<a class="anchor" aria-label="anchor" href="#crash-course-python-basics"></a>
 </h2>
 <hr class="half-width">
@@ -1263,11 +1296,6 @@ drop‑downs).</p></li>
 <h3 id="printing-basic-data-types">1. Printing &amp; basic data types<a class="anchor" aria-label="anchor" href="#printing-basic-data-types"></a>
 </h3>
 
-<p>Let’s open a new Jupyter Notebook called
-<code>crash_course.ipynb</code>. In Jupyter Lab, you can do this by
-clicking the blue <code>+</code> button, and then clicking the Python
-tile under notebook. Right-click the newly created notebook to and
-select rename to rename it.</p>
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -1302,15 +1330,20 @@ select rename to rename it.</p>
 <div class="section level3">
 <h3 id="lists-ordered-collections">3. Lists (ordered collections)<a class="anchor" aria-label="anchor" href="#lists-ordered-collections"></a>
 </h3>
+<p>We can define lists of objects. They can be any type of data. For
+example strings (but they could also be mixed type).</p>
+<p>We can use indexing to retrieve items (starts at 0!), slice lists,
+and append new items.</p>
 <div class="codewrapper sourceCode" id="cb5">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" tabindex="-1" aria-label="code-block-5-1"></a>samples <span class="op">=</span> [<span class="st">"S1"</span>, <span class="st">"S2"</span>, <span class="st">"S3"</span>]   <span class="co"># create a list</span></span>
 <span id="cb5-2"><a href="#cb5-2" tabindex="-1" aria-label="code-block-5-2"></a><span class="bu">print</span>(samples[<span class="dv">0</span>])              <span class="co"># first element → "S1"</span></span>
-<span id="cb5-3"><a href="#cb5-3" tabindex="-1" aria-label="code-block-5-3"></a></span>
-<span id="cb5-4"><a href="#cb5-4" tabindex="-1" aria-label="code-block-5-4"></a><span class="co"># Append a new sample name</span></span>
-<span id="cb5-5"><a href="#cb5-5" tabindex="-1" aria-label="code-block-5-5"></a>samples.append(<span class="st">"S4"</span>)</span>
-<span id="cb5-6"><a href="#cb5-6" tabindex="-1" aria-label="code-block-5-6"></a><span class="bu">print</span>(samples)</span></code></pre>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1" aria-label="code-block-5-3"></a><span class="bu">print</span>(sample[<span class="dv">2</span>:<span class="dv">3</span>])             <span class="co"># slice, print part of list according to index</span></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1" aria-label="code-block-5-4"></a></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1" aria-label="code-block-5-5"></a><span class="co"># Append a new sample name</span></span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1" aria-label="code-block-5-6"></a>samples.append(<span class="st">"S4"</span>)</span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1" aria-label="code-block-5-7"></a><span class="bu">print</span>(samples)</span></code></pre>
 </div>
 <p><strong>Output</strong></p>
 <pre><code>S1
@@ -1319,6 +1352,17 @@ select rename to rename it.</p>
 <div class="section level3">
 <h3 id="loop-over-a-list-forloop-to-create-a-dictionary">4. Loop over a list (for‑loop) to create a dictionary<a class="anchor" aria-label="anchor" href="#loop-over-a-list-forloop-to-create-a-dictionary"></a>
 </h3>
+<p>We can iterate over a series, such as a list, to perform operations
+on each item. In this case, we have another data type, a dictionary,
+which is a collection of key:value pairs. We have a pattern where
+we:</p>
+<ol style="list-style-type: decimal">
+<li>Initialize an empty dictionary, which is done with curly
+braces.</li>
+<li>Iterate over the sample list.</li>
+<li>Assign the key (sample) in the dictionary a value (the length pf the
+sample name string).</li>
+</ol>
 <div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -1334,6 +1378,11 @@ select rename to rename it.</p>
 <div class="section level3">
 <h3 id="conditional-statements">5. Conditional statements<a class="anchor" aria-label="anchor" href="#conditional-statements"></a>
 </h3>
+<p>Conditional statements give you the option to check a condition. In
+<code>if</code>-statements, if this condition is true, the indented code
+block will be varied out. An <code>else</code>-statement can be used in
+combination with an <code>if</code> to provide instructions on what to
+do if the <code>if</code> fails.</p>
 <div class="codewrapper sourceCode" id="cb9">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -1356,15 +1405,18 @@ select rename to rename it.</p>
 <div class="codewrapper sourceCode" id="cb11">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" tabindex="-1" aria-label="code-block-11-1"></a><span class="kw">def</span> greet(name: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">str</span>:</span>
-<span id="cb11-2"><a href="#cb11-2" tabindex="-1" aria-label="code-block-11-2"></a>    <span class="co">"""Return a friendly greeting."""</span></span>
-<span id="cb11-3"><a href="#cb11-3" tabindex="-1" aria-label="code-block-11-3"></a>    <span class="cf">return</span> <span class="ss">f"Hello, </span><span class="sc">{</span>name<span class="sc">}</span><span class="ss">!"</span></span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" tabindex="-1" aria-label="code-block-11-1"></a><span class="kw">def</span> check_value(value, threshold):</span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1" aria-label="code-block-11-2"></a>  <span class="cf">if</span> value <span class="op">&gt;</span> threshold:</span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1" aria-label="code-block-11-3"></a>    <span class="cf">return</span> <span class="st">"value is larger"</span> </span>
+<span id="cb11-4"><a href="#cb11-4" tabindex="-1" aria-label="code-block-11-4"></a>  <span class="cf">else</span>:</span>
+<span id="cb11-5"><a href="#cb11-5" tabindex="-1" aria-label="code-block-11-5"></a>    <span class="cf">return</span> <span class="st">"value is smaller or equal"</span></span></code></pre>
 </div>
 <p>Then we can call them using their name and passing any required
 parameters in parentheses:</p>
-<pre><code><span><span class="fu">print</span><span class="op">(</span><span class="fu">greet</span><span class="op">(</span><span class="st">"Alice"</span><span class="op">)</span><span class="op">)</span></span></code></pre>
+<pre><code><span><span class="va">result</span> <span class="op">=</span> <span class="op">(</span><span class="fu">check_value</span><span class="op">(</span><span class="fl">7</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu">print</span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre>
 <p><strong>Output</strong></p>
-<pre><code>Hello, Alice!</code></pre>
+<pre><code><span><span class="st">'value is larger'</span></span></code></pre>
 <div class="section level4">
 <h4 id="built-in-functions">Built-in Functions<a class="anchor" aria-label="anchor" href="#built-in-functions"></a>
 </h4>
@@ -1415,7 +1467,15 @@ the length of things, such as, strings, lists, or dictionaries:</p>
 <pre><code><span><span class="fl">3</span></span></code></pre>
 <p>See the <a href="https://docs.python.org/3/builtins/functions.html" class="external-link">Python Docs on
 built-in functions</a>.</p>
-<!--TODO better challenge-->
+<p>Please note, we are working in a Jupyter Notebook and running text
+snippets. This is a great way to learn and explore data. If you were
+running automated scripts, you would write these in Python files, e.g.,
+<code>my_script.py</code> which can be run in the terminal</p>
+<div class="codewrapper sourceCode" id="cb20">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" tabindex="-1" aria-label="code-block-20-1"></a><span class="ex">python</span> my_script.py</span></code></pre>
+</div>
 <div id="challenge1" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
@@ -1425,15 +1485,17 @@ built-in functions</a>.</p>
 <h3 class="callout-title">Challenge</h3>
 <div class="callout-content">
 <p>What will be printed?</p>
-<div class="codewrapper sourceCode" id="cb20">
+<div class="codewrapper sourceCode" id="cb21">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" tabindex="-1" aria-label="code-block-20-1"></a>x <span class="op">=</span> <span class="dv">5</span></span>
-<span id="cb20-2"><a href="#cb20-2" tabindex="-1" aria-label="code-block-20-2"></a>x <span class="op">=</span> <span class="st">"five"</span></span>
-<span id="cb20-3"><a href="#cb20-3" tabindex="-1" aria-label="code-block-20-3"></a><span class="bu">print</span>(x)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" tabindex="-1" aria-label="code-block-21-1"></a><span class="kw">def</span> add_five(value):</span>
+<span id="cb21-2"><a href="#cb21-2" tabindex="-1" aria-label="code-block-21-2"></a>  <span class="cf">return</span> value <span class="op">+</span> <span class="dv">5</span></span>
+<span id="cb21-3"><a href="#cb21-3" tabindex="-1" aria-label="code-block-21-3"></a></span>
+<span id="cb21-4"><a href="#cb21-4" tabindex="-1" aria-label="code-block-21-4"></a>result <span class="op">=</span> add_five(<span class="dv">5</span>)</span>
+<span id="cb21-5"><a href="#cb21-5" tabindex="-1" aria-label="code-block-21-5"></a>next_value <span class="op">=</span> result <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb21-6"><a href="#cb21-6" tabindex="-1" aria-label="code-block-21-6"></a><span class="bu">print</span>(result)</span></code></pre>
 </div>
-<p>A. 5<br>
-B. five<br>
+<p>A. 11 B. 10<br>
 C. TypeError</p>
 </div>
 </div>
@@ -1445,8 +1507,9 @@ C. TypeError</p>
 </button>
 <div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
-<p><strong>B</strong> – Python variables are dynamically typed; the
-second assignment overwrites the first.</p>
+<p><strong>B</strong> – The function adds 5 to the passed value of 5,
+returning the value of 10. This returned valued is stored in
+<code>result</code> and doesn’t change afterwards.</p>
 </div>
 </div>
 </div>
@@ -1466,10 +1529,10 @@ docs selection page</a> by clicking
 <p>Here, we can find some examples and information such as installation.
 We will do something similar to what the page says and install it
 directly via our Jupyter Notebook:</p>
-<div class="codewrapper sourceCode" id="cb21">
+<div class="codewrapper sourceCode" id="cb22">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" tabindex="-1" aria-label="code-block-21-1"></a><span class="ex">%pip</span> install elabapi-python</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" tabindex="-1" aria-label="code-block-22-1"></a><span class="ex">%pip</span> install elabapi-python</span></code></pre>
 </div>
 <div id="callout1" class="callout">
 <div class="callout-square">
@@ -1483,10 +1546,10 @@ is accessible to our notebook.</p>
 <p>To install it locally (e.g., if you are working outside of the
 Jupyter environment), open a terminal window and install via pip. This
 usually looks like:</p>
-<div class="codewrapper sourceCode" id="cb22">
+<div class="codewrapper sourceCode" id="cb23">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" tabindex="-1" aria-label="code-block-22-1"></a><span class="ex">pip</span> install elabapi-python</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" tabindex="-1" aria-label="code-block-23-1"></a><span class="ex">pip</span> install elabapi-python</span></code></pre>
 </div>
 <p>However, your Python and pip installation may use <code>pip3</code>
 instead of <code>pip</code>.</p>
@@ -1494,47 +1557,47 @@ instead of <code>pip</code>.</p>
 installation instructions</a>, it is highly recommended to work in a
 virtual environment. We recommend <a href="https://docs.astral.sh/uv/" class="external-link"><code>uv</code></a> for creating and
 managing these:</p>
-<div class="codewrapper sourceCode" id="cb23">
+<div class="codewrapper sourceCode" id="cb24">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" tabindex="-1" aria-label="code-block-23-1"></a><span class="bu">cd</span> researcher_user</span>
-<span id="cb23-2"><a href="#cb23-2" tabindex="-1" aria-label="code-block-23-2"></a><span class="ex">uv</span> init <span class="at">--bare</span> <span class="co"># initialize the project in the desired directory</span></span>
-<span id="cb23-3"><a href="#cb23-3" tabindex="-1" aria-label="code-block-23-3"></a><span class="ex">uv</span> add elabapi-python python-dotenv <span class="co"># add the API client and .env support</span></span>
-<span id="cb23-4"><a href="#cb23-4" tabindex="-1" aria-label="code-block-23-4"></a><span class="ex">uv</span> sync</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" tabindex="-1" aria-label="code-block-24-1"></a><span class="bu">cd</span> workshop_data <span class="co"># change directory folder (if not already in this folder)</span></span>
+<span id="cb24-2"><a href="#cb24-2" tabindex="-1" aria-label="code-block-24-2"></a><span class="ex">uv</span> init <span class="at">--bare</span> <span class="co"># initialize the project in the desired directory</span></span>
+<span id="cb24-3"><a href="#cb24-3" tabindex="-1" aria-label="code-block-24-3"></a><span class="ex">uv</span> add elabapi-python python-dotenv <span class="co"># add the API client and .env support</span></span>
+<span id="cb24-4"><a href="#cb24-4" tabindex="-1" aria-label="code-block-24-4"></a><span class="ex">uv</span> sync</span></code></pre>
 </div>
 <p>The package <code>elabapi-python</code> is imported as
 <code>elabapi_python</code>, and <code>python-dotenv</code> is imported
-as <code>dotenv</code> in <code>client.py</code>. Ensure you have added
-your credentials and the URL to a <code>.env</code> (or
-<code>secrets.env</code>) file.</p>
+as <code>dotenv</code> in <code>client.py</code> (we will get to that
+script in a minute). Ensure you have added your credentials and the URL
+to a <code>.env</code> (or <code>secrets.env</code>) file.</p>
 </div>
 </div>
 </div>
 <p>Once downloaded, we need to import the library into our notebook or
 scripts:</p>
-<div class="codewrapper sourceCode" id="cb24">
+<div class="codewrapper sourceCode" id="cb25">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" tabindex="-1" aria-label="code-block-24-1"></a><span class="im">import</span> elabapi_python</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" tabindex="-1" aria-label="code-block-25-1"></a><span class="im">import</span> elabapi_python</span></code></pre>
 </div>
 <p>Python does not allow dashes, therefore, this is replaced with an
 underscore when calling the library.</p>
 <p>To get basic help on any Python library in Jupyter, we can use the
 <code>help()</code> function. For example, to get help on the
 <code>elabapi_python</code> library, we can run:</p>
-<div class="codewrapper sourceCode" id="cb25">
+<div class="codewrapper sourceCode" id="cb26">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" tabindex="-1" aria-label="code-block-25-1"></a><span class="bu">help</span>(elabapi_python)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" tabindex="-1" aria-label="code-block-26-1"></a><span class="bu">help</span>(elabapi_python)</span></code></pre>
 </div>
 <p>Honestly, for this specific case, the help output is not extremely
 helpful. However, it does give us some information on the library. We
 can also use the <code>dir()</code> function to get a list of all the
 functions in the library:</p>
-<div class="codewrapper sourceCode" id="cb26">
+<div class="codewrapper sourceCode" id="cb27">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" tabindex="-1" aria-label="code-block-26-1"></a><span class="bu">dir</span>(elabapi_python)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" tabindex="-1" aria-label="code-block-27-1"></a><span class="bu">dir</span>(elabapi_python)</span></code></pre>
 </div>
 <p>If we start the <a href="https://doc.elabftw.net/api/" class="external-link">API docs</a>
 again and click on <code>Python Library (v2)</code>, we get are taking
@@ -1549,30 +1612,43 @@ interact with the eLabFTW API. First, you set up the main one, which has
 already been done in <code>client.py</code>, then, you can create the
 others.</p>
 <p>We import the main api client into our notebook using:</p>
-<div class="codewrapper sourceCode" id="cb27">
-<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" tabindex="-1" aria-label="code-block-27-1"></a><span class="im">from</span> scripts.client <span class="im">import</span> api_client</span></code></pre>
-</div>
-<p>Note: ensure your are in the correct directory.</p>
-<p>You may get an error here for missing packages, especially
-dotenv:</p>
 <div class="codewrapper sourceCode" id="cb28">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" tabindex="-1" aria-label="code-block-28-1"></a><span class="op">%</span>pip install python<span class="op">-</span>dotenv</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" tabindex="-1" aria-label="code-block-28-1"></a><span class="im">from</span> scripts.client <span class="im">import</span> api_client</span></code></pre>
+</div>
+<p>Note: ensure your are in the correct directory,
+<code>workshop_data/</code>.</p>
+<div id="callout2" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<span class="callout-header">Callout</span>
+<div class="callout-inner">
+<div class="callout-content">
+<p>When writing, you can avoid a lot of spelling errors by using
+<kbd>tab</kbd> to get suggestions.</p>
+</div>
+</div>
+</div>
+<p>You may get an error here for missing packages, especially
+dotenv:</p>
+<div class="codewrapper sourceCode" id="cb29">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" tabindex="-1" aria-label="code-block-29-1"></a><span class="op">%</span>pip install python<span class="op">-</span>dotenv</span></code></pre>
 </div>
 <p>Let’s look at a couple examples in the GitHub repo.</p>
 <p>Check out <a href="https://github.com/elabftw/elabapi-python/blob/master/examples/00-getting-started.py" class="external-link">00_getting-started.py</a>.
 We can see an info client:</p>
-<div class="codewrapper sourceCode" id="cb29">
+<div class="codewrapper sourceCode" id="cb30">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" tabindex="-1" aria-label="code-block-29-1"></a>info_client <span class="op">=</span> elabapi_python.InfoApi(api_client)</span>
-<span id="cb29-2"><a href="#cb29-2" tabindex="-1" aria-label="code-block-29-2"></a>api_response <span class="op">=</span> info_client.get_info()</span>
-<span id="cb29-3"><a href="#cb29-3" tabindex="-1" aria-label="code-block-29-3"></a>api_response</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" tabindex="-1" aria-label="code-block-30-1"></a>info_client <span class="op">=</span> elabapi_python.InfoApi(api_client)</span>
+<span id="cb30-2"><a href="#cb30-2" tabindex="-1" aria-label="code-block-30-2"></a>api_response <span class="op">=</span> info_client.get_info()</span>
+<span id="cb30-3"><a href="#cb30-3" tabindex="-1" aria-label="code-block-30-3"></a>api_response</span></code></pre>
 </div>
-<div id="callout2" class="callout">
+<div id="callout3" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
@@ -1584,42 +1660,53 @@ using a <code>print()</code> statement. This only works for the last
 line of a cell, so if you want to see the output of multiple lines or
 when using in a script, you will need to use <code>print()</code>.</p>
 <p>For example:</p>
-<div class="codewrapper sourceCode" id="cb30">
-<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" tabindex="-1" aria-label="code-block-30-1"></a>api_response</span>
-<span id="cb30-2"><a href="#cb30-2" tabindex="-1" aria-label="code-block-30-2"></a><span class="dv">4</span></span></code></pre>
-</div>
-<p>will output the number 4.</p>
-<p>As opposed to:</p>
 <div class="codewrapper sourceCode" id="cb31">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" tabindex="-1" aria-label="code-block-31-1"></a><span class="bu">print</span>(api_response)</span>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" tabindex="-1" aria-label="code-block-31-1"></a>api_response</span>
 <span id="cb31-2"><a href="#cb31-2" tabindex="-1" aria-label="code-block-31-2"></a><span class="dv">4</span></span></code></pre>
+</div>
+<p>will output the number 4.</p>
+<p>As opposed to:</p>
+<div class="codewrapper sourceCode" id="cb32">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" tabindex="-1" aria-label="code-block-32-1"></a><span class="bu">print</span>(api_response)</span>
+<span id="cb32-2"><a href="#cb32-2" tabindex="-1" aria-label="code-block-32-2"></a><span class="dv">4</span></span></code></pre>
 </div>
 <p>which will output both <code>api_response</code> and the number
 4.</p>
 </div>
 </div>
 </div>
-<p>Back to the clients. Similarly, we can see an experiment client:</p>
-<div class="codewrapper sourceCode" id="cb32">
+<p>Back to the clients. We kind of see the pattern. We create a client
+for the methods we see in the <a href="https://doc.elabftw.net/api/elabapi-html/" class="external-link">HTML API Docs</a>, and
+then use the method. We can do the exact same thing we did before and
+get our own user info:</p>
+<div class="codewrapper sourceCode" id="cb33">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" tabindex="-1" aria-label="code-block-32-1"></a>exp_client <span class="op">=</span> elabapi_python.ExperimentsApi(api_client)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" tabindex="-1" aria-label="code-block-33-1"></a>users_client <span class="op">=</span> elabapi_python.UsersApi(api_client)</span>
+<span id="cb33-2"><a href="#cb33-2" tabindex="-1" aria-label="code-block-33-2"></a>me <span class="op">=</span> users_client.read_user(<span class="st">'me'</span>) <span class="co"># alternative would be to use an ID</span></span>
+<span id="cb33-3"><a href="#cb33-3" tabindex="-1" aria-label="code-block-33-3"></a>me</span></code></pre>
+</div>
+<p>Similarly, we can see an experiment client in the examples:</p>
+<div class="codewrapper sourceCode" id="cb34">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" tabindex="-1" aria-label="code-block-34-1"></a>exp_client <span class="op">=</span> elabapi_python.ExperimentsApi(api_client)</span></code></pre>
 </div>
 <p>Check out <a href="https://github.com/elabftw/elabapi-python/blob/master/examples/00-getting-started.py#L87" class="external-link">line
 87</a>, which shows us how we retrieve an experiment. Remember how we
 created and retrieved an experiment in the terminal using cURL? Let’s
 try the same thing here using the experiment ID from the last
 lesson.</p>
-<div class="codewrapper sourceCode" id="cb33">
+<div class="codewrapper sourceCode" id="cb35">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" tabindex="-1" aria-label="code-block-33-1"></a>exp_id <span class="op">=</span> <span class="dv">94</span> <span class="co"># example; replace with your experiment ID</span></span>
-<span id="cb33-2"><a href="#cb33-2" tabindex="-1" aria-label="code-block-33-2"></a>exp <span class="op">=</span> exp_client.get_experiment(exp_id)</span>
-<span id="cb33-3"><a href="#cb33-3" tabindex="-1" aria-label="code-block-33-3"></a><span class="bu">print</span>(exp)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" tabindex="-1" aria-label="code-block-35-1"></a>exp_id <span class="op">=</span> <span class="dv">94</span> <span class="co"># example; replace with your experiment ID</span></span>
+<span id="cb35-2"><a href="#cb35-2" tabindex="-1" aria-label="code-block-35-2"></a>exp <span class="op">=</span> exp_client.get_experiment(exp_id)</span>
+<span id="cb35-3"><a href="#cb35-3" tabindex="-1" aria-label="code-block-35-3"></a><span class="bu">print</span>(exp)</span></code></pre>
 </div>
 <p>You can see, this does the same things as we were doing before, but
 many of us find Python easier to read and understand than the terminal
@@ -1638,12 +1725,11 @@ eLabFTW? Create this client in your notebook and use it to:</p>
 <ol style="list-style-type: decimal">
 <li>Retrieve all resources (you have access to) from your eLabFTW
 instance.</li>
-<li>Retrieve the bluetooth thermometer resource (from the last
-episode).</li>
-</ol>
-<p>Hint: Look through the <a href="https://github.com/elabftw/elabapi-python/tree/master/examples" class="external-link">examples</a>
+<li>Retrieve the bluetooth thermometer resource (from the last episode).
+::::::: hint Look through the <a href="https://github.com/elabftw/elabapi-python/tree/master/examples" class="external-link">examples</a>
 and keep your eyes out for a different word than <em>resources</em>. We
-saw this in <a href="01_API">episode 01</a>, as well.</p>
+saw this in <a href="01_API">episode 01</a>, as well.</li>
+</ol>
 </div>
 </div>
 </div>
@@ -1656,29 +1742,30 @@ saw this in <a href="01_API">episode 01</a>, as well.</p>
 <div class="accordion-body">
 <p>An example can be found in <a href="https://github.com/elabftw/elabapi-python/blob/master/examples/05-create-modify-item.py" class="external-link">05-create-modify-item</a>
 in line 6:</p>
-<div class="codewrapper sourceCode" id="cb34">
-<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" tabindex="-1" aria-label="code-block-34-1"></a>itemsApi <span class="op">=</span> elabapi_python.ItemsApi(api_client)</span></code></pre>
-</div>
-<p>To retrieve and view all resources you have access to (1):</p>
-<div class="codewrapper sourceCode" id="cb35">
-<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" tabindex="-1" aria-label="code-block-35-1"></a>resources <span class="op">=</span> itemsApi.read_items()</span>
-<span id="cb35-2"><a href="#cb35-2" tabindex="-1" aria-label="code-block-35-2"></a>resources <span class="co"># outputs the resource to the jupyter notebook</span></span></code></pre>
-</div>
-<p>To retrieve a specific resource (2):</p>
 <div class="codewrapper sourceCode" id="cb36">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" tabindex="-1" aria-label="code-block-36-1"></a>resource <span class="op">=</span> itemsApi.get_item(<span class="dv">144</span>)</span>
-<span id="cb36-2"><a href="#cb36-2" tabindex="-1" aria-label="code-block-36-2"></a>resource <span class="co"># outputs the resource to the jupyter notebook</span></span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" tabindex="-1" aria-label="code-block-36-1"></a>itemsApi <span class="op">=</span> elabapi_python.ItemsApi(api_client)</span></code></pre>
+</div>
+<p>To retrieve and view all resources you have access to (1):</p>
+<div class="codewrapper sourceCode" id="cb37">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" tabindex="-1" aria-label="code-block-37-1"></a>resources <span class="op">=</span> itemsApi.read_items()</span>
+<span id="cb37-2"><a href="#cb37-2" tabindex="-1" aria-label="code-block-37-2"></a>resources <span class="co"># outputs the resource to the jupyter notebook</span></span></code></pre>
+</div>
+<p>To retrieve a specific resource (2):</p>
+<div class="codewrapper sourceCode" id="cb38">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" tabindex="-1" aria-label="code-block-38-1"></a>resource <span class="op">=</span> itemsApi.get_item(<span class="dv">144</span>)</span>
+<span id="cb38-2"><a href="#cb38-2" tabindex="-1" aria-label="code-block-38-2"></a>resource <span class="co"># outputs the resource to the jupyter notebook</span></span></code></pre>
 </div>
 </div>
 </div>
 </div>
 </div>
+<p>::::::::::::::::::::::::::::::::::::::::::::::::</p>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -2058,7 +2145,7 @@ episode on iteration</a></p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>You can use the same syntax as above to retrieve a an ID from a
 single experiment.</p>
@@ -2935,7 +3022,7 @@ on GitHub.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>The request we are making is a <code>patch</code> to an existing
 experiment. We need to tell the</p>
@@ -3196,7 +3283,7 @@ directly to the main text field using the API, please share!</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>Here is one possible solution. This assumes you start with a new
 notebook or write a Python script, so it includes all data imports and
@@ -3264,7 +3351,7 @@ resource)</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>Hints and places to start:</p>
 <ul>
