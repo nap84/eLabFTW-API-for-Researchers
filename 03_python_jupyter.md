@@ -24,7 +24,7 @@ exercises: 30 # exercise time in minutes
 
 ## What is Python?
 
-Python is a high‑level, interpreted programming language that was created in the early 1990s by Guido van Rossum.  It reads almost like plain English, which makes it especially attractive for people whose primary expertise is not computer science (e.g. biologists, chemists, physicists, engineers).  
+Python is a high‑level, interpreted programming language that was created in the early 1990s by Guido van Rossum. It reads almost like plain English, which makes it especially attractive for people whose primary expertise is not computer science (e.g. biologists, chemists, physicists, engineers).  
 
 When you run a Python script, the Python interpreter reads the source code line‑by‑line, translates it into byte‑code, and executes it on the fly – you do not need a separate compilation step.
 
@@ -34,7 +34,15 @@ When you run a Python script, the Python interpreter reads the source code line�
 
 ## What is a Jupyter Notebook
 
-A Jupyter Notebook is an interactive web‑based document that combines executable code, rich text, plots, and multimedia in a single, linear layout.You open it in a browser, but the Python (or other language) kernel runs on your computer (or on a remote server) and evaluates each cell on demand.
+Let's open a new Jupyter Notebook called `ep_3_python_jupyter.ipynb`. In Jupyter Lab, you can do this by clicking the blue `+` button, and then clicking the Python tile under notebook. Right-click the newly created notebook to and select rename to rename it.
+
+::::::::::::::::::::::::::::::::: instructor
+
+Use the opened notebook to show the points below.
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+A Jupyter Notebook is an interactive web‑based document that combines executable code, rich text, plots, and multimedia in a single, linear layout. You open it in a browser, but the Python (or other language) kernel runs on your computer (or on a remote server) and evaluates each cell on demand.
 Core concepts
 
 - **Cells** – The notebook is divided into blocks called cells.  
@@ -44,7 +52,7 @@ Core concepts
 
 - **Kernel** – A background process that executes the code. The notebook UI sends the cell’s source to the kernel, receives the result, and displays it. You can restart, interrupt, or switch kernels (e.g., Python 3, R) without leaving the notebook.
 
-- **Output** – Anything that a normal REPL would print can appear: plain text, JSON, tables, Matplotlib/Plotly figures, HTML, LaTeX‑rendered equations, or interactive widgets (sliders, drop‑downs).
+- **Output** – Anything that a normal read–eval–print loop (REPL) would print can appear: plain text, JSON, tables, Matplotlib/Plotly figures, HTML, LaTeX‑rendered equations, or interactive widgets (sliders, drop‑downs).
 
 ## Crash course: Python Basics
 
@@ -55,8 +63,6 @@ Core concepts
 These will be live coded in a Jupyter notebook.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
-
-Let's open a new Jupyter Notebook called `crash_course.ipynb`. In Jupyter Lab, you can do this by clicking the blue `+` button, and then clicking the Python tile under notebook. Right-click the newly created notebook to and select rename to rename it.
 
 
 ```python
@@ -95,9 +101,14 @@ print(a)
 
 ### 3. Lists (ordered collections)  
 
+We can define lists of objects. They can be any type of data. For example strings (but they could also be mixed type). 
+
+We can use indexing to retrieve items (starts at 0!), slice lists, and append new items.
+
 ```python
 samples = ["S1", "S2", "S3"]   # create a list
 print(samples[0])              # first element → "S1"
+print(sample[2:3])             # slice, print part of list according to index
 
 # Append a new sample name
 samples.append("S4")
@@ -112,6 +123,12 @@ S1
 ```
 
 ### 4. Loop over a list (for‑loop) to create a dictionary
+
+We can iterate over a series, such as a list, to perform operations on each item. In this case, we have another data type, a dictionary, which is a collection of key:value pairs. We have a pattern where we:
+
+1. Initialize an empty dictionary, which is done with curly braces.
+2. Iterate over the sample list.
+3. Assign the key (sample) in the dictionary a value (the length pf the sample name string).
 
 ```python
 results = {}
@@ -128,6 +145,8 @@ print(results)
 ```
 
 ### 5. Conditional statements  
+
+Conditional statements give you the option to check a condition. In `if`-statements, if this condition is true, the indented code block will be varied out. An `else`-statement can be used in combination with an `if` to provide instructions on what to do if the `if` fails.
 
 ```python
 threshold = 5
@@ -150,21 +169,24 @@ value is larger
 Functions serve as reusable pieces of code. We define them using `def`:
 
 ```python
-def greet(name: str) -> str:
-    """Return a friendly greeting."""
-    return f"Hello, {name}!"
+def check_value(value, threshold):
+  if value > threshold:
+    return "value is larger" 
+  else:
+    return "value is smaller or equal"
 ```
 
 Then we can call them using their name and passing any required parameters in parentheses:
 
 ```
-print(greet("Alice"))
+result = (check_value(7, 5))
+print(result)
 ```
 
 **Output**
 
 ```
-Hello, Alice!
+'value is larger'
 ```
 
 #### Built-in Functions
@@ -219,23 +241,31 @@ len(sample)
 
 See the [Python Docs on built-in functions](https://docs.python.org/3/builtins/functions.html).
 
-<!--TODO better challenge-->
+Please note, we are working in a Jupyter Notebook and running text snippets. This is a great way to learn and explore data. If you were running automated scripts, you would write these in Python files, e.g., `my_script.py` which can be run in the terminal
+
+```bash
+python my_script.py
+```
+
 ::::::::::::::::::::::::::::::::::::::::::: challenge
 What will be printed?
 
 ```python
-x = 5
-x = "five"
-print(x)
+def add_five(value):
+  return value + 5
+
+result = add_five(5)
+next_value = result + 1
+print(result)
 ```
 
-A. 5  
-B. five  
+A. 11
+B. 10  
 C. TypeError  
 
 ::::::::::::::::::::::::::::::::::::::: solution
 
-**B** – Python variables are dynamically typed; the second assignment overwrites the first.
+**B** – The function adds 5 to the passed value of 5, returning the value of 10. This returned valued is stored in `result` and doesn't change afterwards.
 
 :::::::::::::::::::::::::::::::::
 
@@ -268,14 +298,14 @@ However, your Python and pip installation may use `pip3` instead of `pip`.
 As indicated by the [elabapi-python installation instructions](https://github.com/elabftw/elabapi-python#installation), it is highly recommended to work in a virtual environment. We recommend [`uv`](https://docs.astral.sh/uv/) for creating and managing these:
 
 ```bash
-cd researcher_user
+cd workshop_data # change directory folder (if not already in this folder)
 uv init --bare # initialize the project in the desired directory
 uv add elabapi-python python-dotenv # add the API client and .env support
 uv sync
 ```
 
 The package `elabapi-python` is imported as `elabapi_python`, and
-`python-dotenv` is imported as `dotenv` in `client.py`. Ensure you have added your credentials and the URL to a `.env` (or `secrets.env`) file.
+`python-dotenv` is imported as `dotenv` in `client.py` (we will get to that script in a minute). Ensure you have added your credentials and the URL to a `.env` (or `secrets.env`) file.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -311,7 +341,13 @@ We import the main api client into our notebook using:
 from scripts.client import api_client
 ```
 
-Note: ensure your are in the correct directory.
+Note: ensure your are in the correct directory, `workshop_data/`.
+
+:::::::::::::::::::::::::::::::::::::::::::::::::: callout
+
+When writing, you can avoid a lot of spelling errors by using <kbd>tab</kbd> to get suggestions.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 You may get an error here for missing packages, especially dotenv:
 
@@ -352,7 +388,15 @@ print(api_response)
 which will output both `api_response` and the number 4.
 ::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-Back to the clients. Similarly, we can see an experiment client:
+Back to the clients. We kind of see the pattern. We create a client for the methods we see in the [HTML API Docs](https://doc.elabftw.net/api/elabapi-html/), and then use the method. We can do the exact same thing we did before and get our own user info:
+
+```python
+users_client = elabapi_python.UsersApi(api_client)
+me = users_client.read_user('me') # alternative would be to use an ID
+me
+```
+
+Similarly, we can see an experiment client in the examples:
 
 ```python
 exp_client = elabapi_python.ExperimentsApi(api_client)
@@ -368,16 +412,15 @@ print(exp)
 
 You can see, this does the same things as we were doing before, but many of us find Python easier to read and understand than the terminal commands. This is especially true when we start to combine multiple steps into a single script.
 
-
-
 ::::::::::::::::::::::::::::::::::::: challenge
 
 What is the code for the client that interacts with resources in eLabFTW? Create this client in your notebook and use it to:
 
 1. Retrieve all resources (you have access to) from your eLabFTW instance.
 2. Retrieve the bluetooth thermometer resource (from the last episode).
-
-Hint: Look through the [examples](https://github.com/elabftw/elabapi-python/tree/master/examples) and keep your eyes out for a different word than _resources_. We saw this in [episode 01](01_API), as well.
+::::::: hint
+Look through the [examples](https://github.com/elabftw/elabapi-python/tree/master/examples) and keep your eyes out for a different word than _resources_. We saw this in [episode 01](01_API), as well.
+::::::::
 
 :::::::::::::::::::::::: solution
 

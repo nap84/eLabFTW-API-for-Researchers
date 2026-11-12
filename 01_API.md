@@ -67,6 +67,8 @@ Let's use an analogy from the real world: a restaurant.
 
 ## The eLabFTW API
 
+_Note: we've included a notepad in your workshop folder that has some useful things, such as links, to copy and paste._
+
 eLabFTW's API let's you interact with the ELN, e.g., retrieve and write information from it, without using the graphical user interface (GUI). This is something you may want to do to create automated workflows and avoid repetitive work.
 
 Sticking with our restaurant analogy, we first need to figure out what is available to us, in programmatic terms: what requests we may make (or in restaurant terms: what orders we may place).
@@ -88,6 +90,16 @@ Scrolling through the categories and knowing how eLabFTW is structured, we can g
 Selecting a methods gives us more information, e.g., we can see that `postExperiments` creates an experiment, as well as usage examples in different programming languages and the parameters we can give our API request.
 
 ![screenshot of the postExperiment API method](fig/screenshot_postExperiments_HTMLdocs.png)
+
+Looking at the description, a lot of this is similar to what we seen in the GUI: we have the body (main text), some permissions settings, category settings, and so on.
+
+On things to keep in mind is that, opposed to the GUI, we usually need to use an ID to indicate certain attributes. For example, we would not use the name of a category but it's ID. One way to find these visually is in the address bar of our browser when we filter for certain attributes.
+
+::::::::::::::::::::::::::::::::::::::::::: instructor
+Filter for a experiment category in the browser and show how its ID shows up in the URL.
+
+These values may also be retrieved with the API, of course, but that is a bit beyond the scope of this basics course.
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ## Constructing Requests
 
