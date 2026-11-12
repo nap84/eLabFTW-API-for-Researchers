@@ -169,21 +169,24 @@ value is larger
 Functions serve as reusable pieces of code. We define them using `def`:
 
 ```python
-def greet(name: str) -> str:
-    """Return a friendly greeting."""
-    return f"Hello, {name}!"
+def check_value(value, threshold):
+  if value > threshold:
+    return "value is larger" 
+  else:
+    return "value is smaller or equal"
 ```
 
 Then we can call them using their name and passing any required parameters in parentheses:
 
 ```
-print(greet("Alice"))
+result = (check_value(7, 5))
+print(result)
 ```
 
 **Output**
 
 ```
-Hello, Alice!
+'value is larger'
 ```
 
 #### Built-in Functions
