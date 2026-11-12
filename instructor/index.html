@@ -446,7 +446,7 @@ get started – and notably, to teach courses like this.</p>
   RWTH JupyterHub (requires RWTH Account)
   </h3>
 </button>
-<div id="collapseSpoiler1" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler1" aria-labelledby="headingSpoiler1">
+<div id="collapseSpoiler1" class="accordion-collapse collapse" aria-labelledby="headingSpoiler1" data-bs-parent="#accordionSpoiler1">
 <div class="accordion-body">
 <ol style="list-style-type: decimal"><li>Head to <a href="https://jupyter.rwth-aachen.de/hub/login" class="external-link uri">https://jupyter.rwth-aachen.de/hub/login</a> and sign in
 with your credentials</li>
@@ -468,7 +468,7 @@ full access to what you did.</p>
   Jupyter4NFDI
   </h3>
 </button>
-<div id="collapseSpoiler2" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler2" aria-labelledby="headingSpoiler2">
+<div id="collapseSpoiler2" class="accordion-collapse collapse" aria-labelledby="headingSpoiler2" data-bs-parent="#accordionSpoiler2">
 <div class="accordion-body">
 <ol style="list-style-type: decimal"><li>Head to <a href="https://hub.nfdi-jupyter.de/hub/login" class="external-link uri">https://hub.nfdi-jupyter.de/hub/login</a> and click
 <code>Sign in</code>
@@ -494,12 +494,13 @@ upload to Jupyter Lab maintaining the file structure.</p>
 way to do this:</p>
 <ol style="list-style-type: decimal"><li>Drag-and-drop the zip file to the file into the file explorer in to
 the left.</li>
-<li>Open a terminal <img src="../fig/screenshot_jupyter_launcher.png" alt="screenshot of jupyter lab indicating an added zip file to the file explorer and terminal in the launcher" class="figure"></li>
+<li>Open a terminal (click the blue plus button on the top left if you
+don’t see the launcher tab) <img src="../fig/screenshot_jupyter_launcher.png" alt="screenshot of jupyter lab indicating an added zip file to the file explorer and terminal in the launcher" class="figure"></li>
 <li>Type:</li>
 </ol><div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1" aria-label="code-block-1-1"></a><span class="fu">unzip</span> workshop_data.zi</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1" aria-label="code-block-1-1"></a><span class="fu">unzip</span> workshop_data.zip</span></code></pre>
 </div>
 <p>If you have the zipfile in a folder:</p>
 <div class="codewrapper sourceCode" id="cb2">
@@ -510,6 +511,11 @@ the left.</li>
 <figure><img src="../fig/screenshot_jupyter_terminal.png" alt="screenshot of jupyter lab indicating an added zip file to the file explorer and the code in the terminal to unzip it" class="figure mx-auto d-block"><div class="figcaption">screenshot of jupyter lab indicating an added
 zip file to the file explorer and the code in the terminal to unzip
 it</div>
+</figure><p>You can, of course, add each file file and manually. You can create
+folders in Jupyter lab by clicking the folder icon with the little
+<code>+</code>-sign at the top of the file explorer.</p>
+<figure><img src="../fig/screenshot_jupyter_file_explorer.png" alt="screenshot of jupyter indicating the file explorer" class="figure mx-auto d-block"><div class="figcaption">screenshot of jupyter indicating the file
+explorer</div>
 </figure><div id="callout2" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
