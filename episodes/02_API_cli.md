@@ -92,26 +92,26 @@ You can type this info directly into your terminal. For larger requests, however
 
 ::::::::::::::::::::::::::::::::::::: callout
 
-You can load the API key from a `secrets.env` file instead of pasting the secret into the command.
+You can load the API key from the `secrets.env` file instead of pasting the secret into the command.
 
-Create such a file **in the workshop directory** and paste your token:
+We've included a template in the workshop folder under `scripts/`. If you need to create one, it should look like this:
 
 ```bash
 ELAB_API_KEY='YOUR_TOKEN_HERE'
 ELAB_API_HOST='https://elab.parks.web.gateway.ionos.coscine.dev/api/v2'
 ```
 
-From the **workshop directory**, run:
+To load them, from the **workshop directory**, run:
 
 ```bash
 set -a
-source research_computer/secrets.env
+source scripts/secrets.env
 set +a
 ```
 
 This `set -a` turns the **allexport** option on, while `set +a` turns it off again. Alternative, you could set single variables with `export MY_VAR=value` without having to turn allexport on and off.
 
-The `secrets.env` file should contain `ELAB_API_KEY` and `ELAB_API_HOST`. The key is then available as the `$ELAB_API_KEY` environment variable. Use it in the request like this:
+The key and host is will now available as the `$ELAB_API_KEY` and `$ELAB_API_HOST` environment variable. Use it in the request like this:
 
 ```bash
 curl -i -X POST \
