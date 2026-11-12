@@ -24,7 +24,7 @@ exercises: 30 # exercise time in minutes
 
 ## What is Python?
 
-Python is a high‑level, interpreted programming language that was created in the early 1990s by Guido van Rossum.  It reads almost like plain English, which makes it especially attractive for people whose primary expertise is not computer science (e.g. biologists, chemists, physicists, engineers).  
+Python is a high‑level, interpreted programming language that was created in the early 1990s by Guido van Rossum. It reads almost like plain English, which makes it especially attractive for people whose primary expertise is not computer science (e.g. biologists, chemists, physicists, engineers).  
 
 When you run a Python script, the Python interpreter reads the source code line‑by‑line, translates it into byte‑code, and executes it on the fly – you do not need a separate compilation step.
 
