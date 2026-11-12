@@ -224,6 +224,12 @@ curl -i -X POST \
    "$ELAB_API_HOST/experiments"
 ```
 
+::::::::::::::::::::::::::::::::::::: callout
+
+Code pieces such as `-i` are called _flags_ or _options_. Find out more in the [cURL Documentation Man Page](https://curl.se/docs/manpage.html).
+
+:::::::::::::::::::::::::::::::::::::::::::::
+
 ::::::::::::::::::::::::::::::::::::: challenge
 
 The below code intends to link the device resource [**Bluetooth Infrared Thermometer**](https://elab.parks.web.gateway.ionos.coscine.dev/database.php?mode=view&id=144) to the experiment experiment created above.
