@@ -234,44 +234,6 @@ Code pieces such as `-i` are called _flags_ or _options_. Find out more in the [
 
 ::::::::::::::::::::::::::::::::::::: challenge
 
-The below code intends to link the device resource [**Bluetooth Infrared Thermometer**](https://elab.parks.web.gateway.ionos.coscine.dev/database.php?mode=view&id=144) to the experiment experiment created above.
-
-In it current state, it fails. What needs to be fixed?
-
-
-
-::: hint
-
-[Read the docs for LinksToItems](https://doc.elabftw.net/api/elabapi-html#api-LinksToItems-postEntityItemsLinks)
-
-:::
-
-```bash
-curl -X POST \
-   -H "Authorization: $ELAB_API_KEY" \
-   -H "Accept: application/json" \
-   -H "Content-Type: application/json" \
-   "https://elab.parks.web.gateway.ionos.coscine.dev/items/144/experiment/id"
-```
-
-:::::::::::::::::::::::: solution
-
-Assuming the token has been setup in the environment (or you have modified the code accordingly), the code was missing `api/v2/` in the host url as well as the experiment id (modify with your id).
-
-```bash
-curl -X POST \
-   -H "Authorization: $ELAB_API_KEY" \
-   -H "Accept: application/json" \
-   -H "Content-Type: application/json" \
-   "https://elab.parks.web.gateway.ionos.coscine.dev/api/v2/items/144/experiment/132"
-```
-
-:::::::::::::::::::::::::::::::::
-
-::::::::::::::::::::::::::::::::::::::::::::::::
-
-::::::::::::::::::::::::::::::::::::: challenge
-
 What would the command line `cURL` API call look like that retrieves the experiment we just created? Write and execute this command. Then, analyze the response and see if everything is as you imagined.
 
 ::: hint
@@ -330,6 +292,44 @@ curl.exe ... | jq .
 ```
 
 :::::::::::::::::::::::::::::::::::::::::::::::
+
+
+::::::::::::::::::::::::::::::::::::: challenge
+
+The below code intends to link the device resource [**Bluetooth Infrared Thermometer**](https://elab.parks.web.gateway.ionos.coscine.dev/database.php?mode=view&id=144) to the experiment experiment created above.
+
+In it current state, it fails. What needs to be fixed?
+
+::: hint
+
+[Read the docs for LinksToItems](https://doc.elabftw.net/api/elabapi-html#api-LinksToItems-postEntityItemsLinks)
+
+:::
+
+```bash
+curl -X POST \
+   -H "Authorization: $ELAB_API_KEY" \
+   -H "Accept: application/json" \
+   -H "Content-Type: application/json" \
+   "https://elab.parks.web.gateway.ionos.coscine.dev/items/144/experiment/id"
+```
+
+:::::::::::::::::::::::: solution
+
+Assuming the token has been setup in the environment (or you have modified the code accordingly), the code was missing `api/v2/` in the host url as well as the experiment id (modify with your id).
+
+```bash
+curl -X POST \
+   -H "Authorization: $ELAB_API_KEY" \
+   -H "Accept: application/json" \
+   -H "Content-Type: application/json" \
+   "https://elab.parks.web.gateway.ionos.coscine.dev/api/v2/items/144/experiment/132"
+```
+
+:::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
 
 <!-- 
 ::::::::::::::::::::::::::::::::::::: challenge
