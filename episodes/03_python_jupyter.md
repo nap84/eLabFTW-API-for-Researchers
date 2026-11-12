@@ -292,7 +292,7 @@ However, your Python and pip installation may use `pip3` instead of `pip`.
 As indicated by the [elabapi-python installation instructions](https://github.com/elabftw/elabapi-python#installation), it is highly recommended to work in a virtual environment. We recommend [`uv`](https://docs.astral.sh/uv/) for creating and managing these:
 
 ```bash
-cd researcher_user
+cd workshop_data # change directory folder (if not already in this folder)
 uv init --bare # initialize the project in the desired directory
 uv add elabapi-python python-dotenv # add the API client and .env support
 uv sync
