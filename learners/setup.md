@@ -86,7 +86,7 @@ unzip path/to/folder/workshop_data.zip
 
 You can, of course, add each file file and manually. You can create folders in Jupyter lab by clicking the folder icon with the little `+`-sign at the top of the file explorer.
 
-![screenshot of jupyter indicating the file explorer](fig/screenshot_jupyter_file_explorer.png)
+![screenshot of jupyter indicating the file explorer](fig/screenshot_jupyter_file_explorer_folder.png)
 
 :::::::::::::::::::::::::::::::::::::::: callout
 
