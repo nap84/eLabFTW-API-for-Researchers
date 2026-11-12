@@ -388,7 +388,15 @@ print(api_response)
 which will output both `api_response` and the number 4.
 ::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-Back to the clients. Similarly, we can see an experiment client:
+Back to the clients. We kind of see the pattern. We create a client for the methods we see in the [HTML API Docs](https://doc.elabftw.net/api/elabapi-html/), and then use the method. We can do the exact same thing we did before and get our own user info:
+
+```python
+users_client = elabapi_python.UsersApi(api_client)
+me = users_client.read_user('me') # alternative would be to use an ID
+me
+```
+
+Similarly, we can see an experiment client in the examples:
 
 ```python
 exp_client = elabapi_python.ExperimentsApi(api_client)
@@ -403,8 +411,6 @@ print(exp)
 ```
 
 You can see, this does the same things as we were doing before, but many of us find Python easier to read and understand than the terminal commands. This is especially true when we start to combine multiple steps into a single script.
-
-
 
 ::::::::::::::::::::::::::::::::::::: challenge
 
