@@ -77,7 +77,7 @@ To this end, we head to the menu, or in the API's case, the documentation, or sh
 
 This gives us very basic information on the API. If we scroll down we find another link to the [full documentation](https://doc.elabftw.net/api/).
 
-Three things are important for this course: (1) the version 2 documentation link, which leads to the APIs [Swagger documentation page](https://doc.elabftw.net/api/v2), (2) the [HTML doc (v2)](https://doc.elabftw.net/api/elabapi-html/) and (3) the [Python Library (v2) link](https://github.com/elabftw/elabapi-python), the latter two of which we will get to later.
+Two things are important for this course: (1) the [HTML doc (v2)](https://doc.elabftw.net/api/elabapi-html/) and (2) the [Python Library (v2) link](https://github.com/elabftw/elabapi-python), the latter two of which we will get to later. The third, the version 2 documentation link, which leads to the APIs [Swagger documentation page](https://doc.elabftw.net/api/v2), which can also be helpful as a quick reference, however, we won't be using it here.
 
 We will mainly focus on the  to the [HTML doc (v2)](https://doc.elabftw.net/api/elabapi-html/). To the left, we have the various API methods allowed for each type of API, e.g. items (resources in the graphical user interface (GUI)), experiments, items, and so on.
 
