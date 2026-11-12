@@ -130,7 +130,7 @@ Note: `.env` is more common, however, Jupyter lab immediately hides these.
 
 Now, let's make a new request and create an experiment:
 
-Scroll to the [Experiments](https://doc.elabftw.net/api/elabapi-html/#api-Experiments) section on the left and click [`postExperiment`](https://doc.elabftw.net/api/elabapi-html/#api-Experiments-postExperiment). Again, we will look at the cURL usage example and copy and paste it into our text editor. Similar to the steps above:
+In the HTML Docs, Scroll to the [Experiments](https://doc.elabftw.net/api/elabapi-html/#api-Experiments) section on the left and click [`postExperiment`](https://doc.elabftw.net/api/elabapi-html/#api-Experiments-postExperiment). Posting basically means we are creating something new, while patch, for example, would mean we are modifying something. Again, we will look at the cURL usage example and copy and paste it into our text editor. Similar to the steps above:
 
 1. Copy and paste your token to the terminal, replacing `[[apiKey]]`
 2. Replace `https://elab.local:3148` with your eLabFTW URL
