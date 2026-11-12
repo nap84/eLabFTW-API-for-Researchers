@@ -51,3 +51,9 @@ po/*~
 
 # secrets
 *.env
+
+# caches
+__pycache__ 
+
+# random things
+alternatives/
