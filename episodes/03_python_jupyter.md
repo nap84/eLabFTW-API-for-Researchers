@@ -34,7 +34,15 @@ When you run a Python script, the Python interpreter reads the source code line�
 
 ## What is a Jupyter Notebook
 
-A Jupyter Notebook is an interactive web‑based document that combines executable code, rich text, plots, and multimedia in a single, linear layout.You open it in a browser, but the Python (or other language) kernel runs on your computer (or on a remote server) and evaluates each cell on demand.
+Let's open a new Jupyter Notebook called `ep_3_python_jupyter.ipynb`. In Jupyter Lab, you can do this by clicking the blue `+` button, and then clicking the Python tile under notebook. Right-click the newly created notebook to and select rename to rename it.
+
+::::::::::::::::::::::::::::::::: instructor
+
+Use the opened notebook to show the points below.
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+A Jupyter Notebook is an interactive web‑based document that combines executable code, rich text, plots, and multimedia in a single, linear layout. You open it in a browser, but the Python (or other language) kernel runs on your computer (or on a remote server) and evaluates each cell on demand.
 Core concepts
 
 - **Cells** – The notebook is divided into blocks called cells.  
@@ -44,7 +52,7 @@ Core concepts
 
 - **Kernel** – A background process that executes the code. The notebook UI sends the cell’s source to the kernel, receives the result, and displays it. You can restart, interrupt, or switch kernels (e.g., Python 3, R) without leaving the notebook.
 
-- **Output** – Anything that a normal REPL would print can appear: plain text, JSON, tables, Matplotlib/Plotly figures, HTML, LaTeX‑rendered equations, or interactive widgets (sliders, drop‑downs).
+- **Output** – Anything that a normal read–eval–print loop (REPL) would print can appear: plain text, JSON, tables, Matplotlib/Plotly figures, HTML, LaTeX‑rendered equations, or interactive widgets (sliders, drop‑downs).
 
 ## Crash course: Python Basics
 
@@ -55,8 +63,6 @@ Core concepts
 These will be live coded in a Jupyter notebook.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
-
-Let's open a new Jupyter Notebook called `crash_course.ipynb`. In Jupyter Lab, you can do this by clicking the blue `+` button, and then clicking the Python tile under notebook. Right-click the newly created notebook to and select rename to rename it.
 
 
 ```python
@@ -95,9 +101,14 @@ print(a)
 
 ### 3. Lists (ordered collections)  
 
+We can define lists of objects. They can be any type of data. For example strings (but they could also be mixed type). 
+
+We can use indexing to retrieve items (starts at 0!), slice lists, and append new items.
+
 ```python
 samples = ["S1", "S2", "S3"]   # create a list
 print(samples[0])              # first element → "S1"
+print(sample[2:3])             # slice, print part of list according to index
 
 # Append a new sample name
 samples.append("S4")
@@ -112,6 +123,12 @@ S1
 ```
 
 ### 4. Loop over a list (for‑loop) to create a dictionary
+
+We can iterate over a series, such as a list, to perform operations on each item. In this case, we have another data type, a dictionary, which is a collection of key:value pairs. We have a pattern where we:
+
+1. Initialize an empty dictionary, which is done with curly braces.
+2. Iterate over the sample list.
+3. Assign the key (sample) in the dictionary a value (the length pf the sample name string).
 
 ```python
 results = {}
@@ -128,6 +145,8 @@ print(results)
 ```
 
 ### 5. Conditional statements  
+
+Conditional statements give you the option to check a condition. In `if`-statements, if this condition is true, the indented code block will be varied out. An `else`-statement can be used in combination with an `if` to provide instructions on what to do if the `if` fails.
 
 ```python
 threshold = 5
