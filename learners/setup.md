@@ -63,20 +63,29 @@ All course material (included a filled-out version of the notebook) will be avai
 
 ## Datasets
 
-Once Jupyter Lab is running, open a new terminal and run the following command (copy-paste and hit enter):
+Download the zipfile [workshop-data.zip](data/workshop-data.zip). Unzip and then upload to Jupyter Lab maintaining the file structure.
+
+Since folder drag-and-drop is not currently supported, the easiest way to do this:
+
+1. Drag-and-drop the zip file to the file into the file explorer in to the left.
+2. Open a terminal
+![screenshot of jupyter lab indicating an added zip file to the file explorer and terminal in the launcher](fig/screenshot_jupyter_launcher.png)
+1. Type:
 
 ```bash
-#TODO: fix the below by replacing BRANCH, OWNER, REPO, and path/to/folder with the correct values, ensure we switch to folder!
-git clone --depth 1 --filter=blob:none --sparse --branch BRANCH \
-  https://github.com/OWNER/REPO.git
-cd REPO
-git sparse-checkout set path/to/folder
+unzip workshop_data.zi
 ```
 
-This will retrieve the `workshop_data` folder directly.
+If you have the zipfile in a folder:
+
+```bash
+unzip path/to/folder/workshop_data.zip
+```
+
+![screenshot of jupyter lab indicating an added zip file to the file explorer and the code in the terminal to unzip it](fig/screenshot_jupyter_terminal.png)
 
 :::::::::::::::::::::::::::::::::::::::: callout
 
-The `workshop_data` folder is also available via the Moodle room. Here, you may download it and upload it to Jupyter Lab - especially useful in case there are any problems with retrieving it with the instruction above.
+The `workshop_data` folder is also available via the Moodle room for you specific course.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
