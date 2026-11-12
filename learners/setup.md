@@ -21,6 +21,8 @@ To access the demo instance and team:
 3. Fill in your information
 4. Click `Create`
 
+An Admin will then validate you account. 
+
 You will have access to this team for 4 weeks after the workshop. Your account will then be deleted.
 
 ### Jupyter Lab
