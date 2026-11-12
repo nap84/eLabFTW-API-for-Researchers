@@ -68,12 +68,12 @@ Download the zipfile [workshop-data.zip](data/workshop-data.zip). Unzip and then
 Since folder drag-and-drop is not currently supported, the easiest way to do this:
 
 1. Drag-and-drop the zip file to the file into the file explorer in to the left.
-2. Open a terminal
+2. Open a terminal (click the blue plus button on the top left if you don't see the launcher tab)
 ![screenshot of jupyter lab indicating an added zip file to the file explorer and terminal in the launcher](fig/screenshot_jupyter_launcher.png)
 1. Type:
 
 ```bash
-unzip workshop_data.zi
+unzip workshop_data.zip
 ```
 
 If you have the zipfile in a folder:
@@ -83,6 +83,10 @@ unzip path/to/folder/workshop_data.zip
 ```
 
 ![screenshot of jupyter lab indicating an added zip file to the file explorer and the code in the terminal to unzip it](fig/screenshot_jupyter_terminal.png)
+
+You can, of course, add each file file and manually. You can create folders in Jupyter lab by clicking the folder icon with the little `+`-sign at the top of the file explorer.
+
+![screenshot of jupyter indicating the file explorer](fig/screenshot_jupyter_file_explorer.png)
 
 :::::::::::::::::::::::::::::::::::::::: callout
 
