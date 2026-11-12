@@ -185,7 +185,7 @@ Final code:
 
 ```bash
 curl -i -X POST \
-    -H "Authorization: $ELAB_API_KEY" \
+    -H "Authorization: $ELAB_API_KEY" \ 
     -H "Accept: application/json" \
     -H "Content-Type: application/json" \
     -d '{
@@ -221,8 +221,10 @@ curl -i -X POST \
       }
    }
 }' \
-   "$ELAB_API_HOST/experiments"
+   "https://elab.parks.web.gateway.ionos.coscine.dev/api/v2/experiments"
 ```
+
+If we run the code without the `-i` it will run all the same, but will not output any information.
 
 ::::::::::::::::::::::::::::::::::::: callout
 
@@ -236,15 +238,11 @@ The below code intends to link the device resource [**Bluetooth Infrared Thermom
 
 In it current state, it fails. What needs to be fixed?
 
-::: hint
 
-You can use a GET request to the "$ELAB_API_HOST/experiments" endpoint to list all experiments and find the ID of the one you just created.
-
-:::
 
 ::: hint
 
-[Read the docs for LinksToExperiments](https://doc.elabftw.net/api/elabapi-html/#api-LinksToExperiments)
+[Read the docs for LinksToItems](https://doc.elabftw.net/api/elabapi-html#api-LinksToItems-postEntityItemsLinks)
 
 :::
 
@@ -253,10 +251,20 @@ curl -X POST \
    -H "Authorization: $ELAB_API_KEY" \
    -H "Accept: application/json" \
    -H "Content-Type: application/json" \
-   "$ELAB_API_HOST/items/144/experiment/{your_exp_id}"
+   "https://elab.parks.web.gateway.ionos.coscine.dev/items/144/experiment/id"
 ```
 
 :::::::::::::::::::::::: solution
+
+Assuming the token has been setup in the environment (or you have modified the code accordingly), the code was missing `api/v2/` in the host url as well as the experiment id (modify with your id).
+
+```bash
+curl -X POST \
+   -H "Authorization: $ELAB_API_KEY" \
+   -H "Accept: application/json" \
+   -H "Content-Type: application/json" \
+   "https://elab.parks.web.gateway.ionos.coscine.dev/api/v2/items/144/experiment/132"
+```
 
 :::::::::::::::::::::::::::::::::
 
