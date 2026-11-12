@@ -241,6 +241,12 @@ len(sample)
 
 See the [Python Docs on built-in functions](https://docs.python.org/3/builtins/functions.html).
 
+Please note, we are working in a Jupyter Notebook and running text snippets. This is a great way to learn and explore data. If you were running automated scripts, you would write these in Python files, e.g., `my_script.py` which can be run in the terminal
+
+```bash
+python my_script.py
+```
+
 ::::::::::::::::::::::::::::::::::::::::::: challenge
 What will be printed?
 
