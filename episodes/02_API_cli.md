@@ -141,7 +141,7 @@ In the HTML Docs, Scroll to the [Experiments](https://doc.elabftw.net/api/elabap
 
 Note: Don't forget to add spaces between the `\` and the end of the line.
 
-Template for data:
+Template for data - find this in `workshop_data/notepad.md`:
 
 _Feel free to modify!_
 
