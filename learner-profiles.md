@@ -10,4 +10,4 @@ The target audience includes researchers at any level who are already familiar w
 
 Participants must already be eLabFTW users, since they should know how the notebook is structured and the terminology is uses.
 
-While it may be helpful to have some programming skills, I want to empower programming novices to learn some basics and solve their workflow problems.
+While it may be helpful to have some programming skills, we want to empower programming novices to learn some basics and solve their workflow problems.
