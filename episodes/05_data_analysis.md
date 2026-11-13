@@ -111,6 +111,7 @@ Using pandas, we can easily read in and plot the data. First we import pandas. A
 
 ```python
 %pip install pandas # if needed
+%pip install matplotlib # does not install automatically with pandas
 import pandas as pd
 
 measurement_data = pd.read_csv("50_measurement_2026-11-05T11:27:07.281399.csv")
@@ -262,6 +263,6 @@ If you would like to contribute your solutions, please don't hesitate to do so. 
 
 - The eLabFTW Python API client allows you to retrieve all or specific files attached to an experiment
 - Pandas can turn downloaded CSV data into a table ready for analysis
-- Pandas has built-in matplotlib to visualize data and save plots
+- Pandas has built-in matplotlib plots to visualize data and save plots
 
 :::::::::::::::::::::::::::::::::::::::::::::::
