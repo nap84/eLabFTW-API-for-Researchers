@@ -357,23 +357,23 @@ config:
   layout: dagre
 ---
 flowchart
-accTitle: Schematic workflow for data analysis with eLabFTW and Jupyter Notebooks
- subgraph s4["ELN (GUI)"]
-        n3["Experiment"]
-        n11["measurement file"]
-  end
- subgraph s3["Jupyter Notebook"]
-        n10["get measurement files from experiment"]
-        n5["create plots"]
-  end
- subgraph s2["Your Computer"]
-        s3
-  end
+    accTitle: Schematic workflow for data analysis with eLabFTW and Jupyter Notebooks
+    subgraph s4["ELN (GUI)"]
+            n3["Experiment"]
+            n11["measurement file"]
+    end
+    subgraph s3["Jupyter Notebook"]
+            n10["get measurement files from experiment"]
+            n5["create plots"]
+    end
+    subgraph s2["Your Computer"]
+            s3
+    end
 
-    n5 -- attach --&gt; n3
-    n3 --&gt; n11
-    n10 --&gt; n5
-    n11 --&gt; n10</code></pre>
+        n5 -- attach --&gt; n3
+        n3 --&gt; n11
+        n10 --&gt; n5
+        n11 --&gt; n10</code></pre>
 <p>We have not worked with Pandas or Matplotlib yet, but they are the
 most common Python libraries for data analysis and visualization. We
 will use them to load the CSV file and create a plot.</p>
