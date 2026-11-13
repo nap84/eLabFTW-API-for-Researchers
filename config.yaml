@@ -18,7 +18,7 @@ carpentry: 'incubator'
 # carpentry_description: "Custom Carpentry"
 
 # Overall title for pages.
-title: 'eLabFTW API for Researchers' # FIXME
+title: 'eLabFTW API Basics for Researchers' 
 
 # Date the lesson was created (YYYY-MM-DD, this is empty by default)
 created: 2026-10-13
