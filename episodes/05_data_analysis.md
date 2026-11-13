@@ -151,9 +151,11 @@ Use the above snippets and function to write a code that
 3. Attaches the plot back to the experiment
 4. Sets the experiment status to success
 
-Hint: make a small modification to the `download_matching_uploads_locally` so you can retrieve the file name.
-
 **Bonus:** If anyone can figure out how to add an image directly to the main text field using the API, please share!
+
+:::::::::::::::: hint
+Make a small modification to the `download_matching_uploads_locally` so you can retrieve the file name.
+::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: solution
 
@@ -211,7 +213,7 @@ This is play time. Below are ideas of things you can try out. The solution provi
 - Export entries in different formats
 - Create individual resources from a CSV (where each row represents a resource)
 
-::::::::::::::::::::::::::::::::::::: solution
+::::::::::::::::::::::::::::::::::::: hint
 
 Hints and places to start:
 
@@ -257,7 +259,6 @@ If you would like to contribute your solutions, please don't hesitate to do so. 
 :::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
-
 
 ::::::::::::::::::::::::::::::::::::: keypoints
 
