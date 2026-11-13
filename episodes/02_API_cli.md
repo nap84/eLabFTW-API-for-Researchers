@@ -307,7 +307,6 @@ curl -X POST \
    "https://elab.parks.web.gateway.ionos.coscine.dev/items/144/experiment/id"
 ```
 
-
 ::: hint
 
 [Read the docs for LinksToItems](https://doc.elabftw.net/api/elabapi-html#api-LinksToItems-postEntityItemsLinks)
