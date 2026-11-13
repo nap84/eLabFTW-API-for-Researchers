@@ -77,6 +77,7 @@ First, let's get the experiments. To do so, we need the experiments api again. W
 We know we need the experiments API, let's create it:
 ```python
 experiments_api = elabapi_python.ExperimentsApi(api_client)
+uploads_api = elabapi_python.UploadsApi(api_client) 
 ```
 
 Note: run `%pip install elabapi_python` (or for any other packages) if needed.
