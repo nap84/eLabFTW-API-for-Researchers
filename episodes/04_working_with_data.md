@@ -68,6 +68,8 @@ import elabapi_python
 from scripts.client import api_client
 ```
 
+Note: run `%pip install elabapi_python` (or for any other packages) if needed.
+
 If we check the eLabFTW GUI for our own experiments, we will see our experiments with the category 'MEASUREMENT' with 'Heating' in the title:
 
 ![screenshot of ones own experiments in eLabFTW](fig/screenshot_elabftwUI_experiments.png)
@@ -79,8 +81,6 @@ We know we need the experiments API, let's create it:
 experiments_api = elabapi_python.ExperimentsApi(api_client)
 uploads_api = elabapi_python.UploadsApi(api_client) 
 ```
-
-Note: run `%pip install elabapi_python` (or for any other packages) if needed.
 
 We could get all experiments, as we just saw in the previous episode, which would work fine for our little team, but is not really efficient in reality. Luckily, the API allows us to query and this filter what it returns.
 
