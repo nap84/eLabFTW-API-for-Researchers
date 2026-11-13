@@ -23,7 +23,8 @@ We can now keep going and add some more information to our experiments, such as 
 config:
   layout: dagre
 ---
-flowchart LR
+flowchart
+accTitle: Schematic workflow for data analysis with eLabFTW and Jupyter Notebooks
  subgraph s4["ELN (GUI)"]
         n3["Experiment"]
         n11["measurement file"]
@@ -50,6 +51,7 @@ Since we're in a new notebook, we set everything up by importing the package and
 
 ```python
 import elabapi_python
+from scripts.client import api_client
 experiments_api = elabapi_python.ExperimentsApi(api_client)
 uploads_api = elabapi_python.UploadsApi(api_client)
 ```
