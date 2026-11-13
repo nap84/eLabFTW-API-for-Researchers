@@ -33,6 +33,8 @@ config:
   layout: fixed
 ---
 flowchart LR
+accTitle: Schematic workflow for working with data from the ELN
+
  subgraph s4["ELN (GUI)"]
         n3["Experiment"]
         n11["parameters (custom field metadata)"]
