@@ -259,7 +259,7 @@ next_value = result + 1
 print(result)
 ```
 
-A. 11
+A. 11  
 B. 10  
 C. TypeError  
 

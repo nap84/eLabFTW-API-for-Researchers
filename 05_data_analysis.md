@@ -23,7 +23,8 @@ We can now keep going and add some more information to our experiments, such as 
 config:
   layout: dagre
 ---
-flowchart LR
+flowchart
+accTitle: Schematic workflow for data analysis with eLabFTW and Jupyter Notebooks
  subgraph s4["ELN (GUI)"]
         n3["Experiment"]
         n11["measurement file"]
@@ -50,6 +51,7 @@ Since we're in a new notebook, we set everything up by importing the package and
 
 ```python
 import elabapi_python
+from scripts.client import api_client
 experiments_api = elabapi_python.ExperimentsApi(api_client)
 uploads_api = elabapi_python.UploadsApi(api_client)
 ```
@@ -109,6 +111,7 @@ Using pandas, we can easily read in and plot the data. First we import pandas. A
 
 ```python
 %pip install pandas # if needed
+%pip install matplotlib # does not install automatically with pandas
 import pandas as pd
 
 measurement_data = pd.read_csv("50_measurement_2026-11-05T11:27:07.281399.csv")
@@ -148,9 +151,11 @@ Use the above snippets and function to write a code that
 3. Attaches the plot back to the experiment
 4. Sets the experiment status to success
 
-Hint: make a small modification to the `download_matching_uploads_locally` so you can retrieve the file name.
-
 **Bonus:** If anyone can figure out how to add an image directly to the main text field using the API, please share!
+
+:::::::::::::::: hint
+Make a small modification to the `download_matching_uploads_locally` so you can retrieve the file name.
+::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: solution
 
@@ -208,7 +213,7 @@ This is play time. Below are ideas of things you can try out. The solution provi
 - Export entries in different formats
 - Create individual resources from a CSV (where each row represents a resource)
 
-::::::::::::::::::::::::::::::::::::: solution
+::::::::::::::::::::::::::::::::::::: hint
 
 Hints and places to start:
 
@@ -255,11 +260,10 @@ If you would like to contribute your solutions, please don't hesitate to do so. 
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
-
 ::::::::::::::::::::::::::::::::::::: keypoints
 
 - The eLabFTW Python API client allows you to retrieve all or specific files attached to an experiment
 - Pandas can turn downloaded CSV data into a table ready for analysis
-- Pandas has built-in matplotlib to visualize data and save plots
+- Pandas has built-in matplotlib plots to visualize data and save plots
 
 :::::::::::::::::::::::::::::::::::::::::::::::
