@@ -334,7 +334,7 @@
       </div>
     </nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Data Analysis Workflows</h1>
-        <p>Last updated on 2026-11-10 |
+        <p>Last updated on 2026-11-13 |
 
         <a href="https://github.com/carpentries/workbench-template-md/edit/main/episodes/05_data_analysis.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -358,7 +358,8 @@ experiments, such as a plot to quickly see the data, for example:</p>
 config:
   layout: dagre
 ---
-flowchart LR
+flowchart
+accTitle: Schematic workflow for data analysis with eLabFTW and Jupyter Notebooks
  subgraph s4["ELN (GUI)"]
         n3["Experiment"]
         n11["measurement file"]
@@ -388,8 +389,9 @@ package and creating the API clients we need:</p>
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1" aria-label="code-block-2-1"></a><span class="im">import</span> elabapi_python</span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1" aria-label="code-block-2-2"></a>experiments_api <span class="op">=</span> elabapi_python.ExperimentsApi(api_client)</span>
-<span id="cb2-3"><a href="#cb2-3" tabindex="-1" aria-label="code-block-2-3"></a>uploads_api <span class="op">=</span> elabapi_python.UploadsApi(api_client)</span></code></pre>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1" aria-label="code-block-2-2"></a><span class="im">from</span> scripts.client <span class="im">import</span> api_client</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1" aria-label="code-block-2-3"></a>experiments_api <span class="op">=</span> elabapi_python.ExperimentsApi(api_client)</span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1" aria-label="code-block-2-4"></a>uploads_api <span class="op">=</span> elabapi_python.UploadsApi(api_client)</span></code></pre>
 </div>
 <p>Let’s access one of our experiments and download the data file.</p>
 <p>We will continue to use the <code>uploads_api</code> to interact with
@@ -461,10 +463,11 @@ view the first few lines of the dataframe.</p>
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" tabindex="-1" aria-label="code-block-6-1"></a><span class="op">%</span>pip install pandas <span class="co"># if needed</span></span>
-<span id="cb6-2"><a href="#cb6-2" tabindex="-1" aria-label="code-block-6-2"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb6-3"><a href="#cb6-3" tabindex="-1" aria-label="code-block-6-3"></a></span>
-<span id="cb6-4"><a href="#cb6-4" tabindex="-1" aria-label="code-block-6-4"></a>measurement_data <span class="op">=</span> pd.read_csv(<span class="st">"50_measurement_2026-11-05T11:27:07.281399.csv"</span>)</span>
-<span id="cb6-5"><a href="#cb6-5" tabindex="-1" aria-label="code-block-6-5"></a>measurement_data.head()</span></code></pre>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1" aria-label="code-block-6-2"></a><span class="op">%</span>pip install matplotlib <span class="co"># does not install automatically with pandas</span></span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1" aria-label="code-block-6-3"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1" aria-label="code-block-6-4"></a></span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1" aria-label="code-block-6-5"></a>measurement_data <span class="op">=</span> pd.read_csv(<span class="st">"50_measurement_2026-11-05T11:27:07.281399.csv"</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1" aria-label="code-block-6-6"></a>measurement_data.head()</span></code></pre>
 </div>
 <p>Now, let’s create a quick plot. Pandas uses the package matplotlib to
 do this in a built-in manner.</p>
@@ -508,11 +511,22 @@ sufficient. Let’s save it.</p>
 <li>Plots and saves figures for each</li>
 <li>Attaches the plot back to the experiment</li>
 <li>Sets the experiment status to success</li>
-</ol><p>Hint: make a small modification to the
+</ol><p><strong>Bonus:</strong> If anyone can figure out how to add an image
+directly to the main text field using the API, please share!</p>
+</div>
+</div>
+</div>
+<div id="accordionHint1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint1" aria-expanded="false" aria-controls="collapseHint1">
+  <h4 class="accordion-header" id="headingHint1"> Give me a hint </h4>
+</button>
+<div id="collapseHint1" class="accordion-collapse collapse" aria-labelledby="headingHint1" data-bs-parent="#accordionHint1">
+<div class="accordion-body">
+<p>Make a small modification to the
 <code>download_matching_uploads_locally</code> so you can retrieve the
 file name.</p>
-<p><strong>Bonus:</strong> If anyone can figure out how to add an image
-directly to the main text field using the API, please share!</p>
+</div>
 </div>
 </div>
 </div>
@@ -594,12 +608,12 @@ resource)</li>
 </ul></div>
 </div>
 </div>
-<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
+<div id="accordionHint2" class="accordion challenge-accordion accordion-flush">
 <div class="accordion-item">
-<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
-  <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
+<button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint2" aria-expanded="false" aria-controls="collapseHint2">
+  <h4 class="accordion-header" id="headingHint2"> Give me a hint </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseHint2" class="accordion-collapse collapse" aria-labelledby="headingHint2" data-bs-parent="#accordionHint2">
 <div class="accordion-body">
 <p>Hints and places to start:</p>
 <ul><li><p>Change permissions on your create experiments: <a href="https://github.com/elabftw/elabapi-python/blob/master/examples/14-fix-user-exp-permissions.py" class="external-link">examples/14-fix-user-exp-permissions.py</a></p></li>
@@ -659,7 +673,8 @@ to do so. We can include them here for future courses.</p>
 files attached to an experiment</li>
 <li>Pandas can turn downloaded CSV data into a table ready for
 analysis</li>
-<li>Pandas has built-in matplotlib to visualize data and save plots</li>
+<li>Pandas has built-in matplotlib plots to visualize data and save
+plots</li>
 </ul></div>
 </div>
 </div>
@@ -727,7 +742,7 @@ any links that you are not going to use.
   "url": "https://carpentries.github.io/workbench-template-md/instructor/05_data_analysis.html",
   "identifier": "https://carpentries.github.io/workbench-template-md/instructor/05_data_analysis.html",
   "dateCreated": "2026-10-13",
-  "dateModified": "2026-11-10",
+  "dateModified": "2026-11-13",
   "datePublished": "2026-11-13"
 }
 
