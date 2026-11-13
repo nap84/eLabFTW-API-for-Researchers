@@ -23,7 +23,7 @@ exercises: 20
 
 ## Getting Experiment Parameters from eLabFTW
 
-In the previous episodes, we created an experiment, linked a resource, and retrieved the experiments and resources. Now, we will look at how to get and work with information from entries in eLabFTW.
+In the previous episodes, we created an experiment, linked a resource, and showed how to retrieve ELN entries. Now, we will look at how to work with information from entries in eLabFTW.
 
 Here's an overview of the intended workflow:
 
@@ -32,7 +32,9 @@ Here's an overview of the intended workflow:
 config:
   layout: fixed
 ---
-flowchart LR
+flowchart 
+accTitle: Schematic workflow for working with data from the ELN
+
  subgraph s4["ELN (GUI)"]
         n3["Experiment"]
         n11["parameters (custom field metadata)"]
@@ -66,6 +68,8 @@ import elabapi_python
 from scripts.client import api_client
 ```
 
+Note: run `%pip install elabapi_python` (or for any other packages) if needed.
+
 If we check the eLabFTW GUI for our own experiments, we will see our experiments with the category 'MEASUREMENT' with 'Heating' in the title:
 
 ![screenshot of ones own experiments in eLabFTW](fig/screenshot_elabftwUI_experiments.png)
@@ -75,9 +79,8 @@ First, let's get the experiments. To do so, we need the experiments api again. W
 We know we need the experiments API, let's create it:
 ```python
 experiments_api = elabapi_python.ExperimentsApi(api_client)
+uploads_api = elabapi_python.UploadsApi(api_client) 
 ```
-
-Note: run `%pip install elabapi_python` (or for any other packages) if needed.
 
 We could get all experiments, as we just saw in the previous episode, which would work fine for our little team, but is not really efficient in reality. Luckily, the API allows us to query and this filter what it returns.
 
@@ -299,7 +302,12 @@ This is what we expect if we look at the same experiment in the GUI:
 
 How would you access the ID for each of the experiments you retrieved using the GUI?
 
-Bonus: How can you avoid having to access the experiment by its individual index each time you want to retrieve the ID? Hint: check out the [previous episode on iteration](03_python_jupyter.md#4-loop-over-a-list-forloop-to-create-a-dictionary)
+Bonus: How can you avoid having to access the experiment by its individual index each time you want to retrieve the ID?
+
+:::::::: hint
+For bonus: Check out the [previous episode on iteration](03_python_jupyter.md#4-loop-over-a-list-forloop-to-create-a-dictionary)
+
+:::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: solution
 
@@ -354,6 +362,7 @@ for exp in heating_experiments:
 There's many ways to get what we need: here, we will use the `requests` package to make the API request directly and get the full experiment information. The returned data structure is a bit different, but that's fine.
 
 ```python
+%pip install requests
 from scripts.client import API_HOST, API_KEY
 import requests
 
@@ -1112,24 +1121,28 @@ heating_experiments_full[0]['metadata_decoded']['extra_fields']['Laser Power']['
 '125'
 ```
 
-We want to use hese in a pre-prepared script that contains a function that generates some synthetic data and saves it as a CSV (see `scripts/generate_measurement.py`). Let's import this and run it for each experiment, e.g., every set of values. The function returns the path to the generated file, which we will save in a list so we can easily access each one in later steps.
+We want to use hese in a pre-prepared script that contains a function that generates some synthetic data and saves it as a CSV (see `scripts/generate_measurement.py`). Let's import this and run it for each experiment, e.g., every set of values. The function returns the path to the generated file, which we will save in a dictionary (with the experiment ID as the key) so we can easily access each one in later steps.
 
 ```python
 from scripts.generate_measurement import generate_measurement
 
-measurement_files = []
+measurement_files = {}
 
 for exp in heating_experiments_full:
+    
     off_temp = exp['metadata_decoded']['extra_fields']['Switch-off Temperature']['value']
-
+    
     laser_power = exp['metadata_decoded']['extra_fields']['Laser Power']['value']
+    
+    print(f"Running measurement with laser power {laser_power} and shut-off temperature {off_temp}...")
+    
+    out_path = generate_measurement(power_w = float(laser_power), break_temp = float(off_temp))
+    
+    print(f"Output file saved to {out_path}")
+    measurement_files[exp['id']] = out_path
 
-    print(f"Running measurement with laser poser {laser_power} and shut-off temperature {off_temp}...")
-
-    output_path = generate_measurement(power_w = float(laser_power), break_temp=float(off_temp))
-
-    print(f"Output file saved to {output_path}")
-    measurement_files.append(output_path)
+print(len(measurement_files))
+measurement_files
 
 ```
 
@@ -1160,7 +1173,9 @@ If we check our experiments in the GUI, we should see your attached files:
 
 Write a for loops that sets each experiment status to running.
 
-Hint: get an idea of what the commands could look like in the example [examples/05-create-modify-item.py](https://github.com/elabftw/elabapi-python/blob/master/examples/05-create-modify-item.py) on GitHub.
+::::::: hint
+Get an idea of what the commands could look like in the example [examples/05-create-modify-item.py](https://github.com/elabftw/elabapi-python/blob/master/examples/05-create-modify-item.py) on GitHub.
+:::::::::::::
 
 Execute the code and check the GUI to see if it worked.
 
