@@ -309,7 +309,6 @@ For bonus: Check out the [previous episode on iteration](03_python_jupyter.md#4-
 
 :::::::::::::
 
-
 ::::::::::::::::::::::::::::::::::::: solution
 
 You can use the same syntax as above to retrieve a an ID from a single experiment.
@@ -1122,24 +1121,28 @@ heating_experiments_full[0]['metadata_decoded']['extra_fields']['Laser Power']['
 '125'
 ```
 
-We want to use hese in a pre-prepared script that contains a function that generates some synthetic data and saves it as a CSV (see `scripts/generate_measurement.py`). Let's import this and run it for each experiment, e.g., every set of values. The function returns the path to the generated file, which we will save in a list so we can easily access each one in later steps.
+We want to use hese in a pre-prepared script that contains a function that generates some synthetic data and saves it as a CSV (see `scripts/generate_measurement.py`). Let's import this and run it for each experiment, e.g., every set of values. The function returns the path to the generated file, which we will save in a dictionary (with the experiment ID as the key) so we can easily access each one in later steps.
 
 ```python
 from scripts.generate_measurement import generate_measurement
 
-measurement_files = []
+measurement_files = {}
 
 for exp in heating_experiments_full:
+    
     off_temp = exp['metadata_decoded']['extra_fields']['Switch-off Temperature']['value']
-
+    
     laser_power = exp['metadata_decoded']['extra_fields']['Laser Power']['value']
+    
+    print(f"Running measurement with laser power {laser_power} and shut-off temperature {off_temp}...")
+    
+    out_path = generate_measurement(power_w = float(laser_power), break_temp = float(off_temp))
+    
+    print(f"Output file saved to {out_path}")
+    measurement_files[exp['id']] = out_path
 
-    print(f"Running measurement with laser poser {laser_power} and shut-off temperature {off_temp}...")
-
-    output_path = generate_measurement(power_w = float(laser_power), break_temp=float(off_temp))
-
-    print(f"Output file saved to {output_path}")
-    measurement_files.append(output_path)
+print(len(measurement_files))
+measurement_files
 
 ```
 
