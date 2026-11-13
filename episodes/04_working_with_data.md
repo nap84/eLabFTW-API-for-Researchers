@@ -357,6 +357,7 @@ for exp in heating_experiments:
 There's many ways to get what we need: here, we will use the `requests` package to make the API request directly and get the full experiment information. The returned data structure is a bit different, but that's fine.
 
 ```python
+%pip install requests
 from scripts.client import API_HOST, API_KEY
 import requests
 
