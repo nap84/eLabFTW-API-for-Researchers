@@ -32,7 +32,7 @@ Here's an overview of the intended workflow:
 config:
   layout: fixed
 ---
-flowchart LR
+flowchart 
 accTitle: Schematic workflow for working with data from the ELN
 
  subgraph s4["ELN (GUI)"]
