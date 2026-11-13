@@ -1173,11 +1173,11 @@ If we check our experiments in the GUI, we should see your attached files:
 
 Write a for loops that sets each experiment status to running.
 
+Execute the code and check the GUI to see if it worked.
+
 ::::::: hint
 Get an idea of what the commands could look like in the example [examples/05-create-modify-item.py](https://github.com/elabftw/elabapi-python/blob/master/examples/05-create-modify-item.py) on GitHub.
 :::::::::::::
-
-Execute the code and check the GUI to see if it worked.
 
 ::::::::::::::::::::::::::::::::::::: solution
 
