@@ -302,7 +302,13 @@ This is what we expect if we look at the same experiment in the GUI:
 
 How would you access the ID for each of the experiments you retrieved using the GUI?
 
-Bonus: How can you avoid having to access the experiment by its individual index each time you want to retrieve the ID? Hint: check out the [previous episode on iteration](03_python_jupyter.md#4-loop-over-a-list-forloop-to-create-a-dictionary)
+Bonus: How can you avoid having to access the experiment by its individual index each time you want to retrieve the ID?
+
+:::::::: hint
+For bonus: Check out the [previous episode on iteration](03_python_jupyter.md#4-loop-over-a-list-forloop-to-create-a-dictionary)
+
+:::::::::::::
+
 
 ::::::::::::::::::::::::::::::::::::: solution
 
@@ -1164,7 +1170,9 @@ If we check our experiments in the GUI, we should see your attached files:
 
 Write a for loops that sets each experiment status to running.
 
-Hint: get an idea of what the commands could look like in the example [examples/05-create-modify-item.py](https://github.com/elabftw/elabapi-python/blob/master/examples/05-create-modify-item.py) on GitHub.
+::::::: hint
+Get an idea of what the commands could look like in the example [examples/05-create-modify-item.py](https://github.com/elabftw/elabapi-python/blob/master/examples/05-create-modify-item.py) on GitHub.
+:::::::::::::
 
 Execute the code and check the GUI to see if it worked.
 
