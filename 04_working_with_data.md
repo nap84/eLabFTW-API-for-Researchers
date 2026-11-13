@@ -31,28 +31,28 @@ Here's an overview of the intended workflow:
 ---
 config:
   layout: fixed
-accTitle: Schematic workflow for working with data from the ELN
 ---
 flowchart 
+  accTitle: Schematic workflow for working with data from the ELN
 
- subgraph s4["ELN (GUI)"]
-        n3["Experiment"]
-        n11["parameters (custom field metadata)"]
-  end
- subgraph s3["Script"]
-        n10["get parameters from ELN"]
-        n6["output data files"]
-        n5["run measurements"]
-  end
- subgraph s2["Device Computer"]
-        s3
-  end
-    n5 --> n6
-    n6 -- attach --> n3
-    n3 --> n11
-    n10 --> n5
-    n11 --> n10
-    n12(["Researcher"]) -- plans --> n3
+  subgraph s4["ELN (GUI)"]
+          n3["Experiment"]
+          n11["parameters (custom field metadata)"]
+    end
+  subgraph s3["Script"]
+          n10["get parameters from ELN"]
+          n6["output data files"]
+          n5["run measurements"]
+    end
+  subgraph s2["Device Computer"]
+          s3
+    end
+      n5 --> n6
+      n6 -- attach --> n3
+      n3 --> n11
+      n10 --> n5
+      n11 --> n10
+      n12(["Researcher"]) -- plans --> n3
 ```
 
 To this end, head to our eLabFTW test instance via your in your browser. Create at least three experiments using the Heating Test template. Enter a different Laser Power value for each in the extra fields metadata. _Note: You may change the title, just ensure the word 'Heating' remains._
