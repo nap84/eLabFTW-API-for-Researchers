@@ -23,7 +23,7 @@ exercises: 20
 
 ## Getting Experiment Parameters from eLabFTW
 
-In the previous episodes, we created an experiment, linked a resource, and retrieved the experiments and resources. Now, we will look at how to get and work with information from entries in eLabFTW.
+In the previous episodes, we created an experiment, linked a resource, and showed how to retrieve ELN entries. Now, we will look at how to work with information from entries in eLabFTW.
 
 Here's an overview of the intended workflow:
 
