@@ -418,6 +418,7 @@ What is the code for the client that interacts with resources in eLabFTW? Create
 
 1. Retrieve all resources (you have access to) from your eLabFTW instance.
 2. Retrieve the bluetooth thermometer resource (from the last episode).
+
 ::::::: hint
 Look through the [examples](https://github.com/elabftw/elabapi-python/tree/master/examples) and keep your eyes out for a different word than _resources_. We saw this in [episode 01](01_API), as well.
 ::::::::
