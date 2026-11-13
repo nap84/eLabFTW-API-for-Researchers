@@ -253,7 +253,7 @@ Hints and places to start:
             raise
     ```
 
- Create individual resources from a CSV (where each row represents a resource) [examples/09-import-csv.py](https://github.com/elabftw/elabapi-python/blob/master/examples/09-import-csv.py)
+- Create individual resources from a CSV (where each row represents a resource) [examples/09-import-csv.py](https://github.com/elabftw/elabapi-python/blob/master/examples/09-import-csv.py)
 
 If you would like to contribute your solutions, please don't hesitate to do so. We can include them here for future courses.
 :::::::::::::::::::::::::::::::::::::
