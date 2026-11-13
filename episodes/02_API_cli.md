@@ -299,12 +299,6 @@ The below code intends to link the device resource [**Bluetooth Infrared Thermom
 
 In it current state, it fails. What needs to be fixed?
 
-::: hint
-
-[Read the docs for LinksToItems](https://doc.elabftw.net/api/elabapi-html#api-LinksToItems-postEntityItemsLinks)
-
-:::
-
 ```bash
 curl -X POST \
    -H "Authorization: $ELAB_API_KEY" \
@@ -312,6 +306,13 @@ curl -X POST \
    -H "Content-Type: application/json" \
    "https://elab.parks.web.gateway.ionos.coscine.dev/items/144/experiment/id"
 ```
+
+
+::: hint
+
+[Read the docs for LinksToItems](https://doc.elabftw.net/api/elabapi-html#api-LinksToItems-postEntityItemsLinks)
+
+:::
 
 :::::::::::::::::::::::: solution
 
