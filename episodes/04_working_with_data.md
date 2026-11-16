@@ -77,6 +77,7 @@ If we check the eLabFTW GUI for our own experiments, we will see our experiments
 First, let's get the experiments. To do so, we need the experiments api again. We also need a method to attach files. We can what that looks like by checking out the [examples/03-experiment-file-handling.py](https://github.com/elabftw/elabapi-python/blob/master/examples/03-experiment-file-handling.py) in the github repository.
 
 We know we need the experiments API, let's create it:
+
 ```python
 experiments_api = elabapi_python.ExperimentsApi(api_client)
 uploads_api = elabapi_python.UploadsApi(api_client) 
@@ -1212,7 +1213,7 @@ for exp in heating_experiments:
 
 ::::::::::::::::::::::::::::::::::::: callout
 
-Showing this in a Jupyter Notebook helps you better understand the single steps. However, as you may have noticed, this is really innefficient, e.g. it loops over the experiments list and gets the power variable twice. This would all be consolidated into a script. Here, we would create single functions for each step and so on. Then this could be run automatically, e.g., on a device computer, maybe one schedule that checks for new experimets entered throug the GUI and then runs them for you and attached the output files for you to then check through the GUI.
+Showing this in a Jupyter Notebook helps you better understand the single steps. However, as you may have noticed, this is really innefficient, e.g. it loops over the experiments list and gets the power variable twice. This would all be consolidated into a script. This could be run automatically, e.g., on a device computer, maybe one schedule that checks for new experimets entered throug the GUI and then runs them for you and attached the output files for you to then check through the GUI.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
