@@ -1794,7 +1794,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-04_working_with_data"><p>Content from <a href="04_working_with_data.html">Working with Data from eLabFTW</a></p>
 <hr>
-<p>Last updated on 2026-11-13 |
+<p>Last updated on 2026-11-16 |
 
         <a href="https://github.com/carpentries/workbench-template-md/edit/main/episodes/04_working_with_data.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -2146,7 +2146,7 @@ individual index each time you want to retrieve the ID?</p>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint1" aria-expanded="false" aria-controls="collapseHint1">
   <h4 class="accordion-header" id="headingHint1"> Give me a hint </h4>
 </button>
-<div id="collapseHint1" class="accordion-collapse collapse" aria-labelledby="headingHint1" data-bs-parent="#accordionHint1">
+<div id="collapseHint1" class="accordion-collapse collapse" data-bs-parent="#accordionHint1" aria-labelledby="headingHint1">
 <div class="accordion-body">
 <p>For bonus: Check out the <a href="03_python_jupyter.html#4-loop-over-a-list-forloop-to-create-a-dictionary">previous
 episode on iteration</a></p>
@@ -2159,7 +2159,7 @@ episode on iteration</a></p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>You can use the same syntax as above to retrieve a an ID from a
 single experiment.</p>
@@ -3039,7 +3039,7 @@ experiment</div>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint2" aria-expanded="false" aria-controls="collapseHint2">
   <h4 class="accordion-header" id="headingHint2"> Give me a hint </h4>
 </button>
-<div id="collapseHint2" class="accordion-collapse collapse" aria-labelledby="headingHint2" data-bs-parent="#accordionHint2">
+<div id="collapseHint2" class="accordion-collapse collapse" data-bs-parent="#accordionHint2" aria-labelledby="headingHint2">
 <div class="accordion-body">
 <p>Get an idea of what the commands could look like in the example <a href="https://github.com/elabftw/elabapi-python/blob/master/examples/05-create-modify-item.py" class="external-link">examples/05-create-modify-item.py</a>
 on GitHub.</p>
@@ -3052,7 +3052,7 @@ on GitHub.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>The request we are making is a <code>patch</code> to an existing
 experiment. We need to tell the</p>
@@ -3061,7 +3061,7 @@ experiment. We need to tell the</p>
 </h3>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" tabindex="-1" aria-label="code-block-31-1"></a><span class="cf">for</span> exp <span class="kw">in</span> heating_experiments_full:</span>
 <span id="cb31-2"><a href="#cb31-2" tabindex="-1" aria-label="code-block-31-2"></a>    exp_id <span class="op">=</span> exp[<span class="st">'id'</span>]</span>
-<span id="cb31-3"><a href="#cb31-3" tabindex="-1" aria-label="code-block-31-3"></a>    experiments_api.patch_experiment(exp_id, body<span class="op">=</span>{<span class="st">'status'</span>: <span class="dv">47</span>})</span></code></pre>
+<span id="cb31-3"><a href="#cb31-3" tabindex="-1" aria-label="code-block-31-3"></a>    experiments_api.patch_experiment(<span class="bu">id</span><span class="op">=</span>exp_id, body<span class="op">=</span>{<span class="st">'status'</span>: <span class="dv">47</span>})</span></code></pre>
 </div>
 <p>Note, and alternative using the original experiment return (using the
 elabapi-python package) would be:</p>
@@ -3070,7 +3070,7 @@ elabapi-python package) would be:</p>
 </h3>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" tabindex="-1" aria-label="code-block-32-1"></a><span class="cf">for</span> exp <span class="kw">in</span> heating_experiments:</span>
 <span id="cb32-2"><a href="#cb32-2" tabindex="-1" aria-label="code-block-32-2"></a>    exp_id <span class="op">=</span> exp.<span class="bu">id</span></span>
-<span id="cb32-3"><a href="#cb32-3" tabindex="-1" aria-label="code-block-32-3"></a>    experiments_api.patch_experiment(exp_id, body<span class="op">=</span>{<span class="st">'status'</span>: <span class="dv">47</span>})</span></code></pre>
+<span id="cb32-3"><a href="#cb32-3" tabindex="-1" aria-label="code-block-32-3"></a>    experiments_api.patch_experiment(<span class="bu">id</span><span class="op">=</span>exp_id, body<span class="op">=</span>{<span class="st">'status'</span>: <span class="dv">47</span>})</span></code></pre>
 </div>
 <p>Here, we are working with the eLabFTW object instead of a dictionary,
 so we access the experiment ID differently.</p>
@@ -3079,7 +3079,7 @@ so we access the experiment ID differently.</p>
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" tabindex="-1" aria-label="code-block-33-1"></a><span class="cf">for</span> exp <span class="kw">in</span> heating_experiments:</span>
-<span id="cb33-2"><a href="#cb33-2" tabindex="-1" aria-label="code-block-33-2"></a>    experiments_api.patch_experiment(exp.<span class="bu">id</span>, body<span class="op">=</span>{<span class="st">'status'</span>: <span class="dv">47</span>})</span></code></pre>
+<span id="cb33-2"><a href="#cb33-2" tabindex="-1" aria-label="code-block-33-2"></a>    experiments_api.patch_experiment(<span class="bu">id</span><span class="op">=</span>exp.<span class="bu">id</span>, body<span class="op">=</span>{<span class="st">'status'</span>: <span class="dv">47</span>})</span></code></pre>
 </div>
 </div>
 </div>
@@ -3095,8 +3095,7 @@ so we access the experiment ID differently.</p>
 <p>Showing this in a Jupyter Notebook helps you better understand the
 single steps. However, as you may have noticed, this is really
 innefficient, e.g. it loops over the experiments list and gets the power
-variable twice. This would all be consolidated into a script. Here, we
-would create single functions for each step and so on. Then this could
+variable twice. This would all be consolidated into a script. This could
 be run automatically, e.g., on a device computer, maybe one schedule
 that checks for new experimets entered throug the GUI and then runs them
 for you and attached the output files for you to then check through the
@@ -3518,8 +3517,8 @@ any links that you are not going to use.
   "url": "https://carpentries.github.io/workbench-template-md/aio.html",
   "identifier": "https://carpentries.github.io/workbench-template-md/aio.html",
   "dateCreated": "2026-10-13",
-  "dateModified": "2026-11-13",
-  "datePublished": "2026-11-13"
+  "dateModified": "2026-11-16",
+  "datePublished": "2026-11-16"
 }
 
   </script><script>
