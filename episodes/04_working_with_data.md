@@ -1186,7 +1186,7 @@ The request we are making is a `patch` to an existing experiment. We need to tel
 ```python
 for exp in heating_experiments_full:
     exp_id = exp['id']
-    experiments_api.patch_experiment(exp_id, body={'status': 47})
+    experiments_api.patch_experiment(id=exp_id, body={'status': 47})
 
 ```
 
@@ -1195,7 +1195,7 @@ Note, and alternative using the original experiment return (using the elabapi-py
 ```python
 for exp in heating_experiments:
     exp_id = exp.id
-    experiments_api.patch_experiment(exp_id, body={'status': 47})
+    experiments_api.patch_experiment(id=exp_id, body={'status': 47})
 ```
 
 Here, we are working with the eLabFTW object instead of a dictionary, so we access the experiment ID differently.
@@ -1204,7 +1204,7 @@ We could shorten this a bit:
 
 ```python
 for exp in heating_experiments:
-    experiments_api.patch_experiment(exp.id, body={'status': 47})
+    experiments_api.patch_experiment(id=exp.id, body={'status': 47})
 ```
 
 ::::::::::::::::::::::::::::::::::::
